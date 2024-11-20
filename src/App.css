@@ -1,0 +1,112 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Desktop View */
+.desktop-menu {
+  display: flex;
+}
+
+.mobile-menu,
+.mobile-menu-btn {
+  display: none;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}
+
+/* Background color for custom navbar */
+.bg-custom {
+  background-color: #46a19d !important;
+}
+
+/* Live chat button styling for better readability */
+.btn-livechat {
+  border-radius: 20px;
+  font-size: 18px;
+  padding: 10px 30px;
+  width: auto; /* Agar sesuai konten */
+}
+
+/* Mengubah warna teks pada navbar menu */
+/* Mengatur font dan warna untuk teks menu navbar */
+.nav-link {
+  color: #ffffff !important; /* Warna teks navbar */
+  font-family: "Belanosima", sans-serif; /* Font Belanosima */
+}
+
+.nav-link:hover {
+  color: #ffd700 !important; /* Warna teks saat hover */
+}
+
+/* Terapkan font Belanosima ke seluruh teks navbar */
+.navbar-nav .nav-link {
+  color: #ffffff !important; /* Warna teks navbar */
+  font-family: "Belanosima", sans-serif; /* Font Belanosima */
+  font-weight: 400; /* Atur berat font */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffd700 !important; /* Warna teks saat hover */
+}
+
+/* Pastikan tombol Live Chat juga memakai font Belanosima */
+.btn-livechat {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600; /* Berat font medium */
+  font-size: 2rem; /* Sesuaikan ukuran font, 10rem terlalu besar */
+  padding: 15px 30px; /* Menambah padding agar tombol lebih besar dan nyaman */
+  border-radius: 50px; /* Agar sudut tombol lebih bulat */
+}
+
+/* Jika ingin mengubah seluruh font body aplikasi */
+body {
+  font-family: "Belanosima", sans-serif;
+}
