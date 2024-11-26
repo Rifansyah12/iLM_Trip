@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link dari react-router-dom
 import logoImage from "../../assets/lgo2-removebg-preview1.png";
 import "../../App.css";
 import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-import { FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa"; // Menggunakan react-icons
+import { FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ const Navbar = () => {
         background: "#0f4142",
         position: "sticky",
         top: 0,
-        zIndex: 1000, // memastikan navbar tetap di atas elemen lainnya
+        zIndex: 1000,
       }}
     >
       <div className="container-fluid d-flex align-items-center">
@@ -34,9 +35,9 @@ const Navbar = () => {
           }}
         >
           {/* Logo Utama */}
-          <a className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand">
             <img src={logoImage} alt="Logo" width="145" height="84" />
-          </a>
+          </Link>
 
           {/* Ikon Media Sosial */}
           <div
@@ -115,24 +116,24 @@ const Navbar = () => {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav ms-auto ms-4">
-            <a className="nav-link active fs-4 ms-4" href="#">
+            <Link className="nav-link active fs-4 ms-4" to="/">
               Home
-            </a>
-            <a className="nav-link fs-4 ms-4" href="#">
+            </Link>
+            <Link className="nav-link fs-4 ms-4" to="/Paket">
               Paket
-            </a>
-            <a className="nav-link fs-4 ms-4" href="#">
+            </Link>
+            <Link className="nav-link fs-4 ms-4" to="/Testimoni">
               Testimoni
-            </a>
-            <a className="nav-link fs-4 ms-4" href="#">
-              Blog
-            </a>
-            <a className="nav-link fs-4 ms-4" href="#">
-              Kontak
-            </a>
-            <a className="nav-link fs-4 ms-4" href="#">
+            </Link>
+            <Link className="nav-link fs-4 ms-4" to="/TentangKami">
+              Tentang Kami
+            </Link>
+            <Link className="nav-link fs-4 ms-4" to="/Galeri">
+              Galeri
+            </Link>
+            <Link className="nav-link fs-4 ms-4" to="/Booking">
               Booking
-            </a>
+            </Link>
           </div>
           <button className="btn btn-success btn-livechat ms-4">
             <span>Live Chat</span>

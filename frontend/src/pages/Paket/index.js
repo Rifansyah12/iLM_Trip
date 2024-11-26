@@ -27,7 +27,7 @@ const Paket = () => {
           alt="LogoTrip"
           style={{
             width: "100%",
-            maxWidth: 300, // Ukuran maksimum untuk gambar
+            maxWidth: 500, // Ukuran maksimum untuk gambar
             height: "auto", // Proporsi tetap
           }}
         />
@@ -83,7 +83,7 @@ const Paket = () => {
               width: "300%",
               maxWidth: 300,
               height: "auto", // Proporsi tetap
-              border: "2px solid #164F4C",
+              border: "2px solid #ffff",
               borderRadius: "10px",
             }}
           />

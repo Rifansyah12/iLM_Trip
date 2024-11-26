@@ -50,7 +50,7 @@ const AutoSlider = () => {
   }, [reviews.length]);
 
   return (
-    <div style={{ padding: "0 20px", backgroundColor: "#f7f4e7" }}>
+    <div style={{ padding: "0 20px", backgroundColor: "#00000" }}>
       {" "}
       {/* Menambahkan jarak kiri dan kanan */}
       {/* Konten Slider */}
@@ -70,7 +70,7 @@ const AutoSlider = () => {
               {"★".repeat(reviews[currentIndex].rating)}
               {"☆".repeat(5 - reviews[currentIndex].rating)}
             </span>
-            <p style={{ fontSize: "14px", color: "#164F4C" }}>
+            <p style={{ fontSize: "14px", color: "#ffff" }}>
               ({reviews[currentIndex].rating}.0 dari 5 berdasarkan 20 ulasan)
             </p>
           </div>
@@ -78,7 +78,7 @@ const AutoSlider = () => {
             style={{
               fontSize: "16px",
               fontFamily: "Poppins",
-              color: "#164F4C",
+              color: "#ffff",
               marginBottom: "20px",
               lineHeight: "1.5",
             }}
@@ -106,7 +106,7 @@ const AutoSlider = () => {
               style={{
                 fontSize: "16px",
                 fontFamily: "Poppins",
-                color: "#164F4C",
+                color: "#ffff",
                 fontWeight: "600",
               }}
             >
@@ -146,7 +146,7 @@ const AutoSlider = () => {
               width: "20px",
               height: "20px",
               borderRadius: "50%",
-              backgroundColor: currentIndex === index ? "#FFD700" : "#CCCCCC",
+              backgroundColor: currentIndex === index ? "#ffff" : "#CCCCCC",
             }}
           ></div>
         ))}

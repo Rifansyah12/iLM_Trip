@@ -72,7 +72,7 @@ const Story = ({ title, description, date, location, videoSrc, reverse }) => {
       <div style={{ flex: "1 1 45%", textAlign: "left" }}>
         <h2
           style={{
-            color: "#164F4C",
+            color: "#ffff",
             fontSize: "30px",
             fontWeight: "700",
             fontFamily: "Poppins",
@@ -83,7 +83,7 @@ const Story = ({ title, description, date, location, videoSrc, reverse }) => {
         </h2>
         <p
           style={{
-            color: "#164F4C",
+            color: "#ffff",
             fontSize: "16px",
             fontWeight: "400",
             fontFamily: "Poppins",
@@ -95,7 +95,7 @@ const Story = ({ title, description, date, location, videoSrc, reverse }) => {
         </p>
         <div
           style={{
-            color: "#164F4C",
+            color: "#ffff",
             fontSize: "20px",
             fontFamily: "Poppins",
             lineHeight: "1.5",
@@ -120,14 +120,14 @@ const StorySection = () => {
       style={{
         padding: "50px 20px",
         textAlign: "center",
-        background: "#f7f4e7",
+        background: "#00000",
         color: "#f8ab00",
       }}
     >
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <p
           style={{
-            color: "#164F4C",
+            color: "#ffff",
             fontSize: "36px",
             fontWeight: "700",
             fontFamily: "Poppins",
@@ -137,7 +137,7 @@ const StorySection = () => {
         </p>
         <h2
           style={{
-            color: "#164F4C",
+            color: "#ffff",
             fontSize: "36px",
             fontWeight: "700",
             fontFamily: "Poppins",

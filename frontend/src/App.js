@@ -1,56 +1,50 @@
 import React from "react";
-import Header from "./components/Header/index";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Header from "./components/Header/index";
 import Galeri from "./pages/Galeri";
 import Paket from "./pages/Paket";
 import Testimoni from "./pages/Testimoni";
-import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
+import TentangKami from "./pages/TentangKami";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const App = () => {
+const Home = () => {
   return (
-    <div>
-      <Navbar />
+    <>
       <Header />
       <main>
         {/* Tentang Petualangan */}
         <section
           style={{
-            padding: "50px 20px",
+            padding: "10px 10px",
             textAlign: "center",
-            backgroundColor: "#f7f4e7", // Background warna
+            backgroundColor: "#E18503", // Background warna
           }}
         >
           <h2
             style={{
-              color: "#164F4C",
-              fontSize: 36,
-              fontWeight: "700",
+              color: "#ffff",
+              fontSize: 25,
+              fontWeight: "500",
               fontFamily: "Poppins",
+              width: "60%", // Kurangi lebar sesuai kebutuhan, misalnya 80%
+              margin: "0 auto", // Agar tetap di tengah secara horizontal
+              textAlign: "center",
             }}
           >
-            Tentang Petualangan Kami
+            Nikmati petualangan yang akan menggugah jiwa, di mana keindahan alam
+            menjadi bagian dari pengalaman luar biasa yang tak akan pernah Anda
+            lupakan
           </h2>
-          <p
-            style={{
-              color: "#666",
-              fontSize: 18,
-              fontFamily: "Poppins",
-              marginTop: 20,
-            }}
-          >
-            Kami menghadirkan pengalaman petualangan yang unik dan mendalam,
-            membawa Anda untuk menjelajahi keindahan alam dan menemukan kekuatan
-            dalam diri Anda.
-          </p>
         </section>
 
         {/* Fitur-Fitur */}
         <Paket />
 
-        <div style={{ backgroundColor: "#f7f4e7", padding: "20px" }}>
+        <div style={{ backgroundColor: "#000000", padding: "20px" }}>
           {/* Galeri dengan latar belakang yang sama */}
-          <div style={{ marginBottom: "40px" }}>
+          <div style={{ marginBottom: "50px" }}>
             <Galeri />
           </div>
 
@@ -60,6 +54,30 @@ const App = () => {
           </div>
         </div>
       </main>
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <div>
+      {/* Navbar tetap ada di semua halaman */}
+      <Navbar />
+
+      <Routes>
+        {/* Rute Home */}
+        <Route path="/" element={<Home />} />
+
+        {/* Halaman Tentang Kami */}
+        <Route path="/TentangKami" element={<TentangKami />} />
+
+        {/* Rute lainnya (contoh halaman lain) */}
+        <Route path="/Galeri" element={<Galeri />} />
+        <Route path="/Paket" element={<Paket />} />
+        <Route path="/Testimoni" element={<Testimoni />} />
+      </Routes>
+
+      {/* Footer tetap ada di semua halaman */}
       <Footer />
     </div>
   );
