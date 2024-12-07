@@ -135,9 +135,9 @@ const Navbar = () => {
               Booking
             </Link>
           </div>
-          <button className="btn btn-success btn-livechat ms-4">
-            <span>Live Chat</span>
-          </button>
+          <Link className="btn btn-success btn-livechat ms-4" to="/Kontak">
+            <span>Kontak</span>
+          </Link>
         </div>
       </div>
     </nav>
