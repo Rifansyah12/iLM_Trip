@@ -110,3 +110,18 @@
 body {
   font-family: "Belanosima", sans-serif;
 }
+
+/* button live chat style  */
+.btn-livechat {
+  border-radius: 50px; /* Membuat tombol berbentuk bulat */
+  padding: 10px 20px;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
+  transition: transform 0.3s ease;
+}
+
+.btn-livechat:hover {
+  background-color: #28a745; /* Warna saat hover */
+  transform: scale(1.1); /* Efek zoom saat hover */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}

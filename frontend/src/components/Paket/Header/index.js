@@ -1,6 +1,5 @@
 import React from "react";
-import Background from "../../assets/volcano-3779159_1280.png";
-import NewImage from "../../assets/logo/Logo_trip.png"; // Gambar baru yang ditambahkan
+import Background from "../../../assets/volcano-3779159_1280.png";
 
 function Header() {
   const headerStyle = {
@@ -12,7 +11,7 @@ function Header() {
 
   const textStyle = {
     color: "#FFFCFC",
-    fontSize: 50,
+    fontSize: 100,
     fontFamily: "Beiruti",
     fontWeight: "700",
     wordWrap: "break-word",
@@ -40,7 +39,6 @@ function Header() {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Efek hitam transparan
     zIndex: 0, // Overlay berada di atas gambar, tapi di bawah teks
   };
 
@@ -63,45 +61,24 @@ function Header() {
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        “Pilih Petualangan Anda, Capai Puncaknya!”
+        Layanan
         <p
           style={{
             color: "#ffff",
-            fontSize: 25,
+            fontSize: 40,
             fontWeight: "50",
             fontFamily: "Poppins",
-            width: "100%", // Sesuaikan lebar teks
-            margin: "30px", // Agar teks tetap di tengah secara horizontal
+            width: "200%", // Sesuaikan lebar teks
+            margin: "20px", // Agar teks tetap di tengah secara horizontal
+            left: 50,
             textAlign: "left",
           }}
         >
-          Petualangan ini lebih dari sekedar perjalanan menuju puncak. Ini
-          adalah pengalaman yang akan mengubah cara Anda merasakan dunia, penuh
-          tantangan, keindahan, dan kebanggaan yang tak terlupakan
+          Temukan Keajaiban Alam Bersama Kami dan Rasakan sensasi mendaki gunung
+          dengan kenyamanan dan fasilitas lengkap. Pilih paket favoritmu dan
+          biarkan kami mengurus sisanya.
         </p>
-        <button
-          style={{
-            width: 206,
-            height: 47,
-            background: "linear-gradient(90deg, white 0%, #FFD18F 100%)",
-            borderRadius: 10,
-            border: "none", // Menghapus border default button
-            cursor: "pointer", // Menambahkan efek pointer saat hover
-            fontSize: 30, // Ukuran font opsional
-            fontWeight: "bold", // Bobot font opsional
-            fontFamily: "Poppins, sans-serif", // Font opsional
-            color: "#FA8806",
-          }}
-        >
-          Explore
-        </button>
       </div>
-      <img
-        className="NewImage" // Kelas untuk gambar baru
-        style={newImageStyle} // Gaya untuk gambar baru
-        src={NewImage} // Sumber gambar baru
-        alt="New Image"
-      />
     </header>
   );
 }
