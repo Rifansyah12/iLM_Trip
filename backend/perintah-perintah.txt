@@ -1,0 +1,3 @@
+npx sequelize-cli db:migrate -> untuk migrate migration
+npx sequelize-cli migration:generate --name create-table-destinas -> untuk membuat file migration
+npx sequelize-cli model:generate --name PaketPendakian --attributes nama_paket:string,deskripsi_paket:text,foto:string,destinasi_id:integer -> untuk membuat model
