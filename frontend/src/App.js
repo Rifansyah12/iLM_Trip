@@ -6,6 +6,13 @@ import Header from "./components/Header/index";
 import Galeri from "./pages/Galeri";
 import Paket from "./pages/Paket";
 import PaketHome from "./pages/Paket/Home";
+import PrivateTrip from "./pages/Paket/PrivateTrip";
+import OpenTrip from "./pages/Paket/OpenTrip";
+// import OpenTrip1 from "./component/Paket/OpenTrip";
+import Merbabu from "./pages/Paket/OpenTrip/Gunung/merbabu";
+import FamilyTrip from "./pages/Paket/FamilyTrip";
+import Gathering from "./pages/Paket/Gathering";
+import TestimoniHome from "./pages/Testimoni/Home";
 import Testimoni from "./pages/Testimoni";
 import TentangKami from "./pages/TentangKami";
 import Kontak from "./pages/Kontak";
@@ -74,8 +81,15 @@ const App = () => {
         <Route path="/Galeri" element={<Galeri />} />
         <Route path="/Paket" element={<Paket />} />
         <Route path="/Paket/Home" element={<PaketHome />} />
-        <Route path="/Testimoni" element={<Testimoni />} />
+        <Route path="/Paket/PrivateTrip" element={<PrivateTrip />} />
+        <Route path="/Paket/OpenTrip" element={<OpenTrip />} />
+        <Route path="/Paket/FamilyTrip" element={<FamilyTrip />} />
+        <Route path="/Paket/Gathering" element={<Gathering />} />
+        <Route path="/Testimoni/Home" element={<TestimoniHome />} />
         <Route path="/Kontak" element={<Kontak />} />
+
+        {/* <Route path="/open-trip" element={<OpenTrip />} /> */}
+        <Route path="/Paket/OpenTrip/Gunung/merbabu" element={<Merbabu />} />
       </Routes>
 
       {/* Tombol Live Chat */}

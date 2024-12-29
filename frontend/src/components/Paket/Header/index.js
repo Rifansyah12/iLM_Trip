@@ -11,7 +11,7 @@ function Header() {
 
   const textStyle = {
     color: "#FFFCFC",
-    fontSize: 100,
+    fontSize: 70,
     fontFamily: "Beiruti",
     fontWeight: "700",
     wordWrap: "break-word",
@@ -65,10 +65,10 @@ function Header() {
         <p
           style={{
             color: "#ffff",
-            fontSize: 40,
+            fontSize: 30,
             fontWeight: "50",
             fontFamily: "Poppins",
-            width: "200%", // Sesuaikan lebar teks
+            width: "150%", // Sesuaikan lebar teks
             margin: "20px", // Agar teks tetap di tengah secara horizontal
             left: 50,
             textAlign: "left",

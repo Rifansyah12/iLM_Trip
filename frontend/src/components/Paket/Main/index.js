@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Gunakan Link dari react-router-dom
 import PrivateTripImage from "../../../assets/konten/konten.png";
 import OpenTripImage from "../../../assets/konten/konten.png";
 import FamilyTripImage from "../../../assets/konten/konten.png";
@@ -9,147 +10,250 @@ const Paket = () => {
     <section
       style={{
         backgroundColor: "#222222", // Warna abu-abu
-        padding: "50px", // Tambahkan padding agar konten terlihat rapi
-        display: "flex", // Gunakan flexbox untuk mengatur tata letak
-        flexDirection: "column", // Atur agar semua konten tersusun secara vertikal
-        alignItems: "center", // Pusatkan secara horizontal
+        padding: "50px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
-      {/* Konten */}
-      {[
-        {
-          title: "Private Trip",
-          text: "Nikmati petualangan mendaki yang eksklusif dengan Paket Private Trip kami. Rasakan pengalaman mendaki gunung secara pribadi bersama orang-orang terdekat.Private Trip menawarkan perjalanan pribadi yang penuh kenyamanan, memberi Anda kesempatan untuk menjelajahi pegunungan tanpa gangguan dalam suasana yang lebih tenang dan eksklusif.",
-          image: PrivateTripImage,
-        },
-        {
-          title: "Open Trip",
-          text: "Bergabunglah dengan para pecinta alam dari berbagai penjuru dalam Open Trip kami. Temukan teman baru, rasakan kebersamaan,dan jelajahi keindahan gunung-gunung Indonesia.Open Trip memungkinkan Anda untuk bergabung dengan grup dalam perjalanan yang lebih terjangkau, tetapi tetap menawarkan pengalaman yang luar biasa.",
-          image: OpenTripImage,
-        },
-        {
-          title: "Family Trip",
-          text: "Ciptakan kenangan tak terlupakan bersama keluarga dalam Family Trip kami. Pendakian yang dirancang khusus untuk segala usia, memastikan keamanan, kenyamanan, dan kebahagiaan bersama keluarga tercinta.Family Trip dirancang khusus untuk keluarga yang ingin menikmati waktu bersama dalam perjalanan yang nyaman dan penuh kenangan.",
-          image: FamilyTripImage,
-        },
-        {
-          title: "Gathering Kantor",
-          text: "Perkuat hubungan kerja tim Anda dengan Paket Gathering Kantor. Menghadirkan petualangan mendaki yang menyenangkan dan membangun semangat tim, sembari menikmati keindahan alam Indonesia.Gathering Kantor memberikan kesempatan bagi perusahaan untuk menyelenggarakan acara atau perjalanan bersama rekan kerja dalam suasana yang menyenangkan.",
-          image: GatheringImage,
-        },
-      ].map((feature, index) => (
+      {/* Private Trip */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "300px",
+          margin: "30px auto",
+          maxWidth: "90%",
+          flexWrap: "wrap",
+        }}
+      >
         <div
-          key={index}
           style={{
-            display: "flex",
-            flexDirection: "row", // Posisi teks di kiri dan gambar di kanan
-            alignItems: "center",
-            gap: "300px", // Jarak antar elemen
-            margin: "30px auto", // Margin antar konten
-            maxWidth: "90%", // Batas lebar konten
-            flexWrap: "wrap", // Membuat responsif
+            flex: "1 1 50%",
+            textAlign: "left",
+            maxWidth: "500px",
           }}
         >
-          {/* Konten Teks */}
-          <div
+          <h3
             style={{
-              flex: "1 1 50%", // Menentukan ruang untuk teks
-              textAlign: "left",
-              maxWidth: "500px", // Batas lebar maksimum teks
+              color: "#fff",
+              fontSize: "50px",
+              marginBottom: "10px",
             }}
           >
-            <h3
-              style={{
-                color: "#fff",
-                fontSize: "50px",
-                marginBottom: "10px",
-              }}
-            >
-              {feature.title}
-            </h3>
-            <p style={{ color: "#fff", fontSize: "20px" }}>{feature.text}</p>
-            {/* Tombol */}
-            <button
-              style={{
-                marginTop: "15px", // Jarak dari paragraf
-                padding: "10px 50px", // Ukuran tombol
-                fontSize: "25px", // Ukuran font
-                backgroundColor: "#FA8806", // Warna tombol hijau
-                color: "#fff", // Warna teks putih
-                border: "50px", // Hilangkan border
-                borderRadius: "5px",
-                marginLeft: "auto",
-                cursor: "pointer", // Pointer saat hover
-              }}
-              onClick={() => alert(`Anda memilih: ${feature.title}`)} // Fungsi sederhana untuk contoh
-            >
-              Jelajahi
-            </button>
-          </div>
-          {/* Gambar */}
-          <img
-            src={feature.image}
-            alt={feature.title}
+            Private Trip
+          </h3>
+          <p style={{ color: "#fff", fontSize: "20px" }}>
+            Nikmati petualangan mendaki yang eksklusif dengan Paket Private Trip
+            kami. Rasakan pengalaman mendaki gunung secara pribadi bersama
+            orang-orang terdekat.
+          </p>
+          <Link
+            to="/Paket/PrivateTrip"
             style={{
-              flex: "1 1 40%", // Gambar responsif
-              maxWidth: "300px",
-              height: "auto", // Proporsi gambar tetap
-              border: "20px",
-              borderRadius: "20px",
+              display: "inline-block",
+              marginTop: "15px",
+              padding: "10px 50px",
+              fontSize: "25px",
+              backgroundColor: "#FA8806",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "5px",
             }}
-          />
+          >
+            Jelajahi
+          </Link>
         </div>
-      ))}
-      <hr
-        style={{
-          width: "90%", // Sesuaikan lebar garis
-          border: "1px solid #fff", // Warna garis
-          margin: "20px auto", // Jarak dari elemen sebelumnya
-        }}
-      />
-
-      {/* Tambahkan foto-foto Kenangan  */}
-      <div
-        style={{
-          width: "100%", // Lebar penuh container
-          textAlign: "center", // Judul di tengah
-          color: "#fff", // Warna teks putih
-          marginBottom: "50px", // Jarak antara judul dan grid
-        }}
-      >
-        <h2 style={{ fontSize: "50px", margin: "0" }}>
-          Kenangan Perjalanan Bersama Kami
-        </h2>
+        <img
+          src={PrivateTripImage}
+          alt="Private Trip"
+          style={{
+            flex: "1 1 40%",
+            maxWidth: "300px",
+            height: "auto",
+            borderRadius: "20px",
+          }}
+        />
       </div>
+
+      {/* Open Trip */}
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)", // 2 kolom
-          gridGap: "20px", // Jarak antar gambar
-          marginTop: "20px",
-          maxWidth: "90%", // Batas lebar
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "300px",
+          margin: "30px auto",
+          maxWidth: "90%",
+          flexWrap: "wrap",
         }}
       >
-        {[
-          PrivateTripImage,
-          OpenTripImage,
-          FamilyTripImage,
-          GatheringImage,
-          PrivateTripImage,
-          OpenTripImage,
-        ].map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`Foto Kenangan ${index + 1}`}
+        <div
+          style={{
+            flex: "1 1 50%",
+            textAlign: "left",
+            maxWidth: "500px",
+          }}
+        >
+          <h3
             style={{
-              width: "100%", // Gambar menyesuaikan kolom
-              height: "auto", // Menjaga proporsi gambar
-              borderRadius: "0px", // Membuat sudut melengkung
-              border: "0px solid #fff", // Tambahkan border putih
+              color: "#fff",
+              fontSize: "50px",
+              marginBottom: "10px",
             }}
-          />
-        ))}
+          >
+            Open Trip
+          </h3>
+          <p style={{ color: "#fff", fontSize: "20px" }}>
+            Bergabunglah dengan para pecinta alam dari berbagai penjuru dalam
+            Open Trip kami.
+          </p>
+          <Link
+            to="/Paket/OpenTrip"
+            style={{
+              display: "inline-block",
+              marginTop: "15px",
+              padding: "10px 50px",
+              fontSize: "25px",
+              backgroundColor: "#FA8806",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "5px",
+            }}
+          >
+            Jelajahi
+          </Link>
+        </div>
+        <img
+          src={OpenTripImage}
+          alt="Open Trip"
+          style={{
+            flex: "1 1 40%",
+            maxWidth: "300px",
+            height: "auto",
+            borderRadius: "20px",
+          }}
+        />
+      </div>
+
+      {/* Family Trip */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "300px",
+          margin: "30px auto",
+          maxWidth: "90%",
+          flexWrap: "wrap",
+        }}
+      >
+        <div
+          style={{
+            flex: "1 1 50%",
+            textAlign: "left",
+            maxWidth: "500px",
+          }}
+        >
+          <h3
+            style={{
+              color: "#fff",
+              fontSize: "50px",
+              marginBottom: "10px",
+            }}
+          >
+            Family Trip
+          </h3>
+          <p style={{ color: "#fff", fontSize: "20px" }}>
+            Ciptakan kenangan tak terlupakan bersama keluarga dalam Family Trip
+            kami.
+          </p>
+          <Link
+            to="/FamilyTrip"
+            style={{
+              display: "inline-block",
+              marginTop: "15px",
+              padding: "10px 50px",
+              fontSize: "25px",
+              backgroundColor: "#FA8806",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "5px",
+            }}
+          >
+            Jelajahi
+          </Link>
+        </div>
+        <img
+          src={FamilyTripImage}
+          alt="Family Trip"
+          style={{
+            flex: "1 1 40%",
+            maxWidth: "300px",
+            height: "auto",
+            borderRadius: "20px",
+          }}
+        />
+      </div>
+
+      {/* Gathering Kantor */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "300px",
+          margin: "30px auto",
+          maxWidth: "90%",
+          flexWrap: "wrap",
+        }}
+      >
+        <div
+          style={{
+            flex: "1 1 50%",
+            textAlign: "left",
+            maxWidth: "500px",
+          }}
+        >
+          <h3
+            style={{
+              color: "#fff",
+              fontSize: "50px",
+              marginBottom: "10px",
+            }}
+          >
+            Gathering Kantor
+          </h3>
+          <p style={{ color: "#fff", fontSize: "20px" }}>
+            Perkuat hubungan kerja tim Anda dengan Paket Gathering Kantor.
+          </p>
+          <Link
+            to="/Gathering"
+            style={{
+              display: "inline-block",
+              marginTop: "15px",
+              padding: "10px 50px",
+              fontSize: "25px",
+              backgroundColor: "#FA8806",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "5px",
+            }}
+          >
+            Jelajahi
+          </Link>
+        </div>
+        <img
+          src={GatheringImage}
+          alt="Gathering Kantor"
+          style={{
+            flex: "1 1 40%",
+            maxWidth: "300px",
+            height: "auto",
+            borderRadius: "20px",
+          }}
+        />
       </div>
     </section>
   );

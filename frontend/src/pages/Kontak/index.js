@@ -30,10 +30,11 @@ const Kontak = () => {
     <>
       {/* Div pertama */}
       <div style={{ padding: "100px", backgroundColor: "#282C2B" }}>
-        <h2 style={{ textAlign: "center", color: "#E18503", fontSize: "60px" }}>
+        <h2 style={{ textAlign: "left", color: "#ffff", fontSize: "60px" }}>
           Kontak
         </h2>
-        <p style={{ textAlign: "center", color: "#ffff", fontSize: "40px" }}>
+
+        <p style={{ textAlign: "left", color: "#ffff", fontSize: "40px" }}>
           Kamu punya pertanyaan tentang layanan yang kami tawarkan, tinggal isi
           form di bawah ya. Kami akan coba jawab semua pertanyaan dan komentar
           dalam 24 jam.

@@ -122,7 +122,7 @@ const Navbar = () => {
             <Link className="nav-link fs-4 ms-4" to="/Paket/Home">
               Paket
             </Link>
-            <Link className="nav-link fs-4 ms-4" to="/Testimoni">
+            <Link className="nav-link fs-4 ms-4" to="/Testimoni/Home">
               Testimoni
             </Link>
             <Link className="nav-link fs-4 ms-4" to="/TentangKami">
