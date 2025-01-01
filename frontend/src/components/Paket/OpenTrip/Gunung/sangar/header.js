@@ -101,7 +101,7 @@ function Header() {
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        Gunung Merbabu
+        Gunung Sangar
         {/* <p
           style={{
             color: "#ffff",

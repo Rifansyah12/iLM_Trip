@@ -13,7 +13,7 @@ import Pangrango from "../../../assets/Gunung/Pangrango/pangrango2.jpg";
 import Sangar from "../../../assets/Gunung/SangarMega/mega.jpg";
 import Gede from "../../../assets/Gunung/Gede/gede1.jpg";
 
-const PrivateTrip = () => {
+const OpenTrip = () => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
@@ -317,6 +317,7 @@ const PrivateTrip = () => {
           }}
         >
           <button
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/prau")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -438,6 +439,7 @@ const PrivateTrip = () => {
           }}
         >
           <button
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/sindoro")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -559,6 +561,7 @@ const PrivateTrip = () => {
           }}
         >
           <button
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/sumbing")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -680,6 +683,7 @@ const PrivateTrip = () => {
           }}
         >
           <button
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/papandayan")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -803,6 +807,7 @@ const PrivateTrip = () => {
           }}
         >
           <button
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/gede")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -929,6 +934,7 @@ const PrivateTrip = () => {
           }}
         >
           <button
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/pangrango")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -1071,6 +1077,7 @@ const PrivateTrip = () => {
           }}
         >
           <button
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/sangar")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -1227,4 +1234,4 @@ const PrivateTrip = () => {
   );
 };
 
-export default PrivateTrip;
+export default OpenTrip;
