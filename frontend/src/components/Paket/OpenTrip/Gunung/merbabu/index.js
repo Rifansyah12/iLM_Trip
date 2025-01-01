@@ -7,7 +7,6 @@ import SampleImage3 from "../../../../../assets/Gunung/Merbabu/merbabu3.JPG";
 import SampleImage4 from "../../../../../assets/Gunung/Merbabu/merbabu4.JPG";
 import SampleImage5 from "../../../../../assets/Gunung/Merbabu/merbabu5.JPG";
 import SampleImage6 from "../../../../../assets/Gunung/Merbabu/merbabu6.JPG";
-import FormData from "../../../../FormDaftar";
 
 const Merbabu = () => {
   const navigate = useNavigate();
@@ -251,7 +250,7 @@ const Merbabu = () => {
         </button>
 
         <button
-          onClick={openModal}
+          onClick={() => navigate("/FormDaftar")} // Navigasi ke halaman booking
           style={{
             padding: "15px 30px",
             fontSize: "18px",
@@ -264,18 +263,6 @@ const Merbabu = () => {
         >
           Pesan Sekarang
         </button>
-
-        {/* Modal */}
-        {isModalOpen && (
-          <div style={modalStyles.overlay}>
-            <div style={modalStyles.modal}>
-              <button onClick={closeModal} style={modalStyles.closeButton}>
-                X
-              </button>
-              <FormData />
-            </div>
-          </div>
-        )}
 
         <button
           onClick={() => navigate("/Syarat")} // Navigasi ke halaman booking
@@ -425,36 +412,6 @@ const Merbabu = () => {
       )}
     </section>
   );
-};
-
-const modalStyles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {
-    backgroundColor: "#fff",
-    padding: "20px",
-    borderRadius: "5px",
-    width: "500px",
-    position: "relative",
-  },
-  closeButton: {
-    position: "absolute",
-    top: "10px",
-    right: "10px",
-    fontSize: "20px",
-    border: "none",
-    backgroundColor: "transparent",
-    cursor: "pointer",
-  },
 };
 
 export default Merbabu;
