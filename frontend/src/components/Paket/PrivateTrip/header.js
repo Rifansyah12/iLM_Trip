@@ -5,7 +5,7 @@ function Header() {
   const headerStyle = {
     position: "relative",
     width: "100%",
-    height: 671, // Tinggi gambar latar belakang
+    height: 400, // Tinggi gambar latar belakang
     overflow: "hidden",
   };
 
@@ -16,7 +16,7 @@ function Header() {
     fontWeight: "700",
     wordWrap: "break-word",
     position: "absolute",
-    top: 180, // Posisi vertikal teks
+    top: 50, // Posisi vertikal teks
     left: 50, // Sama dengan padding kiri navbar
     paddingRight: 50, // Sama dengan padding kanan navbar
     zIndex: 1, // Pastikan teks berada di atas gambar

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Import semua gambar yang digunakan
-import SampleImage1 from "../../../../../assets/Gunung/Merbabu/merbabu1.jpg";
-import SampleImage2 from "../../../../../assets/Gunung/Merbabu/merbabu2.jpg";
-import SampleImage3 from "../../../../../assets/Gunung/Merbabu/merbabu3.JPG";
-import SampleImage4 from "../../../../../assets/Gunung/Merbabu/merbabu4.JPG";
-import SampleImage5 from "../../../../../assets/Gunung/Merbabu/merbabu5.JPG";
-import SampleImage6 from "../../../../../assets/Gunung/Merbabu/merbabu6.JPG";
+import SampleImage1 from "../../../assets/Gunung/Merbabu/merbabu1.jpg";
+import SampleImage2 from "../../../assets/Gunung/Merbabu/merbabu2.jpg";
+import SampleImage3 from "../../../assets/Gunung/Merbabu/merbabu3.JPG";
+import SampleImage4 from "../../../assets/Gunung/Merbabu/merbabu4.JPG";
+import SampleImage5 from "../../../assets/Gunung/Merbabu/merbabu5.JPG";
+import SampleImage6 from "../../../assets/Gunung/Merbabu/merbabu6.JPG";
+import FormData from "../../FormDaftar";
 
-const Sindoro = () => {
+const Gathering = () => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
@@ -36,7 +37,7 @@ const Sindoro = () => {
         alignItems: "left",
       }}
     >
-      <h2>PAKET MEDIUM TRIP (IDR 729.999/pax) Via Kledung</h2>
+      <h2>PAKET MEDIUM TRIP (IDR 850.000/pax) Via Selo</h2>
       <h2>Minimal Keberangkatan 16 Orang</h2>
       <div
         style={{
@@ -88,19 +89,20 @@ const Sindoro = () => {
               <h2 style={{ color: "#FA8806" }}>HARGA SUDAH TERMASUK :</h2>
               <ul>
                 <li>✓ Transportasi Hiace / Elf long PP</li>
-                <li>✓ BBM, parkir, Tol, Tips Driver</li>
+                <li>✓ BBM, parkir, Tol , Tips Driver</li>
                 <li>✓ Tiket Masuk 2H1M</li>
+                <li>✓ Asuransi TNGM</li>
                 <li>✓ Homestay BC</li>
                 <li>✓ Kebersihan BC</li>
                 <li>✓ Tenda kap 4-5 (diisi max 4 orang)</li>
                 <li>✓ Tenda Toilet Portable</li>
-                <li>✓ Matras Alumunium Foil (untuk alas tenda)</li>
+                <li>✓ Matras Alumunium Foil (untuk alas tenda )</li>
                 <li>✓ Perlengkapan Makan & Minum</li>
                 <li>✓ Welcome Drink Teh/Kopi</li>
                 <li>✓ Cooking Set</li>
                 <li>✓ Kompor Portable + Gas</li>
                 <li>✓ Makan 3x di gunung</li>
-                <li>✓ Sarapan Sebelum Summits 1x</li>
+                <li>✓ Sarapan sebelum summits 1 x</li>
                 <li>✓ Cheff Gunung</li>
                 <li>✓ Puding/Nutrijel</li>
                 <li>✓ Buah-buahan (semangka / melon) di area camp</li>
@@ -111,7 +113,7 @@ const Sindoro = () => {
                 <li>✓ Porter Tenda</li>
                 <li>✓ Porter Logistik</li>
                 <li>✓ Porter Makan & Minum</li>
-                <li>✓ Porter barang (Alat makan + minum)</li>
+                <li>✓ Porter barang (Alat makan+ minum)</li>
                 <li>✓ P3K Standar</li>
                 <li>✓ Sejadah solat</li>
                 <li>✓ Teman & Keluarga baru</li>
@@ -120,7 +122,7 @@ const Sindoro = () => {
 
             {/* TIDAK TERMASUK */}
             <div style={{ flex: "1" }}>
-              <h2 style={{ color: "#FA8806" }}>TIDAK TERMASUK :</h2>×
+              <h2 style={{ color: "#FA8806" }}>TIDAK TERMASUK :</h2>
               <ul>
                 <li>× Transportasi Menuju Meeting Point</li>
                 <li>× Cemilan & Air pribadi</li>
@@ -131,7 +133,7 @@ const Sindoro = () => {
                 <li>× Biaya Evakuasi</li>
                 <li>× Ojeg</li>
                 <li>× Tips Crew Sukarela</li>
-                <li>× Dan yang tidak disebutkan di paket</li>
+                <li>× dan yang tidak disebutkan di paket</li>
               </ul>
             </div>
           </div>
@@ -149,54 +151,57 @@ const Sindoro = () => {
             Mepo Bandung : Jumat, 15:30 - 16:00 WIB <br />
             Mepo Jakarta : Jumat, 19:00 - 20:00 WIB <br />
             Mepo trans jawa : Kondisional <br />
-            Mepo Basecamp : Sabtu, 06:00 <br />
-            <b>CATATAN :</b> Untuk Meeting Point Tol Trans Jawa dan sekitarnya
-            bisa kumpul/menunggu di Tol Rest Area yang searah dengan perjalanan.
-            Apabila mepo Bandung Full 16 Orang maka transportasi dipisah pakai
-            Jalur Selatan.
+            Mepo Basecamp : Sabtu, 06:00
           </p>
-
           <p>
             <b>(HARI KE 1)</b>
-          </p>
-          <p>
-            15:30 - 16:00 = Kumpul, absensi di Mepo Bandung <br />
-            16:00 - 20:00 = Perjalanan & Penjemputan Mepo Jakarta <br />
-            20:00 - 20:30 = Melanjutkan Perjalanan ke Gunung Prau
-          </p>
-
-          <p>
+            <br />
+            15:30- 16:00 = Kumpul, absensi Penjemputan Mepo Bandung
+            <br />
+            16:00 - 19:30 = Perjalanan & Penjemputan Mepo Jakarta
+            <br />
+            20:00/20:30 maximal = Melanjutkan Perjalanan dari mepo jakarta ke
+            Gunung Merbabu
+            <br />
             <b>(HARI KE 2)</b>
-          </p>
-          <p>
-            06:00 - 08:00 = Tiba di basecamp dan prepare <br />
-            08:00 - 08:30 = Breafing dan berdoa bersama <br />
-            08:30 - 09:00 = Basecamp - Post 1 (Ojeg, Tidak termasuk) <br />
-            09:00 - 10:30 = Post 1 - Post 2 <br />
-            10:30 - 12:00 = Post 2 - Post 3 <br />
-            12:00 - 13:00 = ISHOMA Makan ke 1 <br />
-            13:00 - 14:00 = Post 3 - Plawangan <br />
-            14:00 - 14:30 = Tiba di Area Camp <br />
-            18:00 - 20:00 = ISHOMA Makan ke 2 Malam (CAMP) <br />
-            20:00 - = Istirahat
-          </p>
-
-          <p>
+            <br />
+            07:00 - 08:00 = Tiba di basecamp, prepare pendakian
+            <br />
+            08:00 - 08:30 = Registrasi, Breafing dan berdoa bersama dan mulai
+            pendakian
+            <br />
+            12:00 - 12:30 = ISHOMA Makan ke 1 ( track pendakian )
+            <br />
+            12:30 – 16:00 = Melanjutkan perjalanan
+            <br />
+            16:00 - 18:00 = Sampai tempat camp (Enjoy Sunsite sabana 1 camp
+            area)
+            <br />
+            18:00 - 20:00 = ISOMA Makan Ke 2 20:00 - = Istirahat (CAMP)
+            <br />
             <b>(HARI KE 3)</b>
-          </p>
-          <p>
-            03:30 - 04:00 = Bangun, Sarapan, Prepare Summits <br />
-            04:00 - 06:00 = Menuju Puncak Prau <br />
-            06:00 - 06:30 = Enjoy Puncak <br />
-            06:30 - 07:30 = Menuju tempat camp <br />
-            07:30 - 08:00 = Makan ke 3 Pagi, Prepare Turun <br />
-            08:30 - 12:00 = Puncak - Post 1 <br />
-            12:00 - 12:30 = Post 1 - Basecamp (by ojeg, tidak termasuk) <br />
-            12:30 - 13:30 = ISHOMA, bersih bersih, prepare pulang <br />
-            14:00 - 23:00 = Perjalanan pulang ke mepo jakarta <br />
-            23:00 - 03:00 = Perjalanan mepo bandung <br />
-            03:00 - = Trip selesai dan pulang kerumah masing-masing dengan
-            selamat
+            <br />
+            03:00 - 04:00 = Bangun, Prepare Summits Sarapan Sebelum Summits
+            <br />
+            04:00 - 04:30 = Sabana 1 - Sabana 2
+            <br />
+            04:30 - 06:00 = Sabana 2 - Puncak
+            <br />
+            06:00 - 07:00 = Enjoy Puncak Triangulasi & Ketengsong
+            <br />
+            07:00 - 09:00 = Turun Kembali ke Camp area
+            <br />
+            09:00 – 11.00 = Makan Ke 3 Prepare Turun
+            <br />
+            11.00- 15:00 = Sabana 1 - Basecamp
+            <br />
+            15:00 - 17:00 = Bersih bersih, prepare pulang ke mepo awal
+            <br />
+            17:00 - 03:00 = Perjalanan pulang ke mepo jakarta
+            <br />
+            03:00 - 05:00 = Perjalanan ke mepo bandung
+            <br />
+            05:00 - = Trip selesai & pulang kerumah masing masing dengan selamat
           </p>
 
           <div>
@@ -204,23 +209,23 @@ const Sindoro = () => {
             <ul>
               <li>
                 Sewaktu Waktu dapat berubah-ubah tergantung fisik dan kondisi di
-                lapangan, diharapkan Peserta koordinasi dengan crew apabila
+                lapangan. Diharapkan peserta berkoordinasi dengan crew apabila
                 terjadi sakit atau cedera.
               </li>
               <li>
-                Seluruh peserta harus Mengikuti Arahan SOP pendakian yang ada di
-                taman nasional maupun SOP Il’m Trip Organizer, peserta harus
+                Seluruh peserta harus mengikuti arahan SOP pendakian yang ada di
+                taman nasional maupun SOP Il'm Trip Organizer, peserta harus
                 saling membantu, kompak, komunikasi, dan menjaga kebersamaan
                 satu sama lain.
               </li>
               <li>
-                Jalur Wates terdapat sumber mata air di pos 3, peserta WAJIB
-                membawa air minum pribadi minimal 2-3 botol (ukuran 1.5L) dengan
-                perhitungan : 1 Botol untuk naik, 1 botol saat dicamp, dan 1
-                botol saat turun (refill di mata air).
+                Jalur Selo tidak ada sumber mata air, peserta WAJIB membawa air
+                minum pribadi minimal 3-4 botol (ukuran 1.5L) dengan
+                perhitungan: 1 botol untuk naik, 1 botol saat summit, 1 botol
+                saat turun.
               </li>
               <li>
-                Sampah cemilan dan air minum kemasan pribadi, harap dibawa turun
+                Sampah cemilan dan air minum kemasan pribadi, dibawa turun
                 kembali oleh masing-masing peserta.
               </li>
             </ul>
@@ -246,7 +251,7 @@ const Sindoro = () => {
         </button>
 
         <button
-          onClick={() => navigate("/booking")} // Navigasi ke halaman booking
+          onClick={openModal}
           style={{
             padding: "15px 30px",
             fontSize: "18px",
@@ -259,6 +264,18 @@ const Sindoro = () => {
         >
           Pesan Sekarang
         </button>
+
+        {/* Modal */}
+        {isModalOpen && (
+          <div style={modalStyles.overlay}>
+            <div style={modalStyles.modal}>
+              <button onClick={closeModal} style={modalStyles.closeButton}>
+                X
+              </button>
+              <FormData />
+            </div>
+          </div>
+        )}
 
         <button
           onClick={() => navigate("/Syarat")} // Navigasi ke halaman booking
@@ -410,4 +427,34 @@ const Sindoro = () => {
   );
 };
 
-export default Sindoro;
+const modalStyles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modal: {
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "5px",
+    width: "500px",
+    position: "relative",
+  },
+  closeButton: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    fontSize: "20px",
+    border: "none",
+    backgroundColor: "transparent",
+    cursor: "pointer",
+  },
+};
+
+export default Gathering;

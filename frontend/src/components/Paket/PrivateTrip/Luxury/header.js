@@ -1,27 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Background1 from "../../../assets/Trip/bg2.png";
-import Background2 from "../../../assets/Gunung/Merbabu/merbabu1.jpg";
-import Background3 from "../../../assets/Gunung/Merbabu/merbabu2.jpg"; // Tambahkan gambar lain jika diperlukan
+import React from "react";
+import Background from "../../../../assets/Trip/bgprt.png";
 
 function Header() {
-  const [currentImage, setCurrentImage] = useState(Background1); // Gambar pertama sebagai default
-
-  // Gambar latar belakang yang akan diputar
-  const backgroundImages = [Background1, Background2, Background3];
-
-  useEffect(() => {
-    // Mengganti gambar latar belakang setiap 3 detik (3000ms)
-    const interval = setInterval(() => {
-      setCurrentImage((prevImage) => {
-        const currentIndex = backgroundImages.indexOf(prevImage);
-        const nextIndex = (currentIndex + 1) % backgroundImages.length;
-        return backgroundImages[nextIndex];
-      });
-    }, 3000); // Ganti gambar setiap 3 detik
-
-    return () => clearInterval(interval); // Bersihkan interval ketika komponen di-unmount
-  }, []);
-
   const headerStyle = {
     position: "relative",
     width: "100%",
@@ -59,8 +39,16 @@ function Header() {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Menambahkan lapisan hitam transparan
     zIndex: 0, // Overlay berada di atas gambar, tapi di bawah teks
+  };
+
+  const newImageStyle = {
+    position: "absolute",
+    top: 10, // Menempatkan gambar sedikit lebih rendah dari bagian atas
+    right: 10, // Menempatkan gambar di sebelah kanan dengan jarak 10px dari tepi kanan
+    width: "20%", // Memperkecil ukuran gambar menjadi 15% dari lebar elemen induk
+    height: "auto", // Biarkan tinggi gambar proporsional dengan lebar
+    zIndex: 1, // Pastikan gambar baru berada di atas gambar latar belakang
   };
 
   return (
@@ -68,12 +56,12 @@ function Header() {
       <img
         className="Volcano37791591280"
         style={imageStyle}
-        src={currentImage} // Menggunakan gambar yang disimpan dalam state
+        src={Background}
         alt="Background"
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        OpenTrip
+        PrivateTrip LUXURY
         <p
           style={{
             color: "#ffff",
@@ -86,9 +74,9 @@ function Header() {
             textAlign: "left",
           }}
         >
-          Nikmati open trip penuh petualangan yang membawa Anda pada pengalaman
-          seru, layanan berkualitas, dan cerita-cerita baru yang tak akan
-          terlupakan.
+          Nikmati petualangan mendaki yang eksklusif dengan Paket Private Trip
+          kami. Rasakan pengalaman mendaki gunung secara pribadi bersama
+          orang-orang terdekat.
         </p>
       </div>
     </header>

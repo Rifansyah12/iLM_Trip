@@ -170,7 +170,7 @@ const Paket = () => {
             kami.
           </p>
           <Link
-            to="/FamilyTrip"
+            to="/Paket/FamilyTrip"
             style={{
               display: "inline-block",
               marginTop: "15px",
@@ -229,7 +229,7 @@ const Paket = () => {
             Perkuat hubungan kerja tim Anda dengan Paket Gathering Kantor.
           </p>
           <Link
-            to="/Gathering"
+            to="/Paket/Gathering"
             style={{
               display: "inline-block",
               marginTop: "15px",

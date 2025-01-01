@@ -36,7 +36,7 @@ const Pangrango = () => {
         alignItems: "left",
       }}
     >
-      <h2>PAKET MEDIUM TRIP (IDR 850.000/pax) Via Selo</h2>
+      <h2>PAKET MEDIUM TRIP (IDR 725.000/pax) Via Cibodas</h2>
       <h2>Minimal Keberangkatan 16 Orang</h2>
       <div
         style={{
@@ -71,7 +71,7 @@ const Pangrango = () => {
           {/* MEETING POINT */}
           <div style={{ flex: "1" }}>
             <h2 style={{ color: "#FA8806" }}>MEETING POINT :</h2>
-            <p>BANDUNG – JAKARTA – TOL TRANS JAWA – BASECAMP</p>
+            <p>BANDUNG – JAKARTA – BASECAMP</p>
           </div>
 
           {/* FLEX CONTAINER FOR REMAINING CONTENT */}
@@ -85,26 +85,24 @@ const Pangrango = () => {
           >
             {/* HARGA SUDAH TERMASUK */}
             <div style={{ flex: "1" }}>
-              <h2 style={{ color: "#FA8806" }}>HARGA SUDAH TERMASUK :</h2>
+              <h2 style={{ color: "#FA8806" }}>HARGA SUDAH TERMASUK :</h2>✓
               <ul>
                 <li>✓ Transportasi Hiace / Elf long PP</li>
-                <li>✓ BBM, parkir, Tol , Tips Driver</li>
-                <li>✓ Tiket Masuk 2H1M</li>
-                <li>✓ Asuransi TNGM</li>
+                <li>✓ BBM, parkir, Tol, Tips Driver</li>
+                <li>✓ Tiket Masuk 2H1M TNGP</li>
                 <li>✓ Homestay BC</li>
                 <li>✓ Kebersihan BC</li>
                 <li>✓ Tenda kap 4-5 (diisi max 4 orang)</li>
                 <li>✓ Tenda Toilet Portable</li>
-                <li>✓ Matras Alumunium Foil (untuk alas tenda )</li>
+                <li>✓ Matras Alumunium Foil (untuk alas tenda)</li>
                 <li>✓ Perlengkapan Makan & Minum</li>
                 <li>✓ Welcome Drink Teh/Kopi</li>
                 <li>✓ Cooking Set</li>
                 <li>✓ Kompor Portable + Gas</li>
                 <li>✓ Makan 3x di gunung</li>
-                <li>✓ Sarapan sebelum summits 1 x</li>
                 <li>✓ Cheff Gunung</li>
                 <li>✓ Puding/Nutrijel</li>
-                <li>✓ Buah-buahan (semangka / melon) di area camp</li>
+                <li>✓ Buah-buahan (semangka/melon) di area camp</li>
                 <li>✓ Logistik</li>
                 <li>✓ HT</li>
                 <li>✓ Guide Profesional</li>
@@ -123,16 +121,18 @@ const Pangrango = () => {
             <div style={{ flex: "1" }}>
               <h2 style={{ color: "#FA8806" }}>TIDAK TERMASUK :</h2>
               <ul>
-                <li>× Transportasi Menuju Meeting Point</li>
-                <li>× Cemilan & Air pribadi</li>
-                <li>× Perlengkapan Pribadi</li>
-                <li>× Porter Pribadi</li>
-                <li>× Surat Sehat</li>
-                <li>× Asuransi Pribadi</li>
-                <li>× Biaya Evakuasi</li>
-                <li>× Ojeg</li>
-                <li>× Tips Crew Sukarela</li>
-                <li>× dan yang tidak disebutkan di paket</li>
+                <ul>
+                  <li>× Transportasi Menuju Meeting Point</li>
+                  <li>× Cemilan & Air pribadi</li>
+                  <li>× Perlengkapan Pribadi</li>
+                  <li>× Porter Pribadi</li>
+                  <li>× Surat Sehat</li>
+                  <li>× Asuransi Pribadi</li>
+                  <li>× Biaya Evakuasi</li>
+                  <li>× Ojeg</li>
+                  <li>× Tips Crew Sukarela</li>
+                  <li>× Dan yang tidak disebutkan di paket</li>
+                </ul>
               </ul>
             </div>
           </div>
@@ -147,60 +147,62 @@ const Pangrango = () => {
             <b>MEETING POINT PESERTA :</b>
           </p>
           <p>
-            Mepo Bandung : Jumat, 15:30 - 16:00 WIB <br />
-            Mepo Jakarta : Jumat, 19:00 - 20:00 WIB <br />
-            Mepo trans jawa : Kondisional <br />
+            Mepo Bandung : Jumat, 18:00 - 19:00 WIB <br />
+            Mepo Jakarta : Jumat, 22:00 – 22:30 WIB <br />
             Mepo Basecamp : Sabtu, 06:00
+          </p>
+          <p>
+            <b>NOTED :</b> JIKA PESERTA HANYA MEETING POINT BANDUNG MAKA, JAM
+            JEMPUTAN MEETING POINT BANDUNG MENYESUAIKAN MENJADI JAM 20:00 –
+            21:00
           </p>
           <p>
             <b>(HARI KE 1)</b>
             <br />
-            15:30- 16:00 = Kumpul, absensi Penjemputan Mepo Bandung
+            18:00 - 19:00 = Penjemputan Mepo Bandung
             <br />
-            16:00 - 19:30 = Perjalanan & Penjemputan Mepo Jakarta
-            <br />
-            20:00/20:30 maximal = Melanjutkan Perjalanan dari mepo jakarta ke
-            Gunung Merbabu
+            19:00 - 22:00 = Penjemputan Mepo Jakarta dan Melanjutkan Perjalanan
+            ke Gunung Gede
             <br />
             <b>(HARI KE 2)</b>
             <br />
-            07:00 - 08:00 = Tiba di basecamp, prepare pendakian
+            03:00 - 06:00 = Tiba di basecamp istirahat dan prepare
             <br />
-            08:00 - 08:30 = Registrasi, Breafing dan berdoa bersama dan mulai
-            pendakian
+            06:00 - 06:30 = Breafing dan berdoa bersama
             <br />
-            12:00 - 12:30 = ISHOMA Makan ke 1 ( track pendakian )
+            07:00 - 11:00 = Mulai perjalanan
             <br />
-            12:30 – 16:00 = Melanjutkan perjalanan
+            12:00 - 12:30 = ISHOMA Makan ke 1
             <br />
-            16:00 - 18:00 = Sampai tempat camp (Enjoy Sunsite sabana 1 camp
-            area)
+            13:00 – 14:00 = Tiba Di tempat Camp Kandang Badak
             <br />
-            18:00 - 20:00 = ISOMA Makan Ke 2 20:00 - = Istirahat (CAMP)
+            18:00 - 20:00 = ISHOMA Makan ke 2 Malam
+            <br />
+            20:00 - = Istirahat
             <br />
             <b>(HARI KE 3)</b>
             <br />
-            03:00 - 04:00 = Bangun, Prepare Summits Sarapan Sebelum Summits
+            03:00 - 03:30 = Bangun, Sarapan Prepare Summits
             <br />
-            04:00 - 04:30 = Sabana 1 - Sabana 2
+            04:00 – 07:00 = Summits Puncak Pangrango
             <br />
-            04:30 - 06:00 = Sabana 2 - Puncak
+            07:00 : 07:30 = Enjoy Puncak Enjoy Sunrise, Enjoy Lembah
+            Mandalawangi
             <br />
-            06:00 - 07:00 = Enjoy Puncak Triangulasi & Ketengsong
+            07:30 – 09:30 = Turun Dari Puncak Ke tempat camp
             <br />
-            07:00 - 09:00 = Turun Kembali ke Camp area
+            09:30 – 10:00 = Makan ke 3 Pagi, Prepare Turun
             <br />
-            09:00 – 11.00 = Makan Ke 3 Prepare Turun
+            10:00 – 15:00 = Turun menuju Basecamp
             <br />
-            11.00- 15:00 = Sabana 1 - Basecamp
+            15:00 - 15:30 = ISHOMA, bersih bersih, prepare pulang
             <br />
-            15:00 - 17:00 = Bersih bersih, prepare pulang ke mepo awal
+            16:00 - 20:00 = Perjalanan pulang ke Mepo (Jakarta bila ada)
             <br />
-            17:00 - 03:00 = Perjalanan pulang ke mepo jakarta
+            20:00 – 24:00 = Perjalanan ke Mepo Bandung
             <br />
-            03:00 - 05:00 = Perjalanan ke mepo bandung
-            <br />
-            05:00 - = Trip selesai & pulang kerumah masing masing dengan selamat
+            24:00 - = Trip selesai dan pulang kerumah masing-masing dengan
+            selamat
           </p>
 
           <div>
@@ -213,18 +215,18 @@ const Pangrango = () => {
               </li>
               <li>
                 Seluruh peserta harus mengikuti arahan SOP pendakian yang ada di
-                taman nasional maupun SOP Il'm Trip Organizer, peserta harus
+                taman nasional maupun SOP Il’m Trip Organizer, peserta harus
                 saling membantu, kompak, komunikasi, dan menjaga kebersamaan
                 satu sama lain.
               </li>
               <li>
-                Jalur Selo tidak ada sumber mata air, peserta WAJIB membawa air
-                minum pribadi minimal 3-4 botol (ukuran 1.5L) dengan
-                perhitungan: 1 botol untuk naik, 1 botol saat summit, 1 botol
-                saat turun.
+                Peserta WAJIB membawa air minum pribadi minimal 2-3 botol
+                (ukuran 1.5L) dengan perhitungan: 1 Botol untuk naik, 1 botol
+                saat dicamp/summits dan 1 botol saat turun pendakian.
               </li>
+              <li>Terdapat warung-warung di track pendakian.</li>
               <li>
-                Sampah cemilan dan air minum kemasan pribadi, dibawa turun
+                Sampah cemilan dan air minum kemasan pribadi, harap dibawa turun
                 kembali oleh masing-masing peserta.
               </li>
             </ul>

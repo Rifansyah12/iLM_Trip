@@ -36,7 +36,7 @@ const Sumbing = () => {
         alignItems: "left",
       }}
     >
-      <h2>PAKET MEDIUM TRIP (IDR 850.000/pax) Via Selo</h2>
+      <h2>PAKET MEDIUM TRIP (IDR 729.999/pax) Via Garung</h2>
       <h2>Minimal Keberangkatan 16 Orang</h2>
       <div
         style={{
@@ -87,13 +87,12 @@ const Sumbing = () => {
             <div style={{ flex: "1" }}>
               <h2 style={{ color: "#FA8806" }}>HARGA SUDAH TERMASUK :</h2>
               <ul>
-                <li>✓ Transportasi Hiace / Elf long PP</li>
+                <li> ✓ Transportasi Hiace / Elf long PP</li>
                 <li>✓ BBM, parkir, Tol , Tips Driver</li>
                 <li>✓ Tiket Masuk 2H1M</li>
-                <li>✓ Asuransi TNGM</li>
                 <li>✓ Homestay BC</li>
-                <li>✓ Kebersihan BC</li>
-                <li>✓ Tenda kap 4-5 (diisi max 4 orang)</li>
+                <li>✓ kebersihan BC</li>
+                <li>✓ Tenda kap 4-5 ( diisi max 4 orang)</li>
                 <li>✓ Tenda Toilet Portable</li>
                 <li>✓ Matras Alumunium Foil (untuk alas tenda )</li>
                 <li>✓ Perlengkapan Makan & Minum</li>
@@ -104,7 +103,7 @@ const Sumbing = () => {
                 <li>✓ Sarapan sebelum summits 1 x</li>
                 <li>✓ Cheff Gunung</li>
                 <li>✓ Puding/Nutrijel</li>
-                <li>✓ Buah-buahan (semangka / melon) di area camp</li>
+                <li>✓ Buah-buahan ( semangka / melon) di area camp</li>
                 <li>✓ Logistik</li>
                 <li>✓ HT</li>
                 <li>✓ Guide Profesional</li>
@@ -130,7 +129,7 @@ const Sumbing = () => {
                 <li>× Surat Sehat</li>
                 <li>× Asuransi Pribadi</li>
                 <li>× Biaya Evakuasi</li>
-                <li>× Ojeg</li>
+                <li>× Ojek</li>
                 <li>× Tips Crew Sukarela</li>
                 <li>× dan yang tidak disebutkan di paket</li>
               </ul>
@@ -141,66 +140,75 @@ const Sumbing = () => {
         {/* ITINERARY */}
         <div>
           <h2 style={{ color: "#FA8806", marginTop: "20px" }}>
-            ITINERARY TRIP :
+            ITINERARY TRIP
           </h2>
+
           <p>
             <b>MEETING POINT PESERTA :</b>
           </p>
           <p>
-            Mepo Bandung : Jumat, 15:30 - 16:00 WIB <br />
-            Mepo Jakarta : Jumat, 19:00 - 20:00 WIB <br />
-            Mepo trans jawa : Kondisional <br />
-            Mepo Basecamp : Sabtu, 06:00
+            Mepo Bandung: Jumat, 15:30 - 16:00 WIB <br />
+            Mepo Jakarta: Jumat, 19:00 - 20:00 WIB <br />
+            Mepo trans jawa: Kondisional <br />
+            Mepo Basecamp: Sabtu, 06:00
           </p>
+
           <p>
             <b>(HARI KE 1)</b>
             <br />
-            15:30- 16:00 = Kumpul, absensi Penjemputan Mepo Bandung
+            15:30 - 16:00 = Kumpul, absensi di Mepo Bandung
             <br />
-            16:00 - 19:30 = Perjalanan & Penjemputan Mepo Jakarta
+            16:00 - 20:00 = Perjalanan & Penjemputan Mepo Jakarta
             <br />
-            20:00/20:30 maximal = Melanjutkan Perjalanan dari mepo jakarta ke
-            Gunung Merbabu
-            <br />
+            20:00 - 20:30 = Melanjutkan Perjalanan ke Gunung Sumbing
+          </p>
+
+          <p>
             <b>(HARI KE 2)</b>
             <br />
-            07:00 - 08:00 = Tiba di basecamp, prepare pendakian
+            06:00 - 08:00 = Tiba di basecamp dan prepare pendakian
             <br />
-            08:00 - 08:30 = Registrasi, Breafing dan berdoa bersama dan mulai
-            pendakian
+            08:00 - 08:30 = Briefing dan berdoa bersama
             <br />
-            12:00 - 12:30 = ISHOMA Makan ke 1 ( track pendakian )
+            08:30 - 09:00 = Ojek Basecamp - Batas Hutan pos 1 (Ojek, Tidak
+            Termasuk)
             <br />
-            12:30 – 16:00 = Melanjutkan perjalanan
+            09:00 - 10:00 = Post 1 - Post 2<br />
+            10:00 - 11:30 = Post 2 – Pengkolan 9<br />
+            11:30 - 12:30 = ISHOMA Makan ke 1<br />
+            12:30 - 14:30 = Menuju Post 3 - Sunrise Camp
             <br />
-            16:00 - 18:00 = Sampai tempat camp (Enjoy Sunsite sabana 1 camp
-            area)
+            15:00 - = Enjoy Sunrise Camp
             <br />
-            18:00 - 20:00 = ISOMA Makan Ke 2 20:00 - = Istirahat (CAMP)
+            18:00 - 20:00 = ISHOMA Makan ke 2 Malam
             <br />
+            20:00 - = Istirahat
+          </p>
+
+          <p>
             <b>(HARI KE 3)</b>
             <br />
-            03:00 - 04:00 = Bangun, Prepare Summits Sarapan Sebelum Summits
+            02:30 - 03:00 = Bangun, Prepare Summits, Sarapan sebelum Summits
             <br />
-            04:00 - 04:30 = Sabana 1 - Sabana 2
+            03:00 - 05:00 = Sunrise Camp - Post 4<br />
+            05:00 - 07:00 = Post 4 - Puncak
             <br />
-            04:30 - 06:00 = Sabana 2 - Puncak
+            07:00 - 07:30 = Enjoy Puncak Sumbing
             <br />
-            06:00 - 07:00 = Enjoy Puncak Triangulasi & Ketengsong
+            07:30 - 09:30 = Turun kembali ke area camp
             <br />
-            07:00 - 09:00 = Turun Kembali ke Camp area
+            09:30 - 10:30 = Makan ke 3 siang, Prepare Turun
             <br />
-            09:00 – 11.00 = Makan Ke 3 Prepare Turun
+            10:30 - 14:30 = Camp – Pos Ojek
             <br />
-            11.00- 15:00 = Sabana 1 - Basecamp
+            14:30 - 15:00 = Pos 1 Setengah - Basecamp (by Ojek, tidak termasuk)
             <br />
-            15:00 - 17:00 = Bersih bersih, prepare pulang ke mepo awal
+            15:00 - 16:00 = ISHOMA, bersih-bersih, prepare pulang
             <br />
-            17:00 - 03:00 = Perjalanan pulang ke mepo jakarta
+            16:00 - 02:00 = Perjalanan pulang ke Mepo
             <br />
-            03:00 - 05:00 = Perjalanan ke mepo bandung
-            <br />
-            05:00 - = Trip selesai & pulang kerumah masing masing dengan selamat
+            04:00 - = Trip selesai dan pulang ke rumah masing-masing dengan
+            selamat
           </p>
 
           <div>
@@ -213,18 +221,19 @@ const Sumbing = () => {
               </li>
               <li>
                 Seluruh peserta harus mengikuti arahan SOP pendakian yang ada di
-                taman nasional maupun SOP Il'm Trip Organizer, peserta harus
+                taman nasional maupun SOP Il’m Trip Organizer, peserta harus
                 saling membantu, kompak, komunikasi, dan menjaga kebersamaan
                 satu sama lain.
               </li>
               <li>
-                Jalur Selo tidak ada sumber mata air, peserta WAJIB membawa air
-                minum pribadi minimal 3-4 botol (ukuran 1.5L) dengan
-                perhitungan: 1 botol untuk naik, 1 botol saat summit, 1 botol
-                saat turun.
+                Jalur Sumbing Via Garung hanya terdapat mata air di Post 1.
+                Peserta WAJIB membawa air minum pribadi minimal 2-3 botol
+                (ukuran 1.5L) dengan perhitungan: 1 Botol untuk naik, 1 botol
+                saat dicamp/summits, dan 1 botol saat turun pendakian.
               </li>
+              <li>Terdapat warung di beberapa post.</li>
               <li>
-                Sampah cemilan dan air minum kemasan pribadi, dibawa turun
+                Sampah cemilan dan air minum kemasan pribadi, harap dibawa turun
                 kembali oleh masing-masing peserta.
               </li>
             </ul>

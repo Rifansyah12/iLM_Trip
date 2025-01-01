@@ -18,6 +18,10 @@ import Sumbing from "./pages/Paket/OpenTrip/Gunung/sumbing";
 import Sindoro from "./pages/Paket/OpenTrip/Gunung/sindoro";
 import Sangar from "./pages/Paket/OpenTrip/Gunung/sangar";
 //
+// PrivateTrip
+
+import Luxury from "./pages/Paket/PrivateTrip/Luxury";
+import Premium from "./pages/Paket/PrivateTrip/Premium";
 // form
 import FormDaftar from "./components/FormDaftar";
 //
@@ -114,6 +118,10 @@ const App = () => {
         <Route path="/Paket/OpenTrip/Gunung/sindoro" element={<Sindoro />} />
         <Route path="/Paket/OpenTrip/Gunung/sumbing" element={<Sumbing />} />
         <Route path="/Paket/OpenTrip/Gunung/sangar" element={<Sangar />} />
+
+        {/* PrivateTrip */}
+        <Route path="/Paket/PrivateTrip/Premium" element={<Premium />} />
+        <Route path="/Paket/PrivateTrip/Luxury" element={<Luxury />} />
         {/* form */}
         <Route path="/FormDaftar" element={<FormDaftar />} />
         {/*  */}

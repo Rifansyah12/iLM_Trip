@@ -934,7 +934,7 @@ const OpenTrip = () => {
           }}
         >
           <button
-            onClick={() => navigate("/Paket/OpenTrip/Gunung/pangrango")}
+            onClick={() => navigate("/Paket/OpenTrip/Gunung/prau")}
             style={{
               fontSize: "20px",
               fontWeight: "bold",
