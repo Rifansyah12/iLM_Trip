@@ -60,8 +60,7 @@ const Navbar = () => {
                 color: "#fff",
               }}
             >
-              <FaInstagram size={20} />
-              <span>@yourusername</span>
+              <FaInstagram size={30} />
             </a>
             <a
               href="https://www.youtube.com/yourusername"
@@ -75,8 +74,7 @@ const Navbar = () => {
                 color: "#fff",
               }}
             >
-              <FaYoutube size={20} />
-              <span>@yourusername</span>
+              <FaYoutube size={30} />
             </a>
             <a
               href="https://www.tiktok.com/@yourusername"
@@ -90,8 +88,7 @@ const Navbar = () => {
                 color: "#fff",
               }}
             >
-              <FaTiktok size={20} />
-              <span>@yourusername</span>
+              <FaTiktok size={30} />
             </a>
           </div>
         </div>
@@ -137,6 +134,9 @@ const Navbar = () => {
           </div>
           <Link className="btn btn-success btn-livechat ms-4" to="/Kontak">
             <span>Kontak</span>
+          </Link>
+          <Link className="btn btn-primary btn-livechat ms-4" to="/Login">
+            <span>Admin</span>
           </Link>
         </div>
       </div>

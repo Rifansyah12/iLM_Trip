@@ -17,9 +17,10 @@ import Papandayan from "./pages/Paket/OpenTrip/Gunung/papandayan";
 import Sumbing from "./pages/Paket/OpenTrip/Gunung/sumbing";
 import Sindoro from "./pages/Paket/OpenTrip/Gunung/sindoro";
 import Sangar from "./pages/Paket/OpenTrip/Gunung/sangar";
-//
+// login
+import LoginPage from "./components/Login";
+import DashboardPage from "./components/Dashboard";
 // PrivateTrip
-
 import Luxury from "./pages/Paket/PrivateTrip/Luxury";
 import Premium from "./pages/Paket/PrivateTrip/Premium";
 // form
@@ -102,6 +103,7 @@ const App = () => {
         <Route path="/Paket/Gathering" element={<Gathering />} />
         <Route path="/Testimoni/Home" element={<TestimoniHome />} />
         <Route path="/Kontak" element={<Kontak />} />
+        <Route path="/Login" element={<LoginPage />} />
 
         {/* <Route path="/open-trip" element={<OpenTrip />} /> */}
         <Route path="/Paket/OpenTrip/Gunung/merbabu" element={<Merbabu />} />
@@ -124,7 +126,9 @@ const App = () => {
         <Route path="/Paket/PrivateTrip/Luxury" element={<Luxury />} />
         {/* form */}
         <Route path="/FormDaftar" element={<FormDaftar />} />
-        {/*  */}
+        {/* Login */}
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
 
       {/* Tombol Live Chat */}
