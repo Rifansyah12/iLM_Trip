@@ -1,5 +1,5 @@
 import React from "react";
-import Background from "../../../../assets/Trip/bgprt.png";
+import Background from "../../../../assets/volcano-3779159_1280.png";
 
 function Header() {
   const headerStyle = {
@@ -16,7 +16,7 @@ function Header() {
     fontWeight: "700",
     wordWrap: "break-word",
     position: "absolute",
-    top: 50, // Posisi vertikal teks
+    top: 10, // Posisi vertikal teks
     left: 50, // Sama dengan padding kiri navbar
     paddingRight: 50, // Sama dengan padding kanan navbar
     zIndex: 1, // Pastikan teks berada di atas gambar
@@ -61,7 +61,7 @@ function Header() {
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        PrivateTrip <span style={{ color: "#FFD700" }}>PREMIUM</span>
+        Another
         <p
           style={{
             color: "#ffff",
@@ -74,9 +74,9 @@ function Header() {
             textAlign: "left",
           }}
         >
-          Nikmati petualangan mendaki yang eksklusif dengan Paket Private Trip
-          kami. Rasakan pengalaman mendaki gunung secara pribadi bersama
-          orang-orang terdekat.
+          Temukan Keajaiban Alam Bersama Kami dan Rasakan sensasi mendaki gunung
+          dengan kenyamanan dan fasilitas lengkap. Pilih paket favoritmu dan
+          biarkan kami mengurus sisanya.
         </p>
       </div>
     </header>

@@ -139,106 +139,74 @@ const Sumbing = () => {
 
         {/* ITINERARY */}
         <div>
-          <h2 style={{ color: "#FA8806", marginTop: "20px" }}>
-            ITINERARY TRIP
-          </h2>
+  <h2 style={{ color: "#FA8806", marginTop: "20px" }}>ITINERARY TRIP</h2>
 
-          <p>
-            <b>MEETING POINT PESERTA :</b>
-          </p>
-          <p>
-            Mepo Bandung: Jumat, 15:30 - 16:00 WIB <br />
-            Mepo Jakarta: Jumat, 19:00 - 20:00 WIB <br />
-            Mepo trans jawa: Kondisional <br />
-            Mepo Basecamp: Sabtu, 06:00
-          </p>
+  <p><b>MEETING POINT PESERTA :</b></p>
+  <p>
+    Mepo Bandung: Jumat, 15:30 - 16:00 WIB <br />
+    Mepo Jakarta: Jumat, 19:00 - 20:00 WIB <br />
+    Mepo trans jawa: Kondisional <br />
+    Mepo Basecamp: Sabtu, 06:00
+  </p>
 
-          <p>
-            <b>(HARI KE 1)</b>
-            <br />
-            15:30 - 16:00 = Kumpul, absensi di Mepo Bandung
-            <br />
-            16:00 - 20:00 = Perjalanan & Penjemputan Mepo Jakarta
-            <br />
-            20:00 - 20:30 = Melanjutkan Perjalanan ke Gunung Sumbing
-          </p>
+  <p>
+    <b>(HARI KE 1)</b><br />
+    15:30 - 16:00 = Kumpul, absensi di Mepo Bandung<br />
+    16:00 - 20:00 = Perjalanan & Penjemputan Mepo Jakarta<br />
+    20:00 - 20:30 = Melanjutkan Perjalanan ke Gunung Sumbing
+  </p>
 
-          <p>
-            <b>(HARI KE 2)</b>
-            <br />
-            06:00 - 08:00 = Tiba di basecamp dan prepare pendakian
-            <br />
-            08:00 - 08:30 = Briefing dan berdoa bersama
-            <br />
-            08:30 - 09:00 = Ojek Basecamp - Batas Hutan pos 1 (Ojek, Tidak
-            Termasuk)
-            <br />
-            09:00 - 10:00 = Post 1 - Post 2<br />
-            10:00 - 11:30 = Post 2 – Pengkolan 9<br />
-            11:30 - 12:30 = ISHOMA Makan ke 1<br />
-            12:30 - 14:30 = Menuju Post 3 - Sunrise Camp
-            <br />
-            15:00 - = Enjoy Sunrise Camp
-            <br />
-            18:00 - 20:00 = ISHOMA Makan ke 2 Malam
-            <br />
-            20:00 - = Istirahat
-          </p>
+  <p>
+    <b>(HARI KE 2)</b><br />
+    06:00 - 08:00 = Tiba di basecamp dan prepare pendakian<br />
+    08:00 - 08:30 = Briefing dan berdoa bersama<br />
+    08:30 - 09:00 = Ojek Basecamp - Batas Hutan pos 1 (Ojek, Tidak Termasuk)<br />
+    09:00 - 10:00 = Post 1 - Post 2<br />
+    10:00 - 11:30 = Post 2 – Pengkolan 9<br />
+    11:30 - 12:30 = ISHOMA Makan ke 1<br />
+    12:30 - 14:30 = Menuju Post 3 - Sunrise Camp<br />
+    15:00 - = Enjoy Sunrise Camp<br />
+    18:00 - 20:00 = ISHOMA Makan ke 2 Malam<br />
+    20:00 - = Istirahat
+  </p>
 
-          <p>
-            <b>(HARI KE 3)</b>
-            <br />
-            02:30 - 03:00 = Bangun, Prepare Summits, Sarapan sebelum Summits
-            <br />
-            03:00 - 05:00 = Sunrise Camp - Post 4<br />
-            05:00 - 07:00 = Post 4 - Puncak
-            <br />
-            07:00 - 07:30 = Enjoy Puncak Sumbing
-            <br />
-            07:30 - 09:30 = Turun kembali ke area camp
-            <br />
-            09:30 - 10:30 = Makan ke 3 siang, Prepare Turun
-            <br />
-            10:30 - 14:30 = Camp – Pos Ojek
-            <br />
-            14:30 - 15:00 = Pos 1 Setengah - Basecamp (by Ojek, tidak termasuk)
-            <br />
-            15:00 - 16:00 = ISHOMA, bersih-bersih, prepare pulang
-            <br />
-            16:00 - 02:00 = Perjalanan pulang ke Mepo
-            <br />
-            04:00 - = Trip selesai dan pulang ke rumah masing-masing dengan
-            selamat
-          </p>
+  <p>
+    <b>(HARI KE 3)</b><br />
+    02:30 - 03:00 = Bangun, Prepare Summits, Sarapan sebelum Summits<br />
+    03:00 - 05:00 = Sunrise Camp - Post 4<br />
+    05:00 - 07:00 = Post 4 - Puncak<br />
+    07:00 - 07:30 = Enjoy Puncak Sumbing<br />
+    07:30 - 09:30 = Turun kembali ke area camp<br />
+    09:30 - 10:30 = Makan ke 3 siang, Prepare Turun<br />
+    10:30 - 14:30 = Camp – Pos Ojek<br />
+    14:30 - 15:00 = Pos 1 Setengah - Basecamp (by Ojek, tidak termasuk)<br />
+    15:00 - 16:00 = ISHOMA, bersih-bersih, prepare pulang<br />
+    16:00 - 02:00 = Perjalanan pulang ke Mepo<br />
+    04:00 - = Trip selesai dan pulang ke rumah masing-masing dengan selamat
+  </p>
 
-          <div>
-            <h2 style={{ color: "#FA8806", marginTop: "20px" }}>CATATAN :</h2>
-            <ul>
-              <li>
-                Sewaktu Waktu dapat berubah-ubah tergantung fisik dan kondisi di
-                lapangan. Diharapkan peserta berkoordinasi dengan crew apabila
-                terjadi sakit atau cedera.
-              </li>
-              <li>
-                Seluruh peserta harus mengikuti arahan SOP pendakian yang ada di
-                taman nasional maupun SOP Il’m Trip Organizer, peserta harus
-                saling membantu, kompak, komunikasi, dan menjaga kebersamaan
-                satu sama lain.
-              </li>
-              <li>
-                Jalur Sumbing Via Garung hanya terdapat mata air di Post 1.
-                Peserta WAJIB membawa air minum pribadi minimal 2-3 botol
-                (ukuran 1.5L) dengan perhitungan: 1 Botol untuk naik, 1 botol
-                saat dicamp/summits, dan 1 botol saat turun pendakian.
-              </li>
-              <li>Terdapat warung di beberapa post.</li>
-              <li>
-                Sampah cemilan dan air minum kemasan pribadi, harap dibawa turun
-                kembali oleh masing-masing peserta.
-              </li>
-            </ul>
-          </div>
-        </div>
+  <div>
+    <h2 style={{ color: "#FA8806", marginTop: "20px" }}>CATATAN :</h2>
+    <ul>
+      <li>
+        Sewaktu Waktu dapat berubah-ubah tergantung fisik dan kondisi di lapangan. Diharapkan peserta berkoordinasi dengan crew apabila terjadi sakit atau cedera.
+      </li>
+      <li>
+        Seluruh peserta harus mengikuti arahan SOP pendakian yang ada di taman nasional maupun SOP Il’m Trip Organizer, peserta harus saling membantu, kompak, komunikasi, dan menjaga kebersamaan satu sama lain.
+      </li>
+      <li>
+        Jalur Sumbing Via Garung hanya terdapat mata air di Post 1. Peserta WAJIB membawa air minum pribadi minimal 2-3 botol (ukuran 1.5L) dengan perhitungan: 1 Botol untuk naik, 1 botol saat dicamp/summits, dan 1 botol saat turun pendakian.
+      </li>
+      <li>
+        Terdapat warung di beberapa post.
+      </li>
+      <li>
+        Sampah cemilan dan air minum kemasan pribadi, harap dibawa turun kembali oleh masing-masing peserta.
+      </li>
+    </ul>
+  </div>
+</div>
+
       </div>
 
       {/* Tombol Navigasi */}

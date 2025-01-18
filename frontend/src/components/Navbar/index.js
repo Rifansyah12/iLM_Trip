@@ -19,79 +19,17 @@ const Navbar = () => {
       style={{
         width: "100%",
         height: "89px",
-        background: "#0f4142",
+        background: "#000000",
         position: "sticky",
         top: 0,
         zIndex: 1000,
       }}
     >
       <div className="container-fluid d-flex align-items-center">
-        {/* Logo dan Media Sosial */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
-          }}
-        >
-          {/* Logo Utama */}
-          <Link to="/" className="navbar-brand">
-            <img src={logoImage} alt="Logo" width="145" height="84" />
-          </Link>
-
-          {/* Ikon Media Sosial */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "15px",
-              color: "#fff",
-            }}
-          >
-            <a
-              href="https://www.instagram.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                textDecoration: "none",
-                color: "#fff",
-              }}
-            >
-              <FaInstagram size={30} />
-            </a>
-            <a
-              href="https://www.youtube.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                textDecoration: "none",
-                color: "#fff",
-              }}
-            >
-              <FaYoutube size={30} />
-            </a>
-            <a
-              href="https://www.tiktok.com/@yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                textDecoration: "none",
-                color: "#fff",
-              }}
-            >
-              <FaTiktok size={30} />
-            </a>
-          </div>
-        </div>
+        {/* Logo di sebelah kiri */}
+        <Link to="/" className="navbar-brand">
+          <img src={logoImage} alt="Logo" width="145" height="84" />
+        </Link>
 
         {/* Navbar Toggle for Mobile */}
         <button
@@ -107,37 +45,58 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navbar Links */}
+        {/* Bagian Menu Tengah */}
         <div
-          className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}
+          className={`collapse navbar-collapse justify-content-center ${
+            menuOpen ? "show" : ""
+          }`}
           id="navbarNavAltMarkup"
         >
-          <div className="navbar-nav ms-auto ms-4">
+          <div className="navbar-nav">
             <Link className="nav-link active fs-4 ms-4" to="/">
               Home
             </Link>
-            <Link className="nav-link fs-4 ms-4" to="/Paket/Home">
-              Paket
+            <Link className="nav-link fs-4 ms-4" to="/tourpage/home">
+              Tour Package
             </Link>
             <Link className="nav-link fs-4 ms-4" to="/Testimoni/Home">
-              Testimoni
+              About Us
             </Link>
             <Link className="nav-link fs-4 ms-4" to="/TentangKami">
-              Tentang Kami
+              Merchendise
             </Link>
             <Link className="nav-link fs-4 ms-4" to="/Galeri">
-              Galeri
+              Blog
             </Link>
             <Link className="nav-link fs-4 ms-4" to="/Booking">
               Booking
             </Link>
+            {/* Dropdown Lainnya */}
+            <div className="nav-item dropdown fs-4 ms-4">
+              <Link
+                className="nav-link dropdown-toggle"
+                to="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Lainnya
+              </Link>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <Link className="dropdown-item" to="/Kontak">
+                    Kontak
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/Login">
+                    Admin
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <Link className="btn btn-success btn-livechat ms-4" to="/Kontak">
-            <span>Kontak</span>
-          </Link>
-          <Link className="btn btn-primary btn-livechat ms-4" to="/Login">
-            <span>Admin</span>
-          </Link>
         </div>
       </div>
     </nav>

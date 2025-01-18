@@ -73,16 +73,49 @@ const Footer = () => {
             </div>
             <ul className="footer-social">
               <li>
-                <i className="bi bi-instagram"></i> @username
+                <a
+                  href="https://www.instagram.com/ilmtriporganizer?igsh=amttNWJ0cDhqOWt2&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="bi bi-instagram"></i> @ilmtriporganize
+                </a>
               </li>
               <li>
-                <i className="bi bi-facebook"></i> @username
+                <a
+                  href="https://www.facebook.com/username"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="bi bi-facebook"></i> @username
+                </a>
               </li>
               <li>
-                <i className="bi bi-youtube"></i> @username
+                <a
+                  href="https://youtube.com/@ilmtriporganizer?si=3hHJ0xrfDP_ZCvMG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="bi bi-youtube"></i> @ilmtriporganize
+                </a>
               </li>
               <li>
-                <i className="bi bi-tiktok"></i> @username
+                <a
+                  href="https://www.tiktok.com/@ilm_triporganizer?_t=8s3iAwPw9zT&_r=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="bi bi-tiktok"></i> @ilm_triporganizer
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/il-m-trip-organizer-a23a03347/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="bi bi-linkedin"></i> ilm trip organizer
+                </a>
               </li>
             </ul>
           </div>

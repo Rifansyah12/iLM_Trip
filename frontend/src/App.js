@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Header from "./components/Header/index";
 import Galeri from "./pages/Galeri";
 import Paket from "./pages/Paket";
 import PaketHome from "./pages/Paket/Home";
+import PaketAnother from "./pages/Paket/Another";
+import Tourpage from "./pages/tourpage/home";
 import PrivateTrip from "./pages/Paket/PrivateTrip";
 import OpenTrip from "./pages/Paket/OpenTrip";
 // gunung
-import Merbabu from "./pages/Paket/OpenTrip/Gunung/merbabu";
+import Merbabu from "./pages/Paket/OpenTrip/Gunung/merbabu/Index";
 import Prau from "./pages/Paket/OpenTrip/Gunung/prau";
 import Gede from "./pages/Paket/OpenTrip/Gunung/gede";
 import Pangrango from "./pages/Paket/OpenTrip/Gunung/pangrango";
@@ -20,6 +22,7 @@ import Sangar from "./pages/Paket/OpenTrip/Gunung/sangar";
 // login
 import LoginPage from "./components/Login";
 import DashboardPage from "./components/Dashboard";
+import AdminNavbar from "./components/AdminNavbar";
 // PrivateTrip
 import Luxury from "./pages/Paket/PrivateTrip/Luxury";
 import Premium from "./pages/Paket/PrivateTrip/Premium";
@@ -34,6 +37,7 @@ import TentangKami from "./pages/TentangKami";
 import Kontak from "./pages/Kontak";
 import ChatRoom from "./Roomchat"; // Import halaman Room Chat
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const Home = () => {
   return (
@@ -86,6 +90,8 @@ const Home = () => {
 
 const App = () => {
   const [isChatOpen, setIsChatOpen] = useState(false); // State untuk membuka/tutup Room Chat
+  const location = useLocation();
+  const isAdminPage = location.pathname.startsWith("/dashboard");
 
   return (
     <div>
@@ -97,6 +103,8 @@ const App = () => {
         <Route path="/Galeri" element={<Galeri />} />
         <Route path="/Paket" element={<Paket />} />
         <Route path="/Paket/Home" element={<PaketHome />} />
+        <Route path="/Paket/Another" element={<PaketAnother />} />
+        <Route path="/tourpage/home" element={<Tourpage />} />
         <Route path="/Paket/PrivateTrip" element={<PrivateTrip />} />
         <Route path="/Paket/OpenTrip" element={<OpenTrip />} />
         <Route path="/Paket/FamilyTrip" element={<FamilyTrip />} />

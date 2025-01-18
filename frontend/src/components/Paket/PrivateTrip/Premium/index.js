@@ -139,7 +139,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",
@@ -239,7 +239,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",
@@ -339,7 +339,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",
@@ -439,7 +439,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",
@@ -549,7 +549,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",
@@ -649,7 +649,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",
@@ -749,7 +749,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",
@@ -849,7 +849,7 @@ const OpenTrip = () => {
             </h2>
             <p
               style={{
-                fontSize: "36px",
+                fontSize: "20px",
                 marginTop: "10px",
                 color: "#ccc",
                 fontFamily: "'Belanosima', sans-serif",

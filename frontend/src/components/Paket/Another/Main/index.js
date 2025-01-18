@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Import semua gambar yang digunakan
-import SampleImage1 from "../../../assets/Documentasi/OpenTrip/DO1.jpg";
-import SampleImage2 from "../../../assets/Documentasi/OpenTrip/DO2.jpg";
-import SampleImage3 from "../../../assets/Documentasi/OpenTrip/DO3.jpg";
-import Merbabu from "../../../assets/Gunung/Merbabu/merbabu1.jpg";
-import Prau1 from "../../../assets/Gunung/Prau/Prau1.jpg";
-import Sindoro from "../../../assets/Gunung/Sindoro/sindoro1.jpeg";
-import Sumbing from "../../../assets/Gunung/Sumbing/sumbing2.jpg";
-import Papandayan from "../../../assets/Gunung/Papandayan/papandayan1.jpg";
-import Pangrango from "../../../assets/Gunung/Pangrango/pangrango2.jpg";
-import Sangar from "../../../assets/Gunung/SangarMega/mega.jpg";
-import Gede from "../../../assets/Gunung/Gede/gede1.jpg";
+import SampleImage1 from "../../../../assets/Documentasi/OpenTrip/DO1.jpg";
+import SampleImage2 from "../../../../assets/Documentasi/OpenTrip/DO2.jpg";
+import SampleImage3 from "../../../../assets/Documentasi/OpenTrip/DO3.jpg";
+import Merbabu from "../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 
 const OpenTrip = () => {
   const navigate = useNavigate();
@@ -103,7 +96,7 @@ const OpenTrip = () => {
           fontFamily: "'Belanosima', sans-serif",
         }}
       >
-        LAYANAN MOUNTAIN TRIP :
+        LAYANAN Another TRIP :
       </h1>
       {/* Container untuk konten trip Premium dan Luxury */}
       <div
@@ -121,23 +114,6 @@ const OpenTrip = () => {
             maxWidth: "400px", // Menentukan lebar maksimum konten
           }}
         >
-          <div style={{ textAlign: "left", marginTop: "20px" }}>
-            <h2
-              style={{
-                fontSize: "36px",
-                marginBottom: "10px",
-                borderBottom: "2px solid #ffff",
-                display: "inline-block",
-                paddingBottom: "5px",
-                width: "fit-content",
-                fontFamily: "'Belanosima', sans-serif",
-                color: "#FFD700 ",
-              }}
-            >
-              PRIVATE TRIP PREMIUM
-            </h2>
-          </div>
-
           <div
             style={{
               display: "flex",
@@ -158,6 +134,21 @@ const OpenTrip = () => {
               }}
             />
           </div>
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <p
+              style={{
+                fontSize: "20px",
+                marginBottom: "10px",
+                paddingBottom: "5px",
+                width: "fit-content",
+                fontFamily: "Times New Roman, serif",
+                color: "#FFD700",
+              }}
+            >
+              EXPLOR DAN PENGENALAN <br />
+              TUMBUHAN TAHURA DJUANDA
+            </p>
+          </div>
           <div
             style={{
               textAlign: "center",
@@ -166,7 +157,7 @@ const OpenTrip = () => {
             }}
           >
             <button
-              onClick={() => navigate("/Paket/PrivateTrip/Premium")}
+              onClick={() => navigate("/Paket/Another/explore")}
               style={{
                 fontSize: "20px",
                 fontWeight: "bold",
@@ -180,7 +171,7 @@ const OpenTrip = () => {
                 fontFamily: "'Belanosima', sans-serif",
               }}
             >
-              IDR 1.799.999 / Jelajahi
+              IDR 3499.999 / Jelajahi
             </button>
             <div
               style={{
@@ -199,23 +190,6 @@ const OpenTrip = () => {
             maxWidth: "400px", // Menentukan lebar maksimum konten
           }}
         >
-          <div style={{ textAlign: "left", marginTop: "20px" }}>
-            <h2
-              style={{
-                fontSize: "36px",
-                marginBottom: "10px",
-                borderBottom: "2px solid #ffff",
-                display: "inline-block",
-                paddingBottom: "5px",
-                width: "fit-content",
-                fontFamily: "'Belanosima', sans-serif",
-                color: "#BDC3C7",
-              }}
-            >
-              PRIVATE TRIP LUXURY
-            </h2>
-          </div>
-
           <div
             style={{
               display: "flex",
@@ -236,6 +210,22 @@ const OpenTrip = () => {
               }}
             />
           </div>
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <h2
+              style={{
+                fontSize: "20px",
+                marginBottom: "10px",
+                display: "inline-block",
+                paddingBottom: "5px",
+                width: "fit-content",
+                fontFamily: "Times New Roman, serif",
+                color: "#BDC3C7",
+              }}
+            >
+              FUN CLIMBING CITATAH <br />
+              (EDUKASI BASIC CLIMBING & PRAKTEK)
+            </h2>
+          </div>
           <div
             style={{
               textAlign: "center",
@@ -244,7 +234,7 @@ const OpenTrip = () => {
             }}
           >
             <button
-              onClick={() => navigate("/Paket/PrivateTrip/Luxury")}
+              onClick={() => navigate("/Paket/Another/climbing")}
               style={{
                 fontSize: "20px",
                 fontWeight: "bold",
