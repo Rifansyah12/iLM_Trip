@@ -7,6 +7,7 @@ import Galeri from "./pages/Galeri";
 import Paket from "./pages/Paket";
 import PaketHome from "./pages/Paket/Home";
 import PaketAnother from "./pages/Paket/Another";
+import Explore from "./pages/Paket/Another/explore";
 import Tourpage from "./pages/tourpage/home";
 import PrivateTrip from "./pages/Paket/PrivateTrip";
 import OpenTrip from "./pages/Paket/OpenTrip";
@@ -21,8 +22,8 @@ import Sindoro from "./pages/Paket/OpenTrip/Gunung/sindoro";
 import Sangar from "./pages/Paket/OpenTrip/Gunung/sangar";
 // login
 import LoginPage from "./components/Login";
-import DashboardPage from "./components/Dashboard";
-import AdminNavbar from "./components/AdminNavbar";
+import DashboardPage from "./components/Dashboard/Dashboard";
+import AdminNavbar from "./components/Dashboard/Navbar";
 // PrivateTrip
 import Luxury from "./pages/Paket/PrivateTrip/Luxury";
 import Premium from "./pages/Paket/PrivateTrip/Premium";
@@ -95,7 +96,7 @@ const App = () => {
 
   return (
     <div>
-      <Navbar />
+      {isAdminPage ? <AdminNavbar /> : <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -112,6 +113,8 @@ const App = () => {
         <Route path="/Testimoni/Home" element={<TestimoniHome />} />
         <Route path="/Kontak" element={<Kontak />} />
         <Route path="/Login" element={<LoginPage />} />
+        {/* Another */}
+        <Route path="/Paket/Another/explore" element={<Explore />} />
 
         {/* <Route path="/open-trip" element={<OpenTrip />} /> */}
         <Route path="/Paket/OpenTrip/Gunung/merbabu" element={<Merbabu />} />

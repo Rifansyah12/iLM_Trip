@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../../components/Paket/Another/Header";
 import Main from "../../../components/Paket/Another/Main";
-const PaketHome = () => {
+const Another = () => {
   return (
     <div>
       <Header />
@@ -10,4 +10,4 @@ const PaketHome = () => {
   );
 };
 
-export default PaketHome;
+export default Another;
