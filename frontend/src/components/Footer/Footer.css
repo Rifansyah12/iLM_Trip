@@ -1,0 +1,119 @@
+footer.css .footer {
+  padding: 40px 0;
+  background-color: #000000; /* Warna background hitam */
+  color: #fdfdfd; /* Warna teks putih */
+}
+.dark-background {
+  padding: 40px 0;
+  background-color: #000000; /* Warna background hitam */
+  color: #fdfdfd; /* Warna teks putih */
+}
+
+.footer img {
+  width: 100%; /* Tetap pada ukuran sesuai */
+  height: auto;
+  margin-bottom: 20px; /* Tambahkan spasi bawah */
+}
+
+.footer-title {
+  font-size: 1.5rem; /* Ukuran judul */
+  margin-bottom: 15px; /* Kurangi jarak bawah */
+  color: #ffffff; /* Warna judul putih */
+}
+
+.footer-links,
+.footer-social {
+  font-size: 0.9rem; /* Perkecil ukuran teks */
+  color: #ffffff; /* Warna teks putih */
+}
+
+.footer-links li,
+.footer-social li {
+  margin-bottom: 8px; /* Spasi antar item */
+  list-style: none; /* Hilangkan bullet */
+}
+
+.footer-social i {
+  font-size: 1.2rem; /* Ukuran ikon */
+  margin-right: 8px;
+  color: #ffffff; /* Warna ikon putih */
+}
+
+.footer .row {
+  display: flex;
+  flex-wrap: wrap; /* Elemen tetap fleksibel pada layar kecil */
+  justify-content: space-between; /* Spasi antar elemen */
+  align-items: flex-start; /* Pastikan kolom sejajar di atas */
+}
+
+.footer-column {
+  flex: 1; /* Semua kolom berbagi ruang sama rata */
+  max-width: 32%; /* Pastikan setiap kolom memiliki lebar maksimal 32% */
+  box-sizing: border-box; /* Tambahkan padding ke ukuran elemen */
+  margin-bottom: 20px;
+}
+
+.text-center {
+  font-size: 0.85rem; /* Perkecil teks copyright */
+  color: #ffffff; /* Warna teks copyright putih */
+}
+
+.text-start {
+  text-align: left;
+  margin-left: 20px; /* Menambahkan sedikit margin dari kiri jika diperlukan */
+}
+
+@media (max-width: 768px) {
+  .footer-column {
+    max-width: 100%; /* Pada layar kecil, setiap kolom 100% lebar */
+    margin-bottom: 20px;
+  }
+}
+
+.border-wrapper {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 10px; /* Memberikan jarak antara teks dan garis */
+}
+
+.border-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 70%; /* Garis akan memenuhi lebar elemen */
+  height: 2px; /* Ketebalan garis */
+  background-color: rgb(242, 236, 236); /* Warna garis */
+}
+
+.border-wrapper2 {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 10px; /* Memberikan jarak antara judul dan garis */
+}
+
+.border-wrapper2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 80%; /* Garis akan memenuhi lebar elemen */
+  height: 2px; /* Ketebalan garis */
+  background-color: #ffffff; /* Warna garis */
+}
+
+.border-wrapper3 {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 10px; /* Jarak antara teks dan garis */
+}
+
+.border-wrapper3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 70%; /* Panjang garis */
+  height: 2px; /* Ketebalan garis */
+  background-color: rgb(255, 250, 250); /* Warna garis */
+}

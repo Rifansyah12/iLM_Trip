@@ -110,3 +110,70 @@
 body {
   font-family: "Belanosima", sans-serif;
 }
+
+/* button live chat style  */
+.btn-livechat {
+  border-radius: 50px; /* Membuat tombol berbentuk bulat */
+  padding: 10px 20px;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
+  transition: transform 0.3s ease;
+}
+
+.btn-livechat:hover {
+  background-color: #28a745; /* Warna saat hover */
+  transform: scale(1.1); /* Efek zoom saat hover */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* effect writing */
+.typing-indicator {
+  display: inline-block; /* Menyusun elemen dalam baris, bukan blok */
+  font-size: 20px; /* Ukuran font untuk teks */
+  color: #666; /* Warna teks abu-abu untuk indikator pengetikan */
+}
+
+.typing-indicator span {
+  display: inline-block; /* Setiap span akan tampil dalam baris yang sama */
+  animation: typing 1.5s infinite; /* Setiap span akan memiliki animasi 'typing' yang berjalan 1.5 detik dan berulang terus menerus */
+  margin-right: 5px; /* Menambahkan jarak 5px antara setiap titik */
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: 0s; /* Untuk anak pertama, animasi dimulai langsung tanpa penundaan */
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.3s; /* Anak kedua dimulai animasinya setelah 0.3 detik */
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.6s; /* Anak ketiga dimulai animasinya setelah 0.6 detik */
+}
+
+/* Animasi pengetikan yang akan membuat titik-titik beranimasi */
+@keyframes typing {
+  0% {
+    opacity: 0; /* Di awal, titik tidak terlihat (opacity 0) */
+  }
+  50% {
+    opacity: 1; /* Di tengah-tengah animasi, titik menjadi terlihat (opacity 1) */
+  }
+  100% {
+    opacity: 0; /* Di akhir animasi, titik kembali tidak terlihat (opacity 0) */
+  }
+}
+
+/* AdminLTE Sidebar Styling */
+.main-sidebar {
+  background-color: #343a40; /* Pastikan sidebar berwarna */
+  color: white;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.nav-link:hover {
+  background-color: #555 !important;
+}
