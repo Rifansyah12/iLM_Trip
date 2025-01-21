@@ -12,7 +12,7 @@ import Tourpage from "./pages/tourpage/home";
 import PrivateTrip from "./pages/Paket/PrivateTrip";
 import OpenTrip from "./pages/Paket/OpenTrip";
 // gunung
-import Merbabu from "./pages/Paket/OpenTrip/Gunung/merbabu/Index";
+import Merbabu from "./pages/Paket/OpenTrip/Gunung/merbabu/index";
 import Prau from "./pages/Paket/OpenTrip/Gunung/prau";
 import Gede from "./pages/Paket/OpenTrip/Gunung/gede";
 import Pangrango from "./pages/Paket/OpenTrip/Gunung/pangrango";
