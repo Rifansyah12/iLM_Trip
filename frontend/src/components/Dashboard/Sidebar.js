@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -11,7 +12,7 @@ const Sidebar = () => {
           className="brand-image img-circle elevation-3"
           style={{ opacity: ".8" }}
         />
-        <span className="brand-text font-weight-light">IL'M TRIP</span>
+        <span className="brand-text font-weight-light fw-bold">IL'M TRIP</span>
       </a>
       {/* Sidebar */}
       <div className="sidebar">
@@ -76,10 +77,10 @@ const Sidebar = () => {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="pages/examples/invoice.html" className="nav-link">
+                  <Link to="/dashboard/mountaintrip" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Mountain Trip</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a href="pages/AdminNavbar.js" className="nav-link">
