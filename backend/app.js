@@ -8,6 +8,7 @@ import db from './config/database.js';
 import SequelizeStore from 'connect-session-sequelize';
 
 import DestinasiRoute from "./routes/DestinasiRoutes.js"
+import AdminRoute from "./routes/AdminRoutes.js"
 
 
 dotenv.config();
@@ -37,7 +38,7 @@ const store = new sessionStore({
 
 // initializeDatabase();
 app.use(session({
-  secret: process.env.SESS_SECRET,
+  secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: true,
   store: store,
@@ -59,6 +60,7 @@ app.use(fileUpload());
 // membuat statik file agar image bisa diakses di browser
 app.use(express.static("public"));
 app.use(DestinasiRoute);
+app.use(AdminRoute);
 
 
 app.listen(process.env.APP_PORT, ()=>{
