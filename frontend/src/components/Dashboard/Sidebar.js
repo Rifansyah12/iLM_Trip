@@ -1,7 +1,13 @@
 import React from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+import { Link, useLocation } from "react-router-dom";
+>>>>>>> main
 
 const Sidebar = () => {
+  const location = useLocation(); // Untuk mendapatkan lokasi path aktif
+
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
       {/* Brand Logo */}
@@ -55,20 +61,19 @@ const Sidebar = () => {
             role="menu"
             data-accordion="false"
           >
-            {/* Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library */}
             <li className="nav-item menu-open">
-              <a href="#" className="nav-link active">
-                <i className="nav-icon fas fa-tachometer-alt" />
-                <p>
-                  Dashboard
-                  <i className="right fas fa-angle-left" />
-                </p>
-              </a>
+              <Link
+                to="#"
+                className={`nav-link ${
+                  location.pathname === "/dashboard/Dashboard" ? "active" : ""
+                }`}
+              >
+                <i className="right fas fa-angle-left" />
+                <p>Dashboard</p>
+              </Link>
             </li>
-            {/* content */}
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <a className="nav-link">
                 <i className="nav-icon fas fa-book" />
                 <p>
                   Content
@@ -77,27 +82,46 @@ const Sidebar = () => {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
+<<<<<<< HEAD
                   <Link to="/dashboard/mountaintrip" className="nav-link">
+=======
+                  <Link
+                    to="mountaintrip"
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/mountaintrip"
+                        ? "active"
+                        : ""
+                    }`}
+                  >
+>>>>>>> main
                     <i className="far fa-circle nav-icon" />
                     <p>Mountain Trip</p>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/AdminNavbar.js" className="nav-link">
+                  <Link
+                    to="another"
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/another" ? "active" : ""
+                    }`}
+                  >
                     <i className="far fa-circle nav-icon" />
-                    <p>Another Trip</p>
-                  </a>
+                    <p>Another</p>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/examples/projects.html" className="nav-link">
+                  <Link
+                    to="merchen"
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/merchen" ? "active" : ""
+                    }`}
+                  >
                     <i className="far fa-circle nav-icon" />
-                    <p>Merchen</p>
-                  </a>
+                    <p>Merchendise</p>
+                  </Link>
                 </li>
               </ul>
             </li>
-            {/* /content */}
-            {/* Data Pendaftaran */}
             <li className="nav-item">
               <a href="#" className="nav-link">
                 <i className="nav-icon fas fa-table" />
@@ -127,7 +151,6 @@ const Sidebar = () => {
                 </li>
               </ul>
             </li>
-            {/* /Data pendaftaran */}
           </ul>
         </nav>
         {/* /.sidebar-menu */}

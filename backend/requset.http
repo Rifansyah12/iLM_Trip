@@ -1,0 +1,8 @@
+POST http://localhost:5000/c-destinasi
+Content-Type: multipart/form-data
+
+nama_gunung=Mount Rinjani
+deskripsi_gunung=An active volcano in Indonesia
+foto_gunung=@C:\Users\RakhaNauval\Downloads\gunungCikuray.jpg
+harga_tiket=300
+
