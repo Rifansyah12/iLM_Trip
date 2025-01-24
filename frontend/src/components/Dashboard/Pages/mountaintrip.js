@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Mountaintrip = () => {
   return (
@@ -45,9 +46,12 @@ const Mountaintrip = () => {
                   {/* Menggunakan ikon yang mencerminkan perjalanan privat */}
                   <i className="fas fa-user-lock" />
                 </div>
-                <a href="#" className="small-box-footer">
-                  Learn More <i className="fas fa-arrow-circle-right" />
-                </a>
+                <Link
+                  to="/dashboard/mountaintrip/table/private"
+                  className="small-box-footer"
+                >
+                  views <i className="fas fa-arrow-circle-right" />
+                </Link>
               </div>
             </div>
             {/* /Privatetrip */}
@@ -64,9 +68,12 @@ const Mountaintrip = () => {
                   {/* Menggunakan ikon yang mencerminkan perjalanan */}
                   <i className="fas fa-plane-departure" />
                 </div>
-                <a href="#" className="small-box-footer">
-                  View Trips <i className="fas fa-arrow-circle-right" />
-                </a>
+                <Link
+                  to="/dashboard/mountaintrip/table/Open"
+                  className="small-box-footer"
+                >
+                  views <i className="fas fa-arrow-circle-right" />
+                </Link>
               </div>
             </div>
             {/* /Opentrip */}
@@ -83,9 +90,12 @@ const Mountaintrip = () => {
                   {/* Menggunakan ikon yang mencerminkan Family Trip */}
                   <i className="fas fa-users" />
                 </div>
-                <a href="#" className="small-box-footer">
-                  Discover More <i className="fas fa-arrow-circle-right" />
-                </a>
+                <Link
+                  to="/dashboard/mountaintrip/table/Family"
+                  className="small-box-footer"
+                >
+                  views <i className="fas fa-arrow-circle-right" />
+                </Link>
               </div>
             </div>
             {/* ./FamilyTrip */}
@@ -102,9 +112,12 @@ const Mountaintrip = () => {
                   {/* Menggunakan ikon yang mencerminkan Gathering Kantor */}
                   <i className="fas fa-briefcase" />
                 </div>
-                <a href="#" className="small-box-footer">
-                  Learn More <i className="fas fa-arrow-circle-right" />
-                </a>
+                <Link
+                  to="/dashboard/mountaintrip/table/Gathering"
+                  className="small-box-footer"
+                >
+                  views <i className="fas fa-arrow-circle-right" />
+                </Link>
               </div>
             </div>
 

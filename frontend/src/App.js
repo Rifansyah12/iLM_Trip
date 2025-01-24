@@ -44,6 +44,12 @@ import LayoutDashboard from "./components/Dashboard/LayoutDashboard"; // Layout 
 import Dashboard from "./components/Dashboard/Pages/Dashboard";
 import AnotherAdmin from "./components/Dashboard/Pages/another";
 import MountainTrip from "./components/Dashboard/Pages/mountaintrip";
+import MountainTripTablePrivate from "./components/Dashboard/Pages/MountainTripTable/MountainTripTablePrivate";
+import TablePrivatePremium from "./components/Dashboard/Pages/MountainTripTable/TablePrivate/TabkePrivatePremium";
+import TablePrivateLuxury from "./components/Dashboard/Pages/MountainTripTable/TablePrivate/TablePrivateLuxury";
+import MountainTripTableOpen from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableOpen";
+import MountainTripTableGathering from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableGathering";
+import MountainTripTableFamily from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableFamily";
 import MerchenAdmin from "./components/Dashboard/Pages/merchen";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -133,6 +139,30 @@ const App = () => {
         <Route path="/dashboard" element={<LayoutDashboard />}>
           <Route index element={<Dashboard />} />
           <Route path="mountaintrip" element={<MountainTrip />} />
+          <Route
+            path="mountaintrip/table/private"
+            element={<MountainTripTablePrivate />}
+          />
+          <Route
+            path="mountaintrip/table/private/premium"
+            element={<TablePrivatePremium />}
+          />
+          <Route
+            path="mountaintrip/table/private/luxury"
+            element={<TablePrivateLuxury />}
+          />
+          <Route
+            path="mountaintrip/table/Open"
+            element={<MountainTripTableOpen />}
+          />
+          <Route
+            path="mountaintrip/table/Gathering"
+            element={<MountainTripTableGathering />}
+          />
+          <Route
+            path="mountaintrip/table/Family"
+            element={<MountainTripTableFamily />}
+          />
           <Route path="another" element={<AnotherAdmin />} />
           <Route path="merchen" element={<MerchenAdmin />} />
           <Route path="dashboard" element={<DashboardAdmin />} />
