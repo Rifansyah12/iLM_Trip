@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-=======
 import { Link, useLocation } from "react-router-dom";
->>>>>>> main
 
 const Sidebar = () => {
   const location = useLocation(); // Untuk mendapatkan lokasi path aktif
@@ -82,9 +78,6 @@ const Sidebar = () => {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-<<<<<<< HEAD
-                  <Link to="/dashboard/mountaintrip" className="nav-link">
-=======
                   <Link
                     to="mountaintrip"
                     className={`nav-link ${
@@ -93,7 +86,6 @@ const Sidebar = () => {
                         : ""
                     }`}
                   >
->>>>>>> main
                     <i className="far fa-circle nav-icon" />
                     <p>Mountain Trip</p>
                   </Link>
