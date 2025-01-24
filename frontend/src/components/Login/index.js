@@ -39,9 +39,9 @@ function LoginPage() {
     transform: "translate(-50%, -50%)",
     width: 400, // Lebar form login
     padding: 30, // Padding dalam form
-    backgroundColor: "#0f4142", // Warna latar form
+    backgroundColor: "#000000", // Warna latar form
     borderRadius: 10, // Sudut membulat
-    boxShadow: "0 4px 10px rgba(26, 247, 2, 0.79)", // Efek bayangan
+    boxShadow: "0 4px 10px rgba(220, 209, 209, 0.79)", // Efek bayangan
     zIndex: 2, // Form berada di atas overlay
     textAlign: "center",
   };
