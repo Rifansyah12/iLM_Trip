@@ -8,7 +8,8 @@ import db from './config/database.js';
 import SequelizeStore from 'connect-session-sequelize';
 
 import DestinasiRoute from "./routes/DestinasiRoutes.js"
-import AdminRoute from "./routes/AdminRoutes.js"
+import AdminRoute from "./routes/AdminRoutes.js";
+import MountaintripRoute  from "./routes/MountaintripRoutes.js";
 
 
 dotenv.config();
@@ -61,6 +62,7 @@ app.use(fileUpload());
 app.use(express.static("public"));
 app.use(DestinasiRoute);
 app.use(AdminRoute);
+app.use(MountaintripRoute);
 
 
 app.listen(process.env.APP_PORT, ()=>{
