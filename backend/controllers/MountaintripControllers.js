@@ -11,7 +11,7 @@ export const createMountaintrip = async(req, res)=>{
   const fileName = file.md5 + ext;
   const allowedType = ['.png', '.jpg', '.jpeg'];
   if(!allowedType.includes(ext.toLocaleLowerCase())) return res.status(422).json("Invalid Images");
-  if(fileSize > 5000000) return res.status(422).json({msg: "file anda terlalu besar gunakan file dibawah 5mb"});
+  if(fileSize > 50000000) return res.status(422).json({msg: "file anda terlalu besar gunakan file dibawah 5mb"});
   file.mv(`./public/images/mountaintrip/${fileName}`, async(err)=> {
     if(err) return res.status(500).json({msg: err.message});
     const {deskripsi_layanan} = req.body;
@@ -32,6 +32,21 @@ export const createMountaintrip = async(req, res)=>{
 }
 
 
+export const getMountaintripById = async(req, res)=>{
+  const response = await MountainTrip.findOne({
+    attributes: ['id', 'nama_layanan', 'deskripsi_layanan', 'foto'],
+    where:{
+      id: req.params.id
+    }
+  });
+
+  if(!response) res.status(404).json({msg: "Data tidak ditemukan"});
+
+  res.status(200).json(response);
+}
+
+
+
 export const getMountaintrip = async(req, res)=>{
   try {
     const response = await MountainTrip.findAll({
@@ -43,6 +58,7 @@ export const getMountaintrip = async(req, res)=>{
   }
 
 }
+
 
 
 
@@ -115,3 +131,28 @@ export const updateMountaintrip = async (req, res) => {
 };
 
 
+
+export const deleteMountaintrip = async(req, res)=>{
+  const mountaintrip = await MountainTrip.findOne({
+    where:{
+      id: req.params.id
+    }
+  });
+
+  if(!mountaintrip) return res.status(404).json({msg: "Data Mountaintrip tidak ditemukan"});
+  try {
+    const filPath = `./public/images/mountaintrip/${mountaintrip.foto}`;
+    fs.unlinkSync(filPath);
+
+    await MountainTrip.destroy({
+      where:{
+        id: req.params.id
+      }
+    });
+
+    res.status(200).json({msg: "Data sukses dihapus"});
+  } catch (error) {
+    console.log(error);
+    
+  }
+}

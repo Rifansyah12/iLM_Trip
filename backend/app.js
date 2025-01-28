@@ -4,9 +4,9 @@ import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import db from './config/database.js';
+import initRelationships from './models/relashionship.js';
 
 import SequelizeStore from 'connect-session-sequelize';
-
 import DestinasiRoute from "./routes/DestinasiRoutes.js"
 import AdminRoute from "./routes/AdminRoutes.js";
 import MountaintripRoute  from "./routes/MountaintripRoutes.js";
@@ -38,6 +38,8 @@ const store = new sessionStore({
 // }
 
 // initializeDatabase();
+
+initRelationships();
 app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
