@@ -61,7 +61,7 @@ function Header() {
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        PrivateTrip LUXURY
+        PrivateTrip <span style={{ color: "#BDC3C7" }}>LUXURY</span>
         <p
           style={{
             color: "#ffff",

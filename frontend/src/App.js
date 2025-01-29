@@ -51,6 +51,7 @@ import TablePrivateLuxury from "./components/Dashboard/Pages/MountainTripTable/T
 import MountainTripTableOpen from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableOpen";
 import MountainTripTableGathering from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableGathering";
 import MountainTripTableFamily from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableFamily";
+import DataPesertaBaru from "./components/Dashboard/Pages/DataPeserta/DataPesertaBaru";
 import MerchenAdmin from "./components/Dashboard/Pages/merchen";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -168,6 +169,8 @@ const App = () => {
           <Route path="another" element={<AnotherAdmin />} />
           <Route path="merchen" element={<MerchenAdmin />} />
           <Route path="dashboard" element={<DashboardAdmin />} />
+
+          <Route path="DataPesertaBaru" element={<DataPesertaBaru />} />
         </Route>
         {/* 
         <Route path="*" element={<Navigate to="/" />} /> */}

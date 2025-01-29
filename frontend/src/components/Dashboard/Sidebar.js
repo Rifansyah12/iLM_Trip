@@ -124,21 +124,28 @@ const Sidebar = () => {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="pages/tables/simple.html" className="nav-link">
+                  <Link
+                    to="DataPesertaBaru"
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/DataPesertaBaru"
+                        ? "active"
+                        : ""
+                    }`}
+                  >
                     <i className="far fa-circle nav-icon" />
-                    <p>Simple Tables</p>
-                  </a>
+                    <p>Pedaftar Baru</p>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a href="pages/tables/data.html" className="nav-link">
                     <i className="far fa-circle nav-icon" />
-                    <p>DataTables</p>
+                    <p>Data Peserta</p>
                   </a>
                 </li>
                 <li className="nav-item">
                   <a href="pages/tables/jsgrid.html" className="nav-link">
                     <i className="far fa-circle nav-icon" />
-                    <p>jsGrid</p>
+                    <p>ScHedule</p>
                   </a>
                 </li>
               </ul>

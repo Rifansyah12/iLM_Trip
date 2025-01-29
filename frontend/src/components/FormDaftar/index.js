@@ -16,9 +16,11 @@ const containerStyle = {
 
 const formWrapperStyle = {
   backgroundColor: "rgb(8, 8, 8)",
-  padding: "30px",
-  borderRadius: "15px",
-  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
+  padding: "20px", // Kurangi padding untuk mengecilkan ukuran
+  borderRadius: "10px", // Kurangi sudut lengkung
+  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Kurangi bayangan agar terlihat lebih ringan
+  maxWidth: "400px", // Batasi lebar maksimum kotak
+  margin: "0 auto", // Pusatkan secara horizontal
 };
 
 const formStyle = {
@@ -231,17 +233,17 @@ const MultiStepForm = () => {
           />
           <h2
             style={{
-              color: "#28A745",
+              color: "#FFFFF",
               marginBottom: "20px",
               textAlign: "center",
             }}
           >
-            Formulir Pendaftaran Pendakian
+            Formulir Pendaftaran
           </h2>
           <form onSubmit={handleSubmit}>
             {activeStep === 1 && (
               <div>
-                <h2>Langkah 1: Data Pribadi</h2>
+                <p>Data Pribadi</p>
                 <input
                   type="text"
                   name="nama"
@@ -294,7 +296,7 @@ const MultiStepForm = () => {
 
             {activeStep === 2 && (
               <div>
-                <h2>Langkah 2: Informasi Pendakian</h2>
+                <p>Informasi Pendakian</p>
                 <input
                   type="text"
                   name="pekerjaan"

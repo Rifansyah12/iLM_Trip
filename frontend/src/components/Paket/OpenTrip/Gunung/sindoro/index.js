@@ -246,7 +246,7 @@ const Sindoro = () => {
         </button>
 
         <button
-          onClick={() => navigate("/booking")} // Navigasi ke halaman booking
+          onClick={() => navigate("/FormDaftar")} // Navigasi ke halaman booking
           style={{
             padding: "15px 30px",
             fontSize: "18px",
