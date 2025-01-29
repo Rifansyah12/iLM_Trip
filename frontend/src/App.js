@@ -9,6 +9,7 @@ import Paket from "./pages/Paket";
 import PaketHome from "./pages/Paket/Home";
 import PaketAnother from "./pages/Paket/Another";
 import Explore from "./pages/Paket/Another/explore";
+import Ebook from "./components/Ebook";
 import Tourpage from "./pages/tourpage/home";
 import PrivateTrip from "./pages/Paket/PrivateTrip";
 import OpenTrip from "./pages/Paket/OpenTrip";
@@ -34,7 +35,7 @@ import FormDaftar from "./components/FormDaftar";
 // Lainnya
 import FamilyTrip from "./pages/Paket/FamilyTrip";
 import Gathering from "./pages/Paket/Gathering";
-import TestimoniHome from "./pages/Testimoni/Home";
+import TestimoniHome from "./pages/Testimoni/Merchen";
 import Testimoni from "./pages/Testimoni";
 import TentangKami from "./pages/TentangKami";
 import Kontak from "./pages/Kontak";
@@ -106,6 +107,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/TentangKami" element={<TentangKami />} />
         <Route path="/Galeri" element={<Galeri />} />
+        <Route path="/Ebook" element={<Ebook />} />
         <Route path="/Paket" element={<Paket />} />
         <Route path="/Paket/Home" element={<PaketHome />} />
         <Route path="/Paket/Another" element={<PaketAnother />} />
@@ -115,7 +117,7 @@ const App = () => {
         <Route path="/Paket/OpenTrip" element={<OpenTrip />} />
         <Route path="/Paket/FamilyTrip" element={<FamilyTrip />} />
         <Route path="/Paket/Gathering" element={<Gathering />} />
-        <Route path="/Testimoni/Home" element={<TestimoniHome />} />
+        <Route path="/Testimoni/Merchen" element={<TestimoniHome />} />
         <Route path="/Kontak" element={<Kontak />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Paket/OpenTrip/Gunung/merbabu" element={<Merbabu />} />

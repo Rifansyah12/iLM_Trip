@@ -59,18 +59,18 @@ const Navbar = () => {
             <Link className="nav-link fs-4 ms-4" to="/tourpage/home">
               Tour Package
             </Link>
-            <Link className="nav-link fs-4 ms-4" to="/Testimoni/Home">
+            <Link className="nav-link fs-4 ms-4" to="/TentangKami">
               About Us
             </Link>
-            <Link className="nav-link fs-4 ms-4" to="/TentangKami">
+            <Link className="nav-link fs-4 ms-4" to="/Testimoni/Merchen">
               Merchendise
             </Link>
-            <Link className="nav-link fs-4 ms-4" to="/Galeri">
-              Blog
+            <Link className="nav-link fs-4 ms-4" to="/Ebook">
+              Ebooks
             </Link>
-            <Link className="nav-link fs-4 ms-4" to="/Booking">
+            {/* <Link className="nav-link fs-4 ms-4" to="/Booking">
               Booking
-            </Link>
+            </Link> */}
             {/* Dropdown Lainnya */}
             <div className="nav-item dropdown fs-4 ms-4">
               <Link

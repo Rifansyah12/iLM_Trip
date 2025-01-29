@@ -11,9 +11,9 @@ const TentangKami = () => {
         flexDirection: "column", // Tata letak vertikal
       }}
     >
-      <br></br>
-      <br></br>
-      <br></br>
+      <br />
+      <br />
+      <br />
 
       {/* Judul Tentang Kami */}
       <h1 style={{ marginLeft: "50px", fontSize: "80px" }}>Tentang Kami</h1>
@@ -30,7 +30,7 @@ const TentangKami = () => {
         style={{
           fontSize: "30px",
           marginLeft: "50px",
-          maxWidth: "60%", // Maksimum 40% dari lebar layar
+          maxWidth: "60%", // Maksimum 60% dari lebar layar
           textAlign: "justify", // Teks rata kiri-kanan
           marginRight: "auto",
           marginBottom: "100px", // Jarak bawah untuk paragraf pertama
@@ -59,7 +59,7 @@ const TentangKami = () => {
         style={{
           fontSize: "30px",
           marginLeft: "50px",
-          maxWidth: "60%", // Maksimum 40% dari lebar layar
+          maxWidth: "60%", // Maksimum 60% dari lebar layar
           textAlign: "justify", // Teks rata kiri-kanan
           marginRight: "auto",
         }}
@@ -82,7 +82,8 @@ const TentangKami = () => {
         tertinggi dengan penuh kebanggaan. Temukan petualangan mendaki terbaik
         bersama Il'm Trip Organizer dan wujudkan mimpi pendakian Anda.
       </p>
-      {/* Gambar berjejer 2 kesamping dan 2 kebawah */}
+
+      {/* Gambar Berjejer */}
       <div
         style={{
           display: "grid", // Menggunakan grid untuk pengaturan gambar
@@ -127,6 +128,43 @@ const TentangKami = () => {
             height: "200px",
             borderRadius: "10px", // Membuat gambar memiliki sudut yang tumpul
           }}
+        />
+      </div>
+
+      {/* Bagian Sponsor */}
+      <h2
+        style={{ marginLeft: "50px", fontSize: "60px", marginBottom: "20px" }}
+      >
+        Sponsor Kami
+      </h2>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", // Responsif
+          gap: "20px",
+          padding: "0 50px",
+          marginBottom: "50px",
+        }}
+      >
+        <img
+          src="https://via.placeholder.com/150"
+          alt="Sponsor 1"
+          style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+        />
+        <img
+          src="https://via.placeholder.com/150"
+          alt="Sponsor 2"
+          style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+        />
+        <img
+          src="https://via.placeholder.com/150"
+          alt="Sponsor 3"
+          style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+        />
+        <img
+          src="https://via.placeholder.com/150"
+          alt="Sponsor 4"
+          style={{ width: "100%", height: "auto", borderRadius: "10px" }}
         />
       </div>
     </div>
