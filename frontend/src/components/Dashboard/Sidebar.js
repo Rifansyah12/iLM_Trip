@@ -5,7 +5,7 @@ const Sidebar = () => {
   const location = useLocation(); // Untuk mendapatkan lokasi path aktif
 
   return (
-    <aside className="main-sidebar sidebar-dark-primary elevation-4">
+    <aside className="main-sidebar sidebar-dark-primary elevation-6">
       {/* Brand Logo */}
       <a href="index3.html" className="brand-link">
         <img
@@ -137,16 +137,30 @@ const Sidebar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/tables/data.html" className="nav-link">
+                  <Link
+                    to="DataPeserta"
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/DataPeserta"
+                        ? "active"
+                        : ""
+                    }`}
+                  >
                     <i className="far fa-circle nav-icon" />
-                    <p>Data Peserta</p>
-                  </a>
+                    <p>DataPeserta</p>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/tables/jsgrid.html" className="nav-link">
+                  <Link
+                    to="Schedule"
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/Schedule"
+                        ? "active"
+                        : ""
+                    }`}
+                  >
                     <i className="far fa-circle nav-icon" />
-                    <p>ScHedule</p>
-                  </a>
+                    <p>Schedule</p>
+                  </Link>
                 </li>
               </ul>
             </li>

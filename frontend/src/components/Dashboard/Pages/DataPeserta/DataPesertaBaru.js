@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Calendar from "react-calendar"; // Import Calendar dari react-calendar
-import "react-calendar/dist/Calendar.css"; // Import CSS untuk kalender
+// import Calendar from "react-calendar"; // Import Calendar dari react-calendar
+// import "react-calendar/dist/Calendar.css"; // Import CSS untuk kalender
 
 const DataPesertaBaru = () => {
   const [data, setData] = useState([
@@ -418,8 +418,8 @@ const DataPesertaBaru = () => {
                 </div>
               </div>
             </div>
-            <h2>Kalender</h2>
-            <Calendar /> {/* Kalender kecil ditampilkan disini */}
+            {/* <h2>Kalender</h2>
+            <Calendar />  */}
           </div>
         </section>
       </div>
