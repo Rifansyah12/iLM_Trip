@@ -3,12 +3,12 @@ import db from "../config/database.js";
 
 const { DataTypes } = Sequelize;
 
-const Opentrip = db.define(
-  "table_opentrip",
+const Destinasi = db.define(
+  "table_destinasi",
   {
     judul: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         notEmpty: true,
         len: [3, 100], // Judul minimal 3 karakter dan maksimal 100
@@ -56,10 +56,30 @@ const Opentrip = db.define(
       type: DataTypes.TEXT, // Menggunakan TEXT untuk deskripsi panjang
       allowNull: true,
     },
+    id_layanan:{
+      type : DataTypes.INTEGER,
+      allowNull: false,
+
+      references:{
+       model: "table_mountaintrip",
+       key: "id",
+
+      }
+    },
+    id_privatetrip:{
+      type : DataTypes.INTEGER,
+      allowNull: true,
+
+      references:{
+       model: "table_privatetrip",
+       key: "id",
+
+      }
+    }
   },
   {
-    freezeTableName: true, // Menjaga nama tabel tetap 'table_opentrip'
+    freezeTableName: true, // Menjaga nama tabel tetap 'table_des'
   }
 );
 
-export default Opentrip;
+export default Destinasi;

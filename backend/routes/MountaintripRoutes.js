@@ -2,7 +2,7 @@
 
 import express from 'express';
 import { createMountaintrip, getMountaintrip, updateMountaintrip, getMountaintripById, deleteMountaintrip } from "../controllers/MountaintripControllers.js";
-import { createPrivatetrip, getPrivatetrip } from '../controllers/PrivateTripControllers.js';
+import { createPrivatetrip, getPrivatetrip, getPrivatetripById, updatePrivatetrip, deletePrivatetrip} from '../controllers/PrivateTripControllers.js';
 
 const route = express.Router();
 
@@ -17,4 +17,8 @@ route.delete('/deleteMountaintrip/:id', deleteMountaintrip)
 // privateTrip
 route.post('/createPrivatetrip/:id', createPrivatetrip);
 route.get('/getPrivatetrip', getPrivatetrip);
+route.get('/getPrivatetripId/:id', getPrivatetripById);
+route.put('/updatePrivatetrip/:id', updatePrivatetrip)
+route.delete('/deletePrivatetrip/:id', deletePrivatetrip);
+
 export default route;
