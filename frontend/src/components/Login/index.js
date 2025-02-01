@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Background from "../../assets/volcano-3779159_1280.png";
 import NewImage from "../../assets/logo/Logo_trip2.png"; // Logo aplikasi
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const pageStyle = {
     position: "relative",
     width: "100%",
-    height: "100vh", // Menyesuaikan tinggi halaman dengan viewport
+    height: "100vh",
     overflow: "hidden",
   };
 
   const imageStyle = {
     width: "100%",
     height: "100%",
-    objectFit: "cover", // Pastikan gambar tidak pecah
+    objectFit: "cover",
     position: "absolute",
     top: 0,
     left: 0,
-    zIndex: 0, // Gambar berada di bawah elemen lainnya
+    zIndex: 0,
   };
 
   const overlayStyle = {
@@ -28,8 +33,8 @@ function LoginPage() {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.6)", // Overlay hitam transparan
-    zIndex: 1, // Overlay berada di atas gambar
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    zIndex: 1,
   };
 
   const loginBoxStyle = {
@@ -37,12 +42,12 @@ function LoginPage() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400, // Lebar form login
-    padding: 30, // Padding dalam form
-    backgroundColor: "#000000", // Warna latar form
-    borderRadius: 10, // Sudut membulat
-    boxShadow: "0 4px 10px rgba(220, 209, 209, 0.79)", // Efek bayangan
-    zIndex: 2, // Form berada di atas overlay
+    width: 400,
+    padding: 30,
+    backgroundColor: "#000000",
+    borderRadius: 10,
+    boxShadow: "0 4px 10px rgba(220, 209, 209, 0.79)",
+    zIndex: 2,
     textAlign: "center",
   };
 
@@ -69,13 +74,27 @@ function LoginPage() {
   };
 
   const logoStyle = {
-    width: "50%", // Ukuran logo
+    width: "50%",
     marginBottom: 20,
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault(); // Mencegah reload halaman
-    navigate("/dashboard"); // Navigasi ke halaman dashboard
+
+    try {
+      const response = await axios.post("http://localhost:5000/loginAdmin", {
+        email,
+        password,
+      });
+
+      // Simpan token di localStorage
+      localStorage.setItem("token", response.data.token);
+
+      alert("Login Berhasil!");
+      navigate("/dashboard"); // Redirect ke dashboard
+    } catch (err) {
+      setError(err.response?.data?.msg || "Login Gagal!");
+    }
   };
 
   return (
@@ -86,7 +105,7 @@ function LoginPage() {
         src={Background}
         alt="Background"
       />
-      <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
+      <div style={overlayStyle}></div>
       <div style={loginBoxStyle}>
         <img
           className="LogoImage"
@@ -95,12 +114,22 @@ function LoginPage() {
           alt="Logo"
         />
         <h2 style={{ marginBottom: 20, color: "#ffff" }}>Login</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <form onSubmit={handleLogin}>
-          <input type="email" placeholder="Email" style={inputStyle} required />
+          <input
+            type="email"
+            placeholder="Email"
+            style={inputStyle}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
           <input
             type="password"
             placeholder="Password"
             style={inputStyle}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button type="submit" style={buttonStyle}>

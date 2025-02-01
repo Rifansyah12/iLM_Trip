@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import axios from "axios";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Header from "./components/Header/index";
@@ -100,6 +102,19 @@ const App = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/dashboard");
+  const [admins, setAdmins] = useState([]);
+
+  useEffect(() => {
+    // Ambil data dari backend
+    axios
+      .get("http://localhost:5000/api/admin")
+      .then((response) => {
+        setAdmins(response.data); // Simpan data ke state
+      })
+      .catch((error) => {
+        console.error("Error mengambil data:", error);
+      });
+  }, []);
 
   return (
     <div>
