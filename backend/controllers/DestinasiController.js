@@ -1,37 +1,61 @@
 import Destinasi from "../models/DestinasiModels.js";
 
 
+
 import path, { sep } from 'path';
 import fs from 'fs';
+import PrivateTrip from "../models/PrivatTripModels.js";
+import MountainTrip from "../models/LayananMountainTrip.js";
 
 
 export const createDestinasi = async(req, res)=>{
   if(req.files === null) return res.status(400).json({msg: "No file Uploaded"});
   const nama_gunung = req.body.nama_gunung;
-  const file = req.files.foto_gunung;
+  const file = req.files.foto;
   const fileSize = file.data.length;
   const ext = path.extname(file.name);
   const fileName = file.md5 + ext;
 
   const allowedType = ['.png', '.jpg', '.jpeg'];
   if(!allowedType.includes(ext.toLocaleLowerCase())) return res.status(422).json("Invalid Images");
-  if(fileSize > 5000000) return res.status(422).json({msg: "file anda terlalu besar gunakan file ddibawah 5mb"});
+  if(fileSize > 50000000) return res.status(422).json({msg: "file anda terlalu besar gunakan file ddibawah 5mb"});
 
   file.mv(`./public/images/Destinasi/${fileName}`, async(err)=> {
     if(err) return res.status(500).json({msg: err.message});
-    const {deskripsi_gunung, harga_tiket} = req.body;
+    const {paket,lokasi, harga, keterangan} = req.body;
   
     
     try {
 
+      const Privatetrip = await PrivateTrip.findOne({
+        where:{
+          id:req.params.id_private
+        }
+      });
+
+      const Mountaintrip = await MountainTrip.findOne({
+        where:{
+          id: req.params.id_layanan
+        }
+      });
+
+      if(!Privatetrip || !Mountaintrip){
+        return res.status(404).json({msg: "Data untuk id_layanan, dan id_private , tidak ditemukan"});
+      }
+
      
       
       await Destinasi.create({
+        paket: paket,
         nama_gunung: nama_gunung,
-        deskripsi_gunung: deskripsi_gunung,
-        foto_gunung: fileName,
+        lokasi: lokasi,
+        harga: harga,
+        foto: fileName,
+        keterangan: keterangan,
+        id_layanan: Mountaintrip.id,
+        id_privatetrip: Privatetrip.id,
         
-        harga_tiket: harga_tiket,
+        
         
 
 
@@ -51,7 +75,19 @@ export const createDestinasi = async(req, res)=>{
 export const getDestinasi = async(req, res)=>{
   try {
     const response = await Destinasi.findAll({
-      attributes: ['id', 'nama_gunung', 'deskripsi_gunung', 'foto_gunung'],
+    include:[
+      {
+        model: PrivateTrip,
+        as: "privatetrip",
+        attributes: ['id', 'nama_paket', 'harga_paket', 'foto'],
+      },
+      {
+        model: MountainTrip,
+        as: "mountaintrip",
+        attributes: ["id", "nama_layanan", "deskripsi_layanan", "foto"]
+
+      }
+    ]
 
     });
 

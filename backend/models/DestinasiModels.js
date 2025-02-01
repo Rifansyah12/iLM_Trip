@@ -6,7 +6,7 @@ const { DataTypes } = Sequelize;
 const Destinasi = db.define(
   "table_destinasi",
   {
-    judul: {
+    paket: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
@@ -23,13 +23,6 @@ const Destinasi = db.define(
       },
     },
     lokasi: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    paket: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

@@ -19,12 +19,12 @@ PrivateTrip.belongsTo(MountainTrip, {
 
 MountainTrip.hasMany(Destinasi, {
   foreignKey: "id_layanan",
-  as: "Destinasi",
+  as: "mountaintrip",
 });
 
 Destinasi.belongsTo(MountainTrip, {
   foreignKey: "id_layanan",
-  as: "mountainTrip"
+  as: "mountaintrip"
 });
 
 
@@ -32,7 +32,7 @@ Destinasi.belongsTo(MountainTrip, {
 
 PrivateTrip.hasMany(Destinasi,{
   foreignKey: "id_privatetrip",
-  as: "Destinasi",
+  as: "privatetrip",
   
 });
 
