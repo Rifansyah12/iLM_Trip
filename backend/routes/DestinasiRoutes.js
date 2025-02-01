@@ -4,7 +4,7 @@ import { createDestinasi, getDestinasi, updateDestinasi } from "../controllers/D
 
 const route = express.Router();
 
-route.post('/createDestinasi', createDestinasi);
+route.post('/createDestinasi/:id_layanan/:id_private?', createDestinasi);
 route.put('/updateDestinasi/:id', updateDestinasi);
 route.get('/getDestinasi', getDestinasi);
 
