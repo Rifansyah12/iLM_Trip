@@ -110,18 +110,18 @@ export const updateDestinasi = async(req, res)=> {
     if(!destinasi) res.status(404).json({msg: "Data Destinasi tidak ditemukan"});
 
     let fileName;
-    if(!req.files || !req.files.foto_gunung){
-      fileName = Destinasi.foto_gunung;
+    if(!req.files || !req.files.foto){
+      fileName = Destinasi.foto;
     }else{
-      const file = req.files.foto_gunung;
+      const file = req.files.foto;
       const fileSize = file.data.length;
       const ext = path.extname(file.name);
       fileName = file.md5 + ext ;
       const allowedType = ['.png', '.jpg', '.jpeg'];
 
       if(!allowedType.includes(ext.toLocaleLowerCase())) return res.status(422).json({msg: "Gambar Tidak Valid"});
-      if(fileSize > 5000000) return res.status(422).json({msg: "Gambar Harus Kurang dari 5 mb"});
-      const oldFilePath = `./public/images/destinasi/${destinasi.foto_gunung}`;
+      if(fileSize > 50000000) return res.status(422).json({msg: "Gambar Harus Kurang dari 5 mb"});
+      const oldFilePath = `./public/images/destinasi/${destinasi.foto}`;
       const newFilePath = `./public/images/destinasi/${fileName}`;
 
       // Hapus file gambar lama
@@ -139,18 +139,25 @@ export const updateDestinasi = async(req, res)=> {
     }
     
 
-    const {nama_gunung, deskripsi_gunung, harga_gunung} = req.body;
+    const {paket, nama_gunung, lokasi, harga, keterangan} = req.body;
+    const id_layanan = req.body.id_layanan? parseInt(req.body.id_layanan) : null;
+    const id_privatetrip = req.body.id_privatetrip ? parseInt(req.body.id_privatetrip): null;
     
 
 
     await Destinasi.update({
+      paket: paket,
       nama_gunung: nama_gunung,
-      deskripsi_gunung: deskripsi_gunung,
-      foto_gunung: fileName,
-      harga_gunung: harga_gunung
+      lokasi: lokasi,
+      harga: harga,
+      foto: fileName,
+      keterangan: keterangan,
+      id_layanan: id_layanan,
+      id_privatetrip: id_privatetrip,
+     
     }, {
       where:{
-        id: req.params.id
+        id: destinasi.id
       }
     });
 
