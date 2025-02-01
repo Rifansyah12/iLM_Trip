@@ -15,6 +15,8 @@ const MountainTripTablePrivate = () => {
       foto: null,
       keterangan:
         "<b>Meeting Point:</b> Bandara Lombok <br/> <b>Harga Termasuk:</b> Guide, Logistik",
+      deskripsi:
+        "<b>Deskripsi:</b> Pendakian Gunung Rinjani menawarkan pemandangan spektakuler dengan jalur yang menantang.",
     },
   ]);
 
@@ -30,6 +32,7 @@ const MountainTripTablePrivate = () => {
     harga: "",
     foto: null,
     keterangan: "",
+    deskripsi: "",
   });
 
   const [editProduct, setEditProduct] = useState(null); // State untuk produk yang sedang diedit
@@ -98,20 +101,35 @@ const MountainTripTablePrivate = () => {
   };
 
   useEffect(() => {
-    // Initialize Summernote
-    $("#summernote").summernote({
-      height: 200,
-      toolbar: [
-        ["style", ["bold", "italic", "underline", "clear"]],
-        ["para", ["ul", "ol", "paragraph"]],
-        ["view", ["fullscreen", "codeview"]],
-      ],
-      callbacks: {
-        onChange: function (contents) {
-          setNewProduct((prev) => ({ ...prev, keterangan: contents }));
+    if (showModal) {
+      $("#summernote").summernote({
+        height: 200,
+        toolbar: [
+          ["style", ["bold", "italic", "underline", "clear"]],
+          ["para", ["ul", "ol", "paragraph"]],
+          ["view", ["fullscreen", "codeview"]],
+        ],
+        callbacks: {
+          onChange: function (contents) {
+            setNewProduct((prev) => ({ ...prev, keterangan: contents }));
+          },
         },
-      },
-    });
+      });
+
+      $("#summernote-deskripsi").summernote({
+        height: 200,
+        toolbar: [
+          ["style", ["bold", "italic", "underline", "clear"]],
+          ["para", ["ul", "ol", "paragraph"]],
+          ["view", ["fullscreen", "codeview"]],
+        ],
+        callbacks: {
+          onChange: function (contents) {
+            setNewProduct((prev) => ({ ...prev, deskripsi: contents }));
+          },
+        },
+      });
+    }
   }, [showModal]);
 
   return (
@@ -158,6 +176,7 @@ const MountainTripTablePrivate = () => {
                     <th>Harga</th>
                     <th>Foto</th>
                     <th>Keterangan</th>
+                    <th>Deskripsi</th> {/* Tambahkan kolom ini */}
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -184,21 +203,23 @@ const MountainTripTablePrivate = () => {
                       <td
                         dangerouslySetInnerHTML={{ __html: item.keterangan }}
                       ></td>
+                      <td
+                        dangerouslySetInnerHTML={{ __html: item.deskripsi }}
+                      ></td>{" "}
+                      {/* Tambahkan ini */}
                       <td>
-                        <div className="d-flex">
-                          <button
-                            className="btn btn-sm btn-warning mr-2"
-                            onClick={() => handleEditClick(item)}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="btn btn-sm btn-danger"
-                            onClick={() => handleDeleteClick(item.id)}
-                          >
-                            Hapus
-                          </button>
-                        </div>
+                        <button
+                          className="btn btn-sm btn-warning mr-2"
+                          onClick={() => handleEditClick(item)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={() => handleDeleteClick(item.id)}
+                        >
+                          Hapus
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -320,6 +341,11 @@ const MountainTripTablePrivate = () => {
                       />
                     )}
                   </div>
+                  <div className="form-group">
+                    <label>Deskripsi</label>
+                    <textarea id="summernote-deskripsi"></textarea>
+                  </div>
+
                   <div className="form-group">
                     <label>Keterangan</label>
                     <textarea id="summernote"></textarea>
