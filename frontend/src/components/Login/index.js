@@ -1,10 +1,50 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 import Background from "../../assets/volcano-3779159_1280.png";
 import NewImage from "../../assets/logo/Logo_trip2.png"; // Logo aplikasi
 
 function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType]= useState("");
+ 
   const navigate = useNavigate();
+  const handleLogin = async (e)=>{
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/loginAdmin",{
+        username,
+        password,
+      });
+
+    console.log("Response Data:", response.data); // Debugging
+    
+    if (!response.data.token) {
+      throw new Error("Token tidak ditemukan dalam response");
+    }
+
+    setMessage("Login Berhasil");
+    setMessageType("success");
+      localStorage.setItem("token", response.data.token);
+      const adminData ={
+        adminId : response.data.adminId,
+        adminNama : response.data.adminNama,
+        adminUsername: response.data.adminUsername,
+        adminFoto : response.data.adminFoto,
+      }
+      localStorage.setItem("admin", JSON.stringify(adminData));
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
+      
+    } catch (err) {
+      setMessage(err.response?.data?.msg || "Login Gagal");
+      setMessageType("error");
+
+    }
+  }
   const pageStyle = {
     position: "relative",
     width: "100%",
@@ -73,10 +113,7 @@ function LoginPage() {
     marginBottom: 20,
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // Mencegah reload halaman
-    navigate("/dashboard"); // Navigasi ke halaman dashboard
-  };
+  
 
   return (
     <div style={pageStyle}>
@@ -95,12 +132,31 @@ function LoginPage() {
           alt="Logo"
         />
         <h2 style={{ marginBottom: 20, color: "#ffff" }}>Login</h2>
+        {message &&(
+          <div style={{ 
+            backgroundColor: messageType === "success"? "#28a745" : "#dc3545",
+            color: "white",
+            padding: "10px",
+            borderRadius: "5px",
+            marginBottom: "10px",
+           }}>
+            {message}
+           </div>
+        )}
         <form onSubmit={handleLogin}>
-          <input type="email" placeholder="Email" style={inputStyle} required />
+          <input 
+          type="text" 
+          placeholder="Username" 
+          style={inputStyle} 
+          value={username} 
+          onChange={(e)=> setUsername(e.target.value)}
+          required />
           <input
             type="password"
             placeholder="Password"
             style={inputStyle}
+            value={password}
+            onChange={(e)=> setPassword(e.target.value)}
             required
           />
           <button type="submit" style={buttonStyle}>

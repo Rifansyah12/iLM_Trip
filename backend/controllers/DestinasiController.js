@@ -169,3 +169,31 @@ export const updateDestinasi = async(req, res)=> {
   }
 }
 
+
+export const deleteDestinasi = async(req, res)=>{
+  const destinasi = await Destinasi.findOne({
+    where:{
+      id: req.params.id
+    }
+  });
+
+  if(!destinasi) return res.status(404).json({msg: "Data Destinasi tidak di temukan"});
+
+  try {
+    const filePath =`./public/images/destinasi/${destinasi.foto}`;
+    fs.unlinkSync(filePath);
+
+    await destinasi.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    res.status(200).json({msg: "Data sukses dihapus"});
+  } catch (error) {
+    console.log(error);
+    
+  }
+
+}
+

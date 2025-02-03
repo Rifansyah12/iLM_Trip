@@ -1,8 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation(); // Untuk mendapatkan lokasi path aktif
+  const [admin, setAdmin] = useState(null);
+  const navigate = useNavigate();
+  useEffect(()=>{
+    const storeAdmin = localStorage.getItem("admin");
+    if(storeAdmin){
+      try {
+        setAdmin(JSON.parse(storeAdmin));
+      } catch (error) {
+        console.error("Error Parsing admin data from localstorage", error)
+        navigate("/Login")
+        
+      }
+     
+    }else{
+      navigate("/Login");
+    }
+  }, [navigate]);
 
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-6">
@@ -22,14 +40,14 @@ const Sidebar = () => {
         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
           <div className="image">
             <img
-              src="dist/img/user2-160x160.jpg"
+              src={admin ? `http://localhost:5000/images/admin/${admin.adminFoto}`: "dist/img/user2-160x160.jpg"}
               className="img-circle elevation-2"
               alt="User Image"
             />
           </div>
           <div className="info">
             <a href="#" className="d-block">
-              Admin
+              {admin ? admin.adminNama : "Admin"}
             </a>
           </div>
         </div>
