@@ -110,18 +110,30 @@ export const updateDestinasi = async(req, res)=> {
     if(!destinasi) res.status(404).json({msg: "Data Destinasi tidak ditemukan"});
 
     let fileName;
+<<<<<<< HEAD
     if(!req.files || !req.files.foto){
       fileName = Destinasi.foto;
     }else{
       const file = req.files.foto;
+=======
+    if(!req.files || !req.files.foto_gunung){
+      fileName = Destinasi.foto_gunung;
+    }else{
+      const file = req.files.foto_gunung;
+>>>>>>> 43efc93996da013820bae210ee86bb3baa88daae
       const fileSize = file.data.length;
       const ext = path.extname(file.name);
       fileName = file.md5 + ext ;
       const allowedType = ['.png', '.jpg', '.jpeg'];
 
       if(!allowedType.includes(ext.toLocaleLowerCase())) return res.status(422).json({msg: "Gambar Tidak Valid"});
+<<<<<<< HEAD
       if(fileSize > 50000000) return res.status(422).json({msg: "Gambar Harus Kurang dari 5 mb"});
       const oldFilePath = `./public/images/destinasi/${destinasi.foto}`;
+=======
+      if(fileSize > 5000000) return res.status(422).json({msg: "Gambar Harus Kurang dari 5 mb"});
+      const oldFilePath = `./public/images/destinasi/${destinasi.foto_gunung}`;
+>>>>>>> 43efc93996da013820bae210ee86bb3baa88daae
       const newFilePath = `./public/images/destinasi/${fileName}`;
 
       // Hapus file gambar lama
@@ -139,13 +151,18 @@ export const updateDestinasi = async(req, res)=> {
     }
     
 
+<<<<<<< HEAD
     const {paket, nama_gunung, lokasi, harga, keterangan} = req.body;
     const id_layanan = req.body.id_layanan? parseInt(req.body.id_layanan) : null;
     const id_privatetrip = req.body.id_privatetrip ? parseInt(req.body.id_privatetrip): null;
+=======
+    const {nama_gunung, deskripsi_gunung, harga_gunung} = req.body;
+>>>>>>> 43efc93996da013820bae210ee86bb3baa88daae
     
 
 
     await Destinasi.update({
+<<<<<<< HEAD
       paket: paket,
       nama_gunung: nama_gunung,
       lokasi: lokasi,
@@ -158,6 +175,15 @@ export const updateDestinasi = async(req, res)=> {
     }, {
       where:{
         id: destinasi.id
+=======
+      nama_gunung: nama_gunung,
+      deskripsi_gunung: deskripsi_gunung,
+      foto_gunung: fileName,
+      harga_gunung: harga_gunung
+    }, {
+      where:{
+        id: req.params.id
+>>>>>>> 43efc93996da013820bae210ee86bb3baa88daae
       }
     });
 
@@ -169,6 +195,7 @@ export const updateDestinasi = async(req, res)=> {
   }
 }
 
+<<<<<<< HEAD
 
 export const deleteDestinasi = async(req, res)=>{
   const destinasi = await Destinasi.findOne({
@@ -197,3 +224,5 @@ export const deleteDestinasi = async(req, res)=>{
 
 }
 
+=======
+>>>>>>> 43efc93996da013820bae210ee86bb3baa88daae
