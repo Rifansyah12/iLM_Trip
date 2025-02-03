@@ -6,10 +6,12 @@ import dotenv from 'dotenv';
 import db from './config/database.js';
 import initRelationships from './models/relashionship.js';
 
+
 import SequelizeStore from 'connect-session-sequelize';
 import DestinasiRoute from "./routes/DestinasiRoutes.js"
 import AdminRoute from "./routes/AdminRoutes.js";
 import MountaintripRoute  from "./routes/MountaintripRoutes.js";
+import AnothertripRoute from "./routes/AnotherRoutes.js"
 
 
 dotenv.config();
@@ -25,19 +27,19 @@ const store = new sessionStore({
 
 // untuk mengecek apakah database terhubung 
 
-async function initializeDatabase(){
-  try {
-    await db.authenticate();
-    console.log('Database Connected..')
+// async function initializeDatabase(){
+//   try {
+//     await db.authenticate();
+//     console.log('Database Connected..')
 
-    await db.sync({ alter: true});
-    console.log('Data dimodel telah dibuat ...')
-  } catch (error) {
-    console.log('Database tidak terhubung..', error);
-  }
-}
+//     await db.sync({ alter: true});
+//     console.log('Data dimodel telah dibuat ...')
+//   } catch (error) {
+//     console.log('Database tidak terhubung..', error);
+//   }
+// }
 
-initializeDatabase();
+// initializeDatabase();
 
 initRelationships();
 app.use(session({
@@ -65,6 +67,7 @@ app.use(express.static("public"));
 app.use(DestinasiRoute);
 app.use(AdminRoute);
 app.use(MountaintripRoute);
+app.use(AnothertripRoute);
 
 
 app.listen(process.env.APP_PORT, ()=>{

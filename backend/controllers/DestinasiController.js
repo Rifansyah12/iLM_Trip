@@ -212,3 +212,35 @@ export const deleteDestinasi = async(req, res)=>{
 }
 
 
+export const getDestinasiByIdLayanan = async (req, res)=>{
+  try {
+    const {id_layanan} = req.params;
+
+    const response = await Destinasi.findAll({
+      where: {id_layanan},
+
+      include:[
+        {
+          model: PrivateTrip,
+          as: "privatetrip",
+          attributes: ['id', 'nama_paket', 'harga_paket', 'foto']
+        },
+        {
+          model: MountainTrip,
+          as: "mountaintrip",
+          attributes: ["id", "nama_layanan", "deskripsi_layanan", 'foto']
+        }
+      ]
+    });
+
+    if(response.length === 0){
+      return res.status(404).json({message: "Destinasi Tidak ditemukan"});
+    }
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Terjadi kesalahan pada server"});
+    
+  }
+}
