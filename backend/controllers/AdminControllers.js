@@ -61,6 +61,7 @@ export const loginAdmin = async(req, res)=> {
     const adminId = admin.id;
     const adminNama= admin.nama;
     const adminUsername = admin.username;
+    const adminFoto = admin.foto;
     const token = jwt.sign(
       {adminId, adminNama, adminUsername},
 
@@ -72,6 +73,10 @@ export const loginAdmin = async(req, res)=> {
     res.status(200).json({
       msg: "Login Berhasil",
       token: token,
+      adminId: adminId,
+      adminNama: adminNama,
+      adminUsername: adminUsername,
+      adminFoto: adminFoto
     });
   } catch (error) {
     console.log(error.message);
