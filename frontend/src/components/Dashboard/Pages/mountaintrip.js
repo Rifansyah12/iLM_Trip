@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
+const API_URL = "http://localhost:5000";
+
+// Daftar warna latar belakang untuk tiap id
+const backgroundColors = [
+  "bg-primary",
+  "bg-success",
+  "bg-danger",
+  "bg-warning",
+  "bg-info",
+];
+
+// Daftar ikon untuk tiap id
+const icons = [
+  "fas fa-hiking",
+  "fas fa-mountain",
+  "fas fa-campground",
+  "fas fa-tree",
+  "fas fa-water",
+];
+
 const Mountaintrip = () => {
+  const [mountainTrips, setMountainTrips] = useState([]);
+
+  // Fungsi untuk mengambil data dari backend
+  const fetchMountainTrips = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/getMountaintrip`);
+      setMountainTrips(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMountainTrips();
+  }, []);
+
   return (
     <div className="content-wrapper">
-      {/* Content Header (Page header) */}
       <div className="content-header">
         <div className="container-fluid">
           <div className="row mb-2">
             <div className="col-sm-6">
               <h1 className="m-0">MountainTrip</h1>
             </div>
-            {/* /.col */}
             <div className="col-sm-6">
               <ol className="breadcrumb float-sm-right">
                 <li className="breadcrumb-item">
@@ -20,110 +55,53 @@ const Mountaintrip = () => {
                 <li className="breadcrumb-item active">Dashboard v1</li>
               </ol>
             </div>
-            {/* /.col */}
           </div>
-          {/* /.row */}
         </div>
-        {/* /.container-fluid */}
       </div>
-      {/* /.content-header */}
+
       {/* Main content */}
       <section className="content">
-        <div className="container-fluid">
-          {/* Small boxes (Stat box) */}
-          <div className="row">
-            {/* ./col */}
+        {mountainTrips.length > 0 ? (
+          <div className="d-flex flex-row flex-wrap gap-3">
+            {mountainTrips.map((trip, index) => {
+              // Menentukan link berdasarkan ID
+              let linkTarget = "/dashboard/mountaintrip/table/private";
+              if (trip.id === 2)
+                linkTarget = "/dashboard/mountaintrip/table/Open";
+              if (trip.id === 3)
+                linkTarget = "/dashboard/mountaintrip/table/Family";
+              if (trip.id === 4)
+                linkTarget = "/dashboard/mountaintrip/table/Gathering";
 
-            {/* /privatetrip */}
-            <div className="col-lg-3 col-6">
-              {/* small box */}
-              <div className="small-box bg-success">
-                <div className="inner">
-                  <h3>PrivateTrip</h3>
-                  <p>Premium & Luxury</p>
+              return (
+                <div key={trip.id} className="col-lg-3 col-6">
+                  <div
+                    className={`small-box ${
+                      backgroundColors[index % backgroundColors.length]
+                    }`}
+                  >
+                    <div className="inner">
+                      <h3 className="text-sm" style={{ fontSize: "18px" }}>
+                        {trip.nama_layanan}
+                      </h3>
+                    </div>
+                    <div className="icon">
+                      <i
+                        className={`${icons[index % icons.length]}`}
+                        style={{ fontSize: "25px" }}
+                      />
+                    </div>
+                    <Link to={linkTarget} className="small-box-footer">
+                      views <i className="fas fa-arrow-circle-right" />
+                    </Link>
+                  </div>
                 </div>
-                <div className="icon">
-                  {/* Menggunakan ikon yang mencerminkan perjalanan privat */}
-                  <i className="fas fa-user-lock" />
-                </div>
-                <Link
-                  to="/dashboard/mountaintrip/table/private"
-                  className="small-box-footer"
-                >
-                  views <i className="fas fa-arrow-circle-right" />
-                </Link>
-              </div>
-            </div>
-            {/* /Privatetrip */}
-
-            {/* Opentrip */}
-            <div className="col-lg-3 col-6">
-              {/* small box */}
-              <div className="small-box bg-info">
-                <div className="inner">
-                  <h3>OpenTrip</h3>
-                  <p>Mountain</p>
-                </div>
-                <div className="icon">
-                  {/* Menggunakan ikon yang mencerminkan perjalanan */}
-                  <i className="fas fa-plane-departure" />
-                </div>
-                <Link
-                  to="/dashboard/mountaintrip/table/Open"
-                  className="small-box-footer"
-                >
-                  views <i className="fas fa-arrow-circle-right" />
-                </Link>
-              </div>
-            </div>
-            {/* /Opentrip */}
-
-            {/* ./FamilyTrip */}
-            <div className="col-lg-3 col-6">
-              {/* small box */}
-              <div className="small-box bg-warning">
-                <div className="inner">
-                  <h3>FamilyTrip</h3>
-                  <p>Memorable Moments</p>
-                </div>
-                <div className="icon">
-                  {/* Menggunakan ikon yang mencerminkan Family Trip */}
-                  <i className="fas fa-users" />
-                </div>
-                <Link
-                  to="/dashboard/mountaintrip/table/Family"
-                  className="small-box-footer"
-                >
-                  views <i className="fas fa-arrow-circle-right" />
-                </Link>
-              </div>
-            </div>
-            {/* ./FamilyTrip */}
-
-            {/* GatheringKantor */}
-            <div className="col-lg-3 col-6">
-              {/* small box */}
-              <div className="small-box bg-danger">
-                <div className="inner">
-                  <h1>Gathering</h1>
-                  <h5> Kantor</h5>
-                </div>
-                <div className="icon">
-                  {/* Menggunakan ikon yang mencerminkan Gathering Kantor */}
-                  <i className="fas fa-briefcase" />
-                </div>
-                <Link
-                  to="/dashboard/mountaintrip/table/Gathering"
-                  className="small-box-footer"
-                >
-                  views <i className="fas fa-arrow-circle-right" />
-                </Link>
-              </div>
-            </div>
-
-            {/* ./Gathering Kantor*/}
+              );
+            })}
           </div>
-        </div>
+        ) : (
+          <p className="text-center">Loading data...</p>
+        )}
       </section>
     </div>
   );

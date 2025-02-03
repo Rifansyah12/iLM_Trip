@@ -31,7 +31,9 @@ import DashboardAdmin from "./components/Dashboard/Pages/Dashboard";
 
 // PrivateTrip
 import Luxury from "./pages/Paket/PrivateTrip/Luxury";
+import DestinasiLuxury from "./pages/Paket/PrivateTrip/Luxury/Destinasi";
 import Premium from "./pages/Paket/PrivateTrip/Premium";
+import DestinasiPremium from "./pages/Paket/PrivateTrip/Premium/Destinasi";
 // Form
 import FormDaftar from "./components/FormDaftar";
 // Lainnya
@@ -102,19 +104,6 @@ const App = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/dashboard");
-  const [admins, setAdmins] = useState([]);
-
-  useEffect(() => {
-    // Ambil data dari backend
-    axios
-      .get("http://localhost:5000/api/admin")
-      .then((response) => {
-        setAdmins(response.data); // Simpan data ke state
-      })
-      .catch((error) => {
-        console.error("Error mengambil data:", error);
-      });
-  }, []);
 
   return (
     <div>
@@ -153,6 +142,14 @@ const App = () => {
         <Route path="/Paket/OpenTrip/Gunung/sumbing" element={<Sumbing />} />
         <Route path="/Paket/OpenTrip/Gunung/sangar" element={<Sangar />} />
         <Route path="/Paket/PrivateTrip/Premium" element={<Premium />} />
+        <Route
+          path="/Paket/PrivateTrip/Premium/Destinasi"
+          element={<DestinasiPremium />}
+        />
+        <Route
+          path="/Paket/PrivateTrip/Luxury/Destinasi"
+          element={<DestinasiLuxury />}
+        />
         <Route path="/Paket/PrivateTrip/Luxury" element={<Luxury />} />
         <Route path="/FormDaftar" element={<FormDaftar />} />
         {/* Admin Routes with Layout */}

@@ -182,7 +182,7 @@ const OpenTrip = () => {
             }}
           >
             <button
-              onClick={() => navigate("/Paket/OpenTrip/Gunung/merbabu")}
+              onClick={() => navigate("/Paket/PrivateTrip/Premium/Destinasi")}
               style={{
                 fontSize: "20px",
                 fontWeight: "bold",
