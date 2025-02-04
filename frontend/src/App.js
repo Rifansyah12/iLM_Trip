@@ -161,7 +161,7 @@ const App = () => {
             element={<MountainTripTablePrivate />}
           />
           <Route
-            path="mountaintrip/table/private/premium"
+            path="mountaintrip/table/private/premium/:id_privatetrip"
             element={<TablePrivatePremium />}
           />
           <Route

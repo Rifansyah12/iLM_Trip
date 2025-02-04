@@ -81,7 +81,7 @@ const Mountaintrip = () => {
                     <i className="fas fa-crown" />
                   </div>
                   <Link
-                    to={`/dashboard/mountaintrip/table/private/premium`}
+                    to={`/dashboard/mountaintrip/table/private/premium/${premiumTrip.id}`}
                     className="small-box-footer"
                   >
                     views <i className="fas fa-arrow-circle-right" />
@@ -97,13 +97,13 @@ const Mountaintrip = () => {
                   style={{ backgroundColor: "#4B0082", color: "#FFD700" }}
                 >
                   <div className="inner">
-                    <h3>{premiumTrip.nama_paket}</h3>
+                    <h3>{luxuryTrip.nama_paket}</h3>
                   </div>
                   <div className="icon">
                     <i className="fas fa-gem" style={{ color: "#FFD700" }} />
                   </div>
                   <Link
-                    to={`/dashboard/mountaintrip/table/private/luxury`}
+                    to={`/dashboard/mountaintrip/table/private/premium/${luxuryTrip.id}`}
                     className="small-box-footer"
                     style={{ color: "#FFD700" }}
                   >
