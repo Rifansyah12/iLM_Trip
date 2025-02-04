@@ -12,6 +12,7 @@ import DestinasiRoute from "./routes/DestinasiRoutes.js"
 import AdminRoute from "./routes/AdminRoutes.js";
 import MountaintripRoute  from "./routes/MountaintripRoutes.js";
 import AnothertripRoute from "./routes/AnotherRoutes.js"
+import PendaftranpesertaRoute from "./routes/Pendaftaranpeserta.js";
 
 
 dotenv.config();
@@ -68,6 +69,7 @@ app.use(DestinasiRoute);
 app.use(AdminRoute);
 app.use(MountaintripRoute);
 app.use(AnothertripRoute);
+app.use(PendaftranpesertaRoute);
 
 
 app.listen(process.env.APP_PORT, ()=>{
