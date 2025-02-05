@@ -1,35 +1,29 @@
-import express from 'express';
-import fileUpload from 'express-fileupload';
-import cors from 'cors';
-import session from 'express-session';
-import dotenv from 'dotenv';
-import db from './config/database.js';
-import initRelationships from './models/relashionship.js';
+import express from "express";
+import fileUpload from "express-fileupload";
+import cors from "cors";
+import session from "express-session";
+import dotenv from "dotenv";
+import db from "./config/database.js";
+import initRelationships from "./models/relashionship.js";
 
-
-import SequelizeStore from 'connect-session-sequelize';
-import DestinasiRoute from "./routes/DestinasiRoutes.js"
+import SequelizeStore from "connect-session-sequelize";
+import DestinasiRoute from "./routes/DestinasiRoutes.js";
 import AdminRoute from "./routes/AdminRoutes.js";
-import MountaintripRoute  from "./routes/MountaintripRoutes.js";
-import AnothertripRoute from "./routes/AnotherRoutes.js"
-<<<<<<< HEAD
-=======
+import MountaintripRoute from "./routes/MountaintripRoutes.js";
+import AnothertripRoute from "./routes/AnotherRoutes.js";
 import PendaftranpesertaRoute from "./routes/Pendaftaranpeserta.js";
->>>>>>> main
-
 
 dotenv.config();
 const app = express();
 
-// membuat store session 
+// membuat store session
 const sessionStore = new SequelizeStore(session.Store);
 
 const store = new sessionStore({
-  db: db
+  db: db,
 });
 
-
-// untuk mengecek apakah database terhubung 
+// untuk mengecek apakah database terhubung
 
 // async function initializeDatabase(){
 //   try {
@@ -46,22 +40,24 @@ const store = new sessionStore({
 // initializeDatabase();
 
 initRelationships();
-app.use(session({
-  secret: process.env.SECRET_KEY,
-  resave: false,
-  saveUninitialized: true,
-  store: store,
-  cookie: {
-    secure: 'auto'
-  }
-}))
+app.use(
+  session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+    cookie: {
+      secure: "auto",
+    },
+  })
+);
 
-
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:3000'
-}));
-
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 
 app.use(express.json());
 app.use(fileUpload());
@@ -74,7 +70,6 @@ app.use(MountaintripRoute);
 app.use(AnothertripRoute);
 app.use(PendaftranpesertaRoute);
 
-
-app.listen(process.env.APP_PORT, ()=>{
-console.log(`Server Running on http://localhost:${process.env.APP_PORT}`);
+app.listen(process.env.APP_PORT, () => {
+  console.log(`Server Running on http://localhost:${process.env.APP_PORT}`);
 });
