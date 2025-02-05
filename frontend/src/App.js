@@ -50,7 +50,7 @@ import Dashboard from "./components/Dashboard/Pages/Dashboard";
 import AnotherAdmin from "./components/Dashboard/Pages/another";
 import MountainTrip from "./components/Dashboard/Pages/mountaintrip";
 import MountainTripTablePrivate from "./components/Dashboard/Pages/MountainTripTable/MountainTripTablePrivate";
-import TablePrivatePremium from "./components/Dashboard/Pages/MountainTripTable/TablePrivate/TabkePrivatePremium";
+import TablePrivatePremium from "./components/Dashboard/Pages/MountainTripTable/TablePrivate/TablePrivatePremium";
 import TablePrivateLuxury from "./components/Dashboard/Pages/MountainTripTable/TablePrivate/TablePrivateLuxury";
 import MountainTripTableOpen from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableOpen";
 import MountainTripTableGathering from "./components/Dashboard/Pages/MountainTripTable/MountainTripTableGathering";

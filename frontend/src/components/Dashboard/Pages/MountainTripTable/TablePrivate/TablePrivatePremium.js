@@ -273,7 +273,7 @@ const TablePrivate = () => {
                         <select
                           id="selectMountainTrip"
                           className="form-control"
-                          value={selectedTrip} // Pastikan ini adalah ID yang valid
+                          value={id_layanan} // Pastikan ini adalah ID yang valid
                           onChange={handleChange}
                         >
                           <option value="">Pilih Layanan</option>

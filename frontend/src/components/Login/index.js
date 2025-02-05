@@ -135,12 +135,8 @@ function LoginPage() {
         {message && (
           <div
             style={{
-<<<<<<< HEAD
-              backgroundColor: messageType === "success" ? "#28a745" : "#dc3545",
-=======
               backgroundColor:
                 messageType === "success" ? "#28a745" : "#dc3545",
->>>>>>> main
               color: "white",
               padding: "10px",
               borderRadius: "5px",
