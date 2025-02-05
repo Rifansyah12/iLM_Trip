@@ -6,10 +6,13 @@ import dotenv from 'dotenv';
 import db from './config/database.js';
 import initRelationships from './models/relashionship.js';
 
+
 import SequelizeStore from 'connect-session-sequelize';
 import DestinasiRoute from "./routes/DestinasiRoutes.js"
 import AdminRoute from "./routes/AdminRoutes.js";
 import MountaintripRoute  from "./routes/MountaintripRoutes.js";
+import AnothertripRoute from "./routes/AnotherRoutes.js"
+import PendaftranpesertaRoute from "./routes/Pendaftaranpeserta.js";
 
 
 dotenv.config();
@@ -65,6 +68,8 @@ app.use(express.static("public"));
 app.use(DestinasiRoute);
 app.use(AdminRoute);
 app.use(MountaintripRoute);
+app.use(AnothertripRoute);
+app.use(PendaftranpesertaRoute);
 
 
 app.listen(process.env.APP_PORT, ()=>{

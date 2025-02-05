@@ -5,10 +5,47 @@ import Background from "../../assets/volcano-3779159_1280.png";
 import NewImage from "../../assets/logo/Logo_trip2.png"; // Logo aplikasi
 
 function LoginPage() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
+
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/loginAdmin", {
+        username,
+        password,
+      });
+
+      console.log("Response Data:", response.data); // Debugging
+
+      if (!response.data.token) {
+        throw new Error("Token tidak ditemukan dalam response");
+      }
+
+      setMessage("Login Berhasil");
+      setMessageType("success");
+      localStorage.setItem("token", response.data.token);
+
+      const adminData = {
+        adminId: response.data.adminId,
+        adminNama: response.data.adminNama,
+        adminUsername: response.data.adminUsername,
+        adminFoto: response.data.adminFoto,
+      };
+
+      localStorage.setItem("admin", JSON.stringify(adminData));
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
+    } catch (err) {
+      setMessage(err.response?.data?.msg || "Login Gagal");
+      setMessageType("error");
+    }
+  };
 
   const pageStyle = {
     position: "relative",
@@ -78,25 +115,6 @@ function LoginPage() {
     marginBottom: 20,
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault(); // Mencegah reload halaman
-
-    try {
-      const response = await axios.post("http://localhost:5000/loginAdmin", {
-        email,
-        password,
-      });
-
-      // Simpan token di localStorage
-      localStorage.setItem("token", response.data.token);
-
-      alert("Login Berhasil!");
-      navigate("/dashboard"); // Redirect ke dashboard
-    } catch (err) {
-      setError(err.response?.data?.msg || "Login Gagal!");
-    }
-  };
-
   return (
     <div style={pageStyle}>
       <img
@@ -113,15 +131,28 @@ function LoginPage() {
           src={NewImage}
           alt="Logo"
         />
-        <h2 style={{ marginBottom: 20, color: "#ffff" }}>Login</h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <h2 style={{ marginBottom: 20, color: "#fff" }}>Login</h2>
+        {message && (
+          <div
+            style={{
+              backgroundColor:
+                messageType === "success" ? "#28a745" : "#dc3545",
+              color: "white",
+              padding: "10px",
+              borderRadius: "5px",
+              marginBottom: "10px",
+            }}
+          >
+            {message}
+          </div>
+        )}
         <form onSubmit={handleLogin}>
           <input
-            type="email"
-            placeholder="Email"
+            type="text"
+            placeholder="Username"
             style={inputStyle}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
           <input

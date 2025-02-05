@@ -2,7 +2,7 @@ import Destinasi from "../models/DestinasiModels.js";
 
 
 
-import path, { sep } from 'path';
+import path  from 'path';
 import fs from 'fs';
 import PrivateTrip from "../models/PrivatTripModels.js";
 import MountainTrip from "../models/LayananMountainTrip.js";
@@ -110,18 +110,24 @@ export const updateDestinasi = async(req, res)=> {
     if(!destinasi) res.status(404).json({msg: "Data Destinasi tidak ditemukan"});
 
     let fileName;
-    if(!req.files || !req.files.foto){
-      fileName = Destinasi.foto;
+
+
+
+    if(!req.files || !req.files.foto_gunung){
+      fileName = Destinasi.foto_gunung;
     }else{
-      const file = req.files.foto;
+      const file = req.files.foto_gunung;
+
       const fileSize = file.data.length;
       const ext = path.extname(file.name);
       fileName = file.md5 + ext ;
       const allowedType = ['.png', '.jpg', '.jpeg'];
 
       if(!allowedType.includes(ext.toLocaleLowerCase())) return res.status(422).json({msg: "Gambar Tidak Valid"});
+
       if(fileSize > 50000000) return res.status(422).json({msg: "Gambar Harus Kurang dari 5 mb"});
       const oldFilePath = `./public/images/destinasi/${destinasi.foto}`;
+
       const newFilePath = `./public/images/destinasi/${fileName}`;
 
       // Hapus file gambar lama
@@ -139,13 +145,18 @@ export const updateDestinasi = async(req, res)=> {
     }
     
 
+
     const {paket, nama_gunung, lokasi, harga, keterangan} = req.body;
     const id_layanan = req.body.id_layanan? parseInt(req.body.id_layanan) : null;
     const id_privatetrip = req.body.id_privatetrip ? parseInt(req.body.id_privatetrip): null;
+
+    
+
     
 
 
     await Destinasi.update({
+
       paket: paket,
       nama_gunung: nama_gunung,
       lokasi: lokasi,
@@ -158,6 +169,8 @@ export const updateDestinasi = async(req, res)=> {
     }, {
       where:{
         id: destinasi.id
+
+     
       }
     });
 
@@ -169,3 +182,97 @@ export const updateDestinasi = async(req, res)=> {
   }
 }
 
+
+
+export const deleteDestinasi = async(req, res)=>{
+  const destinasi = await Destinasi.findOne({
+    where:{
+      id: req.params.id
+    }
+  });
+
+  if(!destinasi) return res.status(404).json({msg: "Data Destinasi tidak di temukan"});
+
+  try {
+    const filePath =`./public/images/destinasi/${destinasi.foto}`;
+    fs.unlinkSync(filePath);
+
+    await destinasi.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    res.status(200).json({msg: "Data sukses dihapus"});
+  } catch (error) {
+    console.log(error);
+    
+  }
+
+}
+
+
+export const getDestinasiByIdLayanan = async (req, res)=>{
+  try {
+    const {id_layanan} = req.params;
+
+    const response = await Destinasi.findAll({
+      where: {id_layanan},
+
+      include:[
+        {
+          model: PrivateTrip,
+          as: "privatetrip",
+          attributes: ['id', 'nama_paket', 'harga_paket', 'foto']
+        },
+        {
+          model: MountainTrip,
+          as: "mountaintrip",
+          attributes: ["id", "nama_layanan", "deskripsi_layanan", 'foto']
+        }
+      ]
+    });
+
+    if(response.length === 0){
+      return res.status(404).json({message: "Destinasi Tidak ditemukan"});
+    }
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Terjadi kesalahan pada server"});
+    
+  }
+}
+export const getDestinasiByIdPrivate = async (req, res)=>{
+  try {
+    const {id_privatetrip} = req.params;
+
+    const response = await Destinasi.findAll({
+      where: {id_privatetrip},
+
+      include:[
+        {
+          model: PrivateTrip,
+          as: "privatetrip",
+          attributes: ['id', 'nama_paket', 'harga_paket', 'foto']
+        },
+        {
+          model: MountainTrip,
+          as: "mountaintrip",
+          attributes: ["id", "nama_layanan", "deskripsi_layanan", 'foto']
+        }
+      ]
+    });
+
+    if(response.length === 0){
+      return res.status(404).json({message: "Destinasi Tidak ditemukan"});
+    }
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Terjadi kesalahan pada server"});
+    
+  }
+}

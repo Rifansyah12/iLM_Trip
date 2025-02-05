@@ -1,6 +1,7 @@
 import PrivateTrip from "./PrivatTripModels.js";
 import MountainTrip from "./LayananMountainTrip.js";
 import Destinasi from "./DestinasiModels.js";
+import PendaftaranPeserta from "./PendaftaranpesertaModels.js";
 
 // Inisialisasi relasi
 MountainTrip.hasMany(PrivateTrip, { 
@@ -40,6 +41,18 @@ Destinasi.belongsTo(PrivateTrip,{
   foreignKey: "id_privatetrip",
   as: "privatetrip"
 })
+
+// relasi destinasi dan paket pendaftaran
+// Relasi Destinasi dan PendaftaranPeserta
+Destinasi.hasMany(PendaftaranPeserta, {
+  foreignKey: "id_destinasi",
+  as: "pendaftaran_peserta",
+});
+
+PendaftaranPeserta.belongsTo(Destinasi, {
+  foreignKey: "id_destinasi",
+  as: "destinasi",
+});
 
 // Pastikan file ini di-import di entry point
 export default () => {
