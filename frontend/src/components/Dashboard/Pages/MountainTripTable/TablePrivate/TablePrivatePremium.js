@@ -140,6 +140,62 @@ const TablePrivate = () => {
     }
   };
 
+  const handleEdit = async (id) => {
+    const destinasiToEdit = destinasi.find((item) => item.id === id);
+
+    if (!destinasiToEdit) {
+      alert("Destinasi tidak ditemukan!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("nama_gunung", newDestinasi.nama_gunung);
+    formData.append("lokasi", newDestinasi.lokasi);
+    formData.append("paket", newDestinasi.paket);
+    formData.append("harga", newDestinasi.harga);
+    formData.append("keterangan", newDestinasi.keterangan);
+    if (file) {
+      formData.append("foto", file);
+    }
+
+    // Tambahkan id_layanan dan id_privatetrip jika tersedia
+    formData.append("id_layanan", selectedTrip || destinasiToEdit.id_layanan);
+
+    if (id_privatetrip) {
+      formData.append("id_privatetrip", id_privatetrip);
+    }
+
+    try {
+      await axios.put(`http://localhost:5000/updateDestinasi/${id}`, formData);
+      alert("Data berhasil diupdate!");
+      setDestinasi(
+        destinasi.map((item) =>
+          item.id === id ? { ...item, ...newDestinasi } : item
+        )
+      );
+    } catch (err) {
+      alert("Gagal mengupdate data");
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Apakah Anda yakin ingin menghapus destinasi ini?"
+    );
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:5000/deleteDestinasi/${id}`); // Mengirim request DELETE
+        alert("Data berhasil dihapus!");
+        // Menghapus destinasi dari state tanpa me-reload
+        setDestinasi(destinasi.filter((item) => item.id !== id));
+      } catch (err) {
+        alert("Gagal menghapus data");
+        console.error(err);
+      }
+    }
+  };
+
   return (
     <div className="wrapper">
       <div className="content-wrapper">
@@ -333,6 +389,7 @@ const TablePrivate = () => {
                       <th>Harga</th>
                       <th>Foto</th>
                       <th>Keterangan</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -364,6 +421,22 @@ const TablePrivate = () => {
                           )}
                         </td>
                         <td>{item.keterangan}</td>
+                        <td>
+                          {/* Tombol Edit */}
+                          <button
+                            className="btn btn-warning"
+                            onClick={() => handleEdit(item.id)}
+                          >
+                            Edit
+                          </button>
+                          {/* Tombol Hapus */}
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleDelete(item.id)}
+                          >
+                            Hapus
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
