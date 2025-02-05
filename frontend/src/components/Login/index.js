@@ -11,7 +11,6 @@ function LoginPage() {
   const [messageType, setMessageType] = useState("");
 
   const navigate = useNavigate();
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -136,7 +135,12 @@ function LoginPage() {
         {message && (
           <div
             style={{
+<<<<<<< HEAD
               backgroundColor: messageType === "success" ? "#28a745" : "#dc3545",
+=======
+              backgroundColor:
+                messageType === "success" ? "#28a745" : "#dc3545",
+>>>>>>> main
               color: "white",
               padding: "10px",
               borderRadius: "5px",

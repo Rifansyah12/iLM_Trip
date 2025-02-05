@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation(); // Untuk mendapatkan lokasi path aktif
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const storeAdmin = localStorage.getItem("admin");
     if (storeAdmin) {
