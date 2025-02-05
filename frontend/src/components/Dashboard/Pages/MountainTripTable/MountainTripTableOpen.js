@@ -1,156 +1,167 @@
 import React, { useState, useEffect } from "react";
-import "summernote/dist/summernote-lite.css"; // Import Summernote CSS
-import $ from "jquery"; // Import jQuery untuk Summernote
-import "summernote/dist/summernote-lite.js"; // Import Summernote JS
+import axios from "axios"; // Untuk melakukan request ke API
+import "react-summernote/dist/react-summernote.css";
+import "summernote/dist/summernote-bs4.js"; // Import JS untuk Summernote
+import ReactSummernote from "react-summernote"; // Import komponen ReactSummernote
 
-const MountainTripTablePrivate = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      judul: "Pendakian Gunung Rinjani",
-      namaGunung: "Gunung Rinjani",
-      lokasi: "Lombok, NTB",
-      paket: "Medium Trip",
-      harga: "Rp 2,500,000",
-      foto: null,
-      keterangan:
-        "<b>Meeting Point:</b> Bandara Lombok <br/> <b>Harga Termasuk:</b> Guide, Logistik",
-      deskripsi:
-        "<b>Deskripsi:</b> Pendakian Gunung Rinjani menawarkan pemandangan spektakuler dengan jalur yang menantang.",
-    },
-  ]);
+import { useParams } from "react-router-dom";
 
+const TableOpen = () => {
+  const { id_layanan } = useParams(); // Only keep id_layanan
+  const [destinasi, setDestinasi] = useState([]);
+  const [mountainTrips, setMountainTrips] = useState([]);
+  const [selectedTrip, setSelectedTrip] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
 
-  const [showModal, setShowModal] = useState(false);
-  const [newProduct, setNewProduct] = useState({
-    judul: "",
-    namaGunung: "",
+  const [newDestinasi, setNewDestinasi] = useState({
+    nama_gunung: "",
     lokasi: "",
     paket: "",
     harga: "",
     foto: null,
     keterangan: "",
-    deskripsi: "",
   });
+  const [file, setFile] = useState(null);
 
-  const [editProduct, setEditProduct] = useState(null); // State untuk produk yang sedang diedit
+  // Ambil data dari API saat komponen pertama kali dimuat
+  useEffect(() => {
+    const fetchDestinasi = async () => {
+      if (!id_layanan) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/getDestinasiByIdLayanan/${id_layanan}`
+        );
+
+        setDestinasi(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || "Gagal mengambil data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDestinasi();
+  }, [id_layanan]);
+
+  useEffect(() => {
+    const fetchMountainTrips = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/getMountaintrip"
+        );
+        setMountainTrips(response.data);
+      } catch (error) {
+        console.error("Error fetching mountain trips:", error);
+      }
+    };
+
+    fetchMountainTrips();
+  }, []); // Tidak ada dependensi, hanya dipanggil sekali saat komponen dimuat
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   const indexOfLastData = currentPage * dataPerPage;
   const indexOfFirstData = indexOfLastData - dataPerPage;
-  const currentData = data.slice(indexOfFirstData, indexOfLastData);
-
-  const totalPages = Math.ceil(data.length / dataPerPage);
+  const totalPages = Math.ceil(destinasi.length / dataPerPage);
+  const currentData = destinasi.slice(indexOfFirstData, indexOfLastData);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const handleAddProduct = () => {
-    if (editProduct) {
-      // Jika sedang edit, update data
-      setData(
-        data.map((item) =>
-          item.id === editProduct.id ? { ...editProduct, ...newProduct } : item
-        )
-      );
-    } else {
-      // Jika tambah data baru
-      setData([
-        ...data,
-        {
-          id: data.length + 1,
-          ...newProduct,
-        },
-      ]);
-    }
-
-    setShowModal(false);
-    setEditProduct(null); // Reset editProduct setelah update
-    setNewProduct({
-      judul: "",
-      namaGunung: "",
-      lokasi: "",
-      paket: "",
-      harga: "",
-      foto: null,
-      keterangan: "",
-    });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewDestinasi({ ...newDestinasi, [name]: value });
   };
 
+  // Menangani perubahan file
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setNewProduct({ ...newProduct, foto: reader.result });
-      };
-      reader.readAsDataURL(file);
+    setFile(e.target.files[0]);
+  };
+
+  // Menangani perubahan pada select
+  const handleChange = (event) => {
+    const value = event.target.value;
+    if (value) {
+      setSelectedTrip(value); // Set nilai ID layanan
+    } else {
+      setSelectedTrip(""); // Atur menjadi string kosong jika tidak ada pilihan
     }
   };
 
-  const handleEditClick = (item) => {
-    setEditProduct(item);
-    setNewProduct(item); // Set data yang akan diedit ke form
-    setShowModal(true); // Tampilkan modal
-  };
-
-  const handleDeleteClick = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
-
-  useEffect(() => {
-    if (showModal) {
-      $("#summernote").summernote({
-        height: 200,
-        toolbar: [
-          ["style", ["bold", "italic", "underline", "clear"]],
-          ["para", ["ul", "ol", "paragraph"]],
-          ["view", ["fullscreen", "codeview"]],
-        ],
-        callbacks: {
-          onChange: function (contents) {
-            setNewProduct((prev) => ({ ...prev, keterangan: contents }));
-          },
-        },
-      });
-
-      $("#summernote-deskripsi").summernote({
-        height: 200,
-        toolbar: [
-          ["style", ["bold", "italic", "underline", "clear"]],
-          ["para", ["ul", "ol", "paragraph"]],
-          ["view", ["fullscreen", "codeview"]],
-        ],
-        callbacks: {
-          onChange: function (contents) {
-            setNewProduct((prev) => ({ ...prev, deskripsi: contents }));
-          },
-        },
-      });
+  // Fungsi untuk mengirimkan data ke backend
+  const handleAddData = async () => {
+    if (!selectedTrip) {
+      alert("Silakan pilih layanan gunung terlebih dahulu!");
+      return;
     }
-  }, [showModal]);
+
+    // Pastikan id_layanan sudah ada
+    if (!id_layanan) {
+      alert("ID layanan tidak ditemukan!");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("nama_gunung", newDestinasi.nama_gunung);
+    formData.append("lokasi", newDestinasi.lokasi);
+    formData.append("paket", newDestinasi.paket);
+    formData.append("harga", newDestinasi.harga);
+    formData.append("keterangan", newDestinasi.keterangan);
+    formData.append("foto", file);
+
+    // Kirim id_layanan yang valid
+    formData.append("id_layanan", selectedTrip); // Kirim id layanan yang dipilih
+
+    try {
+      await axios.post(
+        `http://localhost:5000/createDestinasi/${selectedTrip}`,
+        formData
+      );
+
+      const response = await axios.get(
+        `http://localhost:5000/getMountaintrip/${id_layanan}` // Update URL ke id_layanan yang valid
+      );
+      setDestinasi(response.data);
+    } catch (err) {
+      alert("Gagal menambahkan data");
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Apakah Anda yakin ingin menghapus destinasi ini?")) {
+      return;
+    }
+
+    try {
+      await axios.delete(`http://localhost:5000/deleteDestinasi/${id}`);
+
+      alert("Data berhasil dihapus!");
+
+      // Perbarui state dengan menghapus destinasi yang telah dihapus
+      setDestinasi(destinasi.filter((item) => item.id !== id));
+    } catch (err) {
+      alert("Gagal menghapus data");
+      console.error(err);
+    }
+  };
 
   return (
     <div className="wrapper">
       <div className="content-wrapper">
         <div className="content-header">
-          <div className="container-fluid">
-            <div className="row mb-2">
-              <div className="col-sm-6">
-                <h1 className="m-0">Open Trip</h1>
-              </div>
-              <div className="col-sm-6">
-                <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item">
-                    <a href="#">Home</a>
-                  </li>
-                  <li className="breadcrumb-item active">Open Trip</li>
-                </ol>
-              </div>
-            </div>
-          </div>
+          <h1 className="m-0">Destinasi Trip</h1> {/* Judul diubah */}
         </div>
 
         <section className="content">
@@ -158,220 +169,213 @@ const MountainTripTablePrivate = () => {
             <div className="mb-3">
               <button
                 className="btn btn-primary"
-                onClick={() => setShowModal(true)}
+                data-toggle="modal"
+                data-target="#addDataModal"
               >
                 Tambah Data
               </button>
             </div>
 
-            <div className="card-body">
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Judul</th>
-                    <th>Nama Gunung</th>
-                    <th>Lokasi</th>
-                    <th>Paket</th>
-                    <th>Harga</th>
-                    <th>Foto</th>
-                    <th>Keterangan</th>
-                    <th>Deskripsi</th> {/* Tambahkan kolom ini */}
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentData.map((item, index) => (
-                    <tr key={item.id}>
-                      <td>{indexOfFirstData + index + 1}.</td>
-                      <td>{item.judul}</td>
-                      <td>{item.namaGunung}</td>
-                      <td>{item.lokasi}</td>
-                      <td>{item.paket}</td>
-                      <td>{item.harga}</td>
-                      <td>
-                        {item.foto ? (
-                          <img
-                            src={item.foto}
-                            alt="Foto"
-                            style={{ width: 50, height: 50 }}
-                          />
-                        ) : (
-                          "Tidak ada foto"
-                        )}
-                      </td>
-                      <td
-                        dangerouslySetInnerHTML={{ __html: item.keterangan }}
-                      ></td>
-                      <td
-                        dangerouslySetInnerHTML={{ __html: item.deskripsi }}
-                      ></td>{" "}
-                      {/* Tambahkan ini */}
-                      <td>
-                        <button
-                          className="btn btn-sm btn-warning mr-2"
-                          onClick={() => handleEditClick(item)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn btn-sm btn-danger"
-                          onClick={() => handleDeleteClick(item.id)}
-                        >
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            {/* FORM TAMBAH DATA  */}
+            <div
+              className="modal fade"
+              id="addDataModal"
+              tabIndex="-1"
+              role="dialog"
+              aria-labelledby="addDataModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="addDataModalLabel">
+                      Tambah Destinasi Baru
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="form-group">
+                        <label>Nama Gunung</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="nama_gunung"
+                          value={newDestinasi.nama_gunung || ""}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Lokasi</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="lokasi"
+                          value={newDestinasi.lokasi || ""}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Paket</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="paket"
+                          value={newDestinasi.paket || ""}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Harga</label>
+                        <input
+                          type="number"
+                          className="form-control"
+                          name="harga"
+                          value={newDestinasi.harga || ""}
+                          onChange={handleInputChange}
+                          step="0.01" // Menyediakan input angka desimal
+                          min="0" // Menghindari angka negatif
+                          required // Menandakan bahwa input ini wajib diisi
+                        />
+                      </div>
 
-              <div className="d-flex justify-content-between align-items-center">
-                <span>Total Data: {data.length}</span>
-                <nav>
-                  <ul className="pagination">
-                    {[...Array(totalPages)].map((_, i) => (
-                      <li
-                        key={i}
-                        className={`page-item ${
-                          currentPage === i + 1 ? "active" : ""
-                        }`}
-                      >
-                        <button
-                          className="page-link"
-                          onClick={() => handlePageChange(i + 1)}
+                      <div className="form-group">
+                        <label>Keterangan</label>
+                        <ReactSummernote
+                          value={newDestinasi.keterangan}
+                          options={{
+                            height: 200, // Menentukan tinggi editor
+                            toolbar: [
+                              [
+                                "style",
+                                ["bold", "italic", "underline", "clear"],
+                              ],
+                              [
+                                "font",
+                                ["strikethrough", "superscript", "subscript"],
+                              ],
+                              ["para", ["ul", "ol", "paragraph"]],
+                              ["insert", ["link", "picture"]],
+                              ["view", ["fullscreen", "codeview"]],
+                            ],
+                          }}
+                          onChange={(content) => {
+                            setNewDestinasi({
+                              ...newDestinasi,
+                              keterangan: content,
+                            });
+                          }}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Foto</label>
+                        <input
+                          type="file"
+                          className="form-control"
+                          onChange={handleFileChange}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Layanan</label>
+                        <select
+                          className="form-control"
+                          value={selectedTrip}
+                          onChange={handleChange}
                         >
-                          {i + 1}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
+                          <option value="">Pilih Layanan</option>
+                          {mountainTrips.map((trip) => (
+                            <option key={trip.id} value={trip.id}>
+                              {trip.nama_layanan} {trip.id}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </form>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={handleAddData}
+                    >
+                      Tambah
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nama Gunung</th>
+                  <th>Lokasi</th>
+                  <th>Harga</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentData.map((destinasi, index) => (
+                  <tr key={destinasi.id}>
+                    <td>{index + 1}</td>
+                    <td>{destinasi.nama_gunung}</td>
+                    <td>{destinasi.lokasi}</td>
+                    <td>{destinasi.harga}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => handleDelete(destinasi.id)}
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Pagination */}
+            <nav>
+              <ul className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <li
+                    key={index + 1}
+                    className={`page-item ${
+                      index + 1 === currentPage ? "active" : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => handlePageChange(index + 1)}
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </section>
-
-        {showModal && (
-          <div className="modal" style={{ display: "block" }}>
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">
-                    {editProduct ? "Edit Data" : "Tambah Data"}
-                  </h5>
-                  <button className="close" onClick={() => setShowModal(false)}>
-                    &times;
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <div className="form-group">
-                    <label>Judul</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newProduct.judul}
-                      onChange={(e) =>
-                        setNewProduct({
-                          ...newProduct,
-                          judul: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Nama Gunung</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newProduct.namaGunung}
-                      onChange={(e) =>
-                        setNewProduct({
-                          ...newProduct,
-                          namaGunung: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Lokasi</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newProduct.lokasi}
-                      onChange={(e) =>
-                        setNewProduct({ ...newProduct, lokasi: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Paket</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newProduct.paket}
-                      onChange={(e) =>
-                        setNewProduct({ ...newProduct, paket: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Harga</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newProduct.harga}
-                      onChange={(e) =>
-                        setNewProduct({ ...newProduct, harga: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Foto</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      onChange={handleFileChange}
-                    />
-                    {newProduct.foto && (
-                      <img
-                        src={newProduct.foto}
-                        alt="Preview"
-                        style={{ width: 100, height: 100, marginTop: 10 }}
-                      />
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label>Deskripsi</label>
-                    <textarea id="summernote-deskripsi"></textarea>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Keterangan</label>
-                    <textarea id="summernote"></textarea>
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    className="btn btn-secondary"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Batal
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleAddProduct}
-                  >
-                    {editProduct ? "Update" : "Tambah"}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
-export default MountainTripTablePrivate;
+export default TableOpen;

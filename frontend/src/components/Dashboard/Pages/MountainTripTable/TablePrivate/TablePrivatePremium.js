@@ -130,69 +130,31 @@ const TablePrivate = () => {
         `http://localhost:5000/createDestinasi/${selectedTrip}/${id_privatetrip}`, // Mengirim selectedTrip dan id_privatetrip di URL
         formData
       );
-
-      alert("Data berhasil ditambahkan!");
-      // Menambahkan destinasi baru ke state tanpa me-reload
-      setDestinasi([...destinasi, newDestinasi]);
+      const response = await axios.get(
+        `http://localhost:5000/getDestinasiByIdPrivate/${id_privatetrip}`
+      );
+      setDestinasi(response.data);
     } catch (err) {
       alert("Gagal menambahkan data");
       console.error(err);
     }
   };
 
-  const handleEdit = async (id) => {
-    const destinasiToEdit = destinasi.find((item) => item.id === id);
-
-    if (!destinasiToEdit) {
-      alert("Destinasi tidak ditemukan!");
+  const handleDelete = async (id) => {
+    if (!window.confirm("Apakah Anda yakin ingin menghapus destinasi ini?")) {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("nama_gunung", newDestinasi.nama_gunung);
-    formData.append("lokasi", newDestinasi.lokasi);
-    formData.append("paket", newDestinasi.paket);
-    formData.append("harga", newDestinasi.harga);
-    formData.append("keterangan", newDestinasi.keterangan);
-    if (file) {
-      formData.append("foto", file);
-    }
-
-    // Tambahkan id_layanan dan id_privatetrip jika tersedia
-    formData.append("id_layanan", selectedTrip || destinasiToEdit.id_layanan);
-
-    if (id_privatetrip) {
-      formData.append("id_privatetrip", id_privatetrip);
-    }
-
     try {
-      await axios.put(`http://localhost:5000/updateDestinasi/${id}`, formData);
-      alert("Data berhasil diupdate!");
-      setDestinasi(
-        destinasi.map((item) =>
-          item.id === id ? { ...item, ...newDestinasi } : item
-        )
-      );
-    } catch (err) {
-      alert("Gagal mengupdate data");
-      console.error(err);
-    }
-  };
+      await axios.delete(`http://localhost:5000/deleteDestinasi/${id}`);
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Apakah Anda yakin ingin menghapus destinasi ini?"
-    );
-    if (confirmDelete) {
-      try {
-        await axios.delete(`http://localhost:5000/deleteDestinasi/${id}`); // Mengirim request DELETE
-        alert("Data berhasil dihapus!");
-        // Menghapus destinasi dari state tanpa me-reload
-        setDestinasi(destinasi.filter((item) => item.id !== id));
-      } catch (err) {
-        alert("Gagal menghapus data");
-        console.error(err);
-      }
+      alert("Data berhasil dihapus!");
+
+      // Perbarui state dengan menghapus destinasi yang telah dihapus
+      setDestinasi(destinasi.filter((item) => item.id !== id));
+    } catch (err) {
+      alert("Gagal menghapus data");
+      console.error(err);
     }
   };
 
@@ -247,7 +209,7 @@ const TablePrivate = () => {
                           type="text"
                           className="form-control"
                           name="nama_gunung"
-                          value={newDestinasi.nama_gunung}
+                          value={newDestinasi.nama_gunung || ""}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -257,7 +219,7 @@ const TablePrivate = () => {
                           type="text"
                           className="form-control"
                           name="lokasi"
-                          value={newDestinasi.lokasi}
+                          value={newDestinasi.lokasi || ""}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -267,7 +229,7 @@ const TablePrivate = () => {
                           type="text"
                           className="form-control"
                           name="paket"
-                          value={newDestinasi.paket}
+                          value={newDestinasi.paket || ""}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -277,7 +239,7 @@ const TablePrivate = () => {
                           type="number"
                           className="form-control"
                           name="harga"
-                          value={newDestinasi.harga}
+                          value={newDestinasi.harga || ""}
                           onChange={handleInputChange}
                           step="0.01" // Menyediakan input angka desimal
                           min="0" // Menghindari angka negatif
@@ -401,11 +363,11 @@ const TablePrivate = () => {
                           {item.mountaintrip?.nama_layanan ||
                             "Nama tidak tersedia"}
                         </td>
-                        <td>
+                        {/* <td>
                           {item.mountaintrip?.nama_layanan ||
                             "Nama tidak tersedia"}
-                        </td>
-
+                        </td> */}
+                        <td>{item.nama_gunung}</td>
                         <td>{item.lokasi}</td>
                         <td>{item.paket}</td>
                         <td>{item.harga}</td>
@@ -422,13 +384,6 @@ const TablePrivate = () => {
                         </td>
                         <td>{item.keterangan}</td>
                         <td>
-                          {/* Tombol Edit */}
-                          <button
-                            className="btn btn-warning"
-                            onClick={() => handleEdit(item.id)}
-                          >
-                            Edit
-                          </button>
                           {/* Tombol Hapus */}
                           <button
                             className="btn btn-danger"
@@ -444,7 +399,10 @@ const TablePrivate = () => {
               )}
 
               <div className="d-flex justify-content-between align-items-center">
-                <span>Total Data: {data.length}</span>
+                <div>
+                  <span>Total Data: {destinasi.length}</span>
+                </div>
+
                 <nav>
                   <ul className="pagination">
                     {[...Array(totalPages)].map((_, i) => (
