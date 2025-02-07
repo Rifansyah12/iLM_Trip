@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Untuk melakukan request ke API
-import "react-summernote/dist/react-summernote.css";
-import "summernote/dist/summernote-bs4.js"; // Import JS untuk Summernote
-import ReactSummernote from "react-summernote"; // Import komponen ReactSummernote
+import SummernoteLite from "react-summernote-lite";
 
 import { useParams } from "react-router-dom";
 
@@ -249,7 +247,7 @@ const TablePrivate = () => {
 
                       <div className="form-group">
                         <label>Keterangan</label>
-                        <ReactSummernote
+                        <SummernoteLite
                           value={newDestinasi.keterangan}
                           options={{
                             height: 200, // Menentukan tinggi editor
