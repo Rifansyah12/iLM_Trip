@@ -66,11 +66,11 @@ const Mountaintrip = () => {
             {mountainTrips.map((trip, index) => {
               // Menentukan link berdasarkan ID
               let linkTarget = "/dashboard/mountaintrip/table/private";
-              if (trip.id === 2)
+              if (trip.id === 3)
                 linkTarget = "/dashboard/mountaintrip/table/Open";
               if (trip.id === 3)
                 linkTarget = "/dashboard/mountaintrip/table/Family";
-              if (trip.id === 4)
+              if (trip.id === 2)
                 linkTarget = "/dashboard/mountaintrip/table/Gathering";
 
               return (
