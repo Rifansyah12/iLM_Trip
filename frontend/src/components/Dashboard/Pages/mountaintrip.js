@@ -62,16 +62,21 @@ const Mountaintrip = () => {
       {/* Main content */}
       <section className="content">
         {mountainTrips.length > 0 ? (
-          <div className="d-flex flex-row flex-wrap gap-3">
+          <div className="d-flex flex-row flex-wrap gap-3 ">
             {mountainTrips.map((trip, index) => {
-              // Menentukan link berdasarkan ID
-              let linkTarget = "/dashboard/mountaintrip/table/private";
-              if (trip.id === 2)
-                linkTarget = "/dashboard/mountaintrip/table/Open";
-              if (trip.id === 3)
-                linkTarget = "/dashboard/mountaintrip/table/Family";
-              if (trip.id === 4)
-                linkTarget = "/dashboard/mountaintrip/table/Gathering";
+              // Ubah nama_layanan menjadi huruf kecil tanpa spasi
+              const layanan = trip.nama_layanan
+                .toLowerCase()
+                .replace(/\s+/g, "");
+
+              // Tentukan link berdasarkan nama_layanan
+              let linkTarget = "/dashboard/mountaintrip/table/Gathering"; // Default
+
+              if (layanan === "privatetrip") {
+                linkTarget = "/dashboard/mountaintrip/table/private";
+              } else {
+                linkTarget = `/dashboard/mountaintrip/table/Open/${trip.id}`;
+              }
 
               return (
                 <div key={trip.id} className="col-lg-3 col-6">
@@ -87,7 +92,7 @@ const Mountaintrip = () => {
                     </div>
                     <div className="icon">
                       <i
-                        className={`${icons[index % icons.length]}`}
+                        className={icons[index % icons.length]}
                         style={{ fontSize: "25px" }}
                       />
                     </div>
