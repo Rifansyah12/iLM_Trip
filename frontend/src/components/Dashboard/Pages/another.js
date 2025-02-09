@@ -1,26 +1,18 @@
-// components/Dashboard/Pages/AnotherAdmin.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const AnotherAdmin = () => {
-  const [data, setData] = useState([
-    { id: 1, produk: "Update software", harga: "Rp 100,000", foto: null },
-    { id: 2, produk: "Clean database", harga: "Rp 200,000", foto: null },
-    { id: 3, produk: "Cron job running", harga: "Rp 150,000", foto: null },
-    { id: 4, produk: "Fix and squish bugs", harga: "Rp 250,000", foto: null },
-    { id: 5, produk: "Fix", harga: "Rp 250,000", foto: null },
-    { id: 6, produk: "Update software", harga: "Rp 100,000", foto: null },
-    { id: 7, produk: "Clean database", harga: "Rp 200,000", foto: null },
-    { id: 8, produk: "Cron job running", harga: "Rp 150,000", foto: null },
-    { id: 9, produk: "Fix and squish bugs", harga: "Rp 250,000", foto: null },
-    { id: 10, produk: "Fix", harga: "Rp 250,000", foto: null },
-  ]);
-
+  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
 
   const [showModal, setShowModal] = useState(false);
   const [newProduct, setNewProduct] = useState({
-    produk: "",
+    nama_layanan: "",
+    keterangan_singkat: "",
+    keterangan_layanan: "",
+    deskripsi_layanan: "",
+    lokasi: "",
     harga: "",
     foto: null,
   });
@@ -35,30 +27,72 @@ const AnotherAdmin = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleAddProduct = () => {
-    setData([
-      ...data,
-      {
-        id: data.length + 1,
-        produk: newProduct.produk,
-        harga: newProduct.harga,
-        foto: newProduct.foto,
-      },
-    ]);
-    setShowModal(false);
-    setNewProduct({ produk: "", harga: "", foto: null });
+  const handleAddProduct = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("nama_layanan", newProduct.nama_layanan);
+      formData.append("keterangan_singkat", newProduct.keterangan_singkat);
+      formData.append("keterangan_layanan", newProduct.keterangan_layanan);
+      formData.append("deskripsi_layanan", newProduct.deskripsi_layanan);
+      formData.append("lokasi", newProduct.lokasi);
+      formData.append("harga", newProduct.harga);
+      if (newProduct.foto) {
+        formData.append("foto", newProduct.foto);
+      }
+
+      const response = await axios.post(
+        "http://localhost:5000/createAnothertrip",
+        formData
+      );
+      setData([...data, response.data]);
+      setShowModal(false);
+      setNewProduct({
+        nama_layanan: "",
+        keterangan_singkat: "",
+        keterangan_layanan: "",
+        deskripsi_layanan: "",
+        lokasi: "",
+        harga: "",
+        foto: null,
+      });
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setNewProduct({ ...newProduct, foto: reader.result });
-      };
-      reader.readAsDataURL(file);
+      setNewProduct({ ...newProduct, foto: file });
     }
   };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/getAnothertrip");
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleEditProduct = async (id) => {
+    // Implement the edit functionality using PUT request
+    console.log("Edit product", id);
+  };
+
+  const handleDeleteProduct = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/deleteAnothertrip/${id}`);
+      setData(data.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="wrapper">
@@ -96,8 +130,9 @@ const AnotherAdmin = () => {
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th style={{ width: 10 }}>#</th>
-                    <th>Produk</th>
+                    <th style={{ width: 10 }}>No</th>
+                    <th>Nama Layanan</th>
+                    <th>Keterangan Singkat</th>
                     <th>Harga</th>
                     <th>Foto</th>
                     <th style={{ width: 100 }}>Aksi</th>
@@ -107,13 +142,14 @@ const AnotherAdmin = () => {
                   {currentData.map((item, index) => (
                     <tr key={item.id}>
                       <td>{indexOfFirstData + index + 1}.</td>
-                      <td>{item.produk}</td>
+                      <td>{item.nama_layanan}</td>
+                      <td>{item.keterangan_singkat}</td>
                       <td>{item.harga}</td>
                       <td>
                         {item.foto ? (
                           <img
-                            src={item.foto}
-                            alt="Produk"
+                            src={`http://localhost:5000/images/anothertrip/${item.foto}`}
+                            alt="Foto"
                             style={{ width: 50, height: 50 }}
                           />
                         ) : (
@@ -122,10 +158,10 @@ const AnotherAdmin = () => {
                       </td>
                       <td>
                         <div className="d-flex">
-                          <button className="btn btn-sm btn-warning mr-2">
-                            Edit
-                          </button>
-                          <button className="btn btn-sm btn-danger">
+                          <button
+                            className="btn btn-sm btn-danger"
+                            onClick={() => handleDeleteProduct(item.id)}
+                          >
                             Hapus
                           </button>
                         </div>
@@ -179,43 +215,106 @@ const AnotherAdmin = () => {
                   </button>
                 </div>
                 <div className="modal-body">
-                  <div className="form-group">
-                    <label>Nama Produk</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newProduct.produk}
-                      onChange={(e) =>
-                        setNewProduct({ ...newProduct, produk: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Harga</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newProduct.harga}
-                      onChange={(e) =>
-                        setNewProduct({ ...newProduct, harga: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Foto Produk</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      onChange={handleFileChange}
-                    />
-                    {newProduct.foto && (
-                      <img
-                        src={newProduct.foto}
-                        alt="Preview"
-                        style={{ width: 100, height: 100, marginTop: 10 }}
+                  <form>
+                    <div className="form-group">
+                      <label>Nama Layanan</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={newProduct.nama_layanan}
+                        onChange={(e) =>
+                          setNewProduct({
+                            ...newProduct,
+                            nama_layanan: e.target.value,
+                          })
+                        }
                       />
-                    )}
-                  </div>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Keterangan Singkat</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={newProduct.keterangan_singkat}
+                        onChange={(e) =>
+                          setNewProduct({
+                            ...newProduct,
+                            keterangan_singkat: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Keterangan Layanan</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={newProduct.keterangan_layanan}
+                        onChange={(e) =>
+                          setNewProduct({
+                            ...newProduct,
+                            keterangan_layanan: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Deskripsi Layanan</label>
+                      <textarea
+                        className="form-control"
+                        rows="3"
+                        value={newProduct.deskripsi_layanan}
+                        onChange={(e) =>
+                          setNewProduct({
+                            ...newProduct,
+                            deskripsi_layanan: e.target.value,
+                          })
+                        }
+                      ></textarea>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Lokasi</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={newProduct.lokasi}
+                        onChange={(e) =>
+                          setNewProduct({
+                            ...newProduct,
+                            lokasi: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Harga</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={newProduct.harga}
+                        onChange={(e) =>
+                          setNewProduct({
+                            ...newProduct,
+                            harga: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Foto</label>
+                      <input
+                        type="file"
+                        className="form-control-file"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                  </form>
                 </div>
                 <div className="modal-footer">
                   <button
