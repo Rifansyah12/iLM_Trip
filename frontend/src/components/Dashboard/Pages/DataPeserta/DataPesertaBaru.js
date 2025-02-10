@@ -7,6 +7,7 @@ const DataPesertaBaru = () => {
   const [isFormVisible, setFormVisible] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
   const [status, setStatus] = useState({}); // Status peserta
+  const [peserta, setPeserta] = useState([]);
 
   const [formData, setFormData] = useState({
     nama_lengkap: "",
@@ -24,20 +25,21 @@ const DataPesertaBaru = () => {
     fotoKtp: null,
   });
 
+  // Mendapatkan daftar peserta saat komponen pertama kali dimuat
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchPeserta = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/getPendaftaranPeserta"
+        );
+        setPeserta(response.data);
+      } catch (error) {
+        console.error("Error fetching peserta:", error);
+      }
+    };
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/getPendaftaranpeserta"
-      );
-      setData(response.data);
-    } catch (error) {
-      console.error("Gagal mengambil data:", error);
-    }
-  };
+    fetchPeserta();
+  }, []);
 
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -73,7 +75,7 @@ const DataPesertaBaru = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:5000/createPendaftaran/${13}`, // Gantilah id_destinasi dengan id yang sesuai
+        `http://localhost:5000/createPendaftaran/${13}`, // Sesuaikan id_destinasi dengan ID yang benar
         formDataToSend,
         {
           headers: {
@@ -81,9 +83,36 @@ const DataPesertaBaru = () => {
           },
         }
       );
+
       console.log(response.data);
       setLoading(false);
-      // Tindakan setelah berhasil (misalnya reset form atau tampilkan pesan sukses)
+
+      // **Menampilkan alert sukses**
+      alert("Data berhasil ditambahkan!");
+
+      // **Menutup form modal**
+      setFormVisible(false);
+
+      // **Mengosongkan form**
+      setFormData({
+        nama_lengkap: "",
+        email: "",
+        alamat_lengkapi: "",
+        domisili: "",
+        nomer_telepon: "",
+        nomertelp_darurat: "",
+        pekerjaan: "",
+        paket: "",
+        fasilitas: "",
+        meetingPoint: "",
+        keterangan: "",
+        kesehatan: "",
+        fotoKtp: null,
+      });
+      setFile(null);
+
+      // **Memperbarui daftar peserta tanpa reload halaman**
+      refreshData();
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -91,39 +120,64 @@ const DataPesertaBaru = () => {
     }
   };
 
+  const refreshData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/getPendaftaranPeserta"
+      );
+      setPeserta(response.data);
+    } catch (error) {
+      console.error("Gagal memperbarui data:", error);
+    }
+  };
+
+  // Fungsi untuk handle approval atau penolakan peserta
   const handleApproval = async (id, isApproved) => {
     try {
-      // Ambil data peserta berdasarkan id
-      const { data } = await axios.get(
-        "http://localhost:5000/getPendaftaranpeserta"
-      );
-      const peserta = data.find((p) => p.id === id);
-
-      if (!peserta) {
-        console.error("Peserta tidak ditemukan");
-        return alert("Peserta tidak ditemukan!");
-      }
-
-      // Kirim request untuk mengubah status peserta
-      const response = await axios.post(
-        `http://localhost:5000/updateStatusPeserta/${peserta.destinasi.id_destinasi}`,
-        {
-          status: isApproved ? "Disetujui" : "Ditolak",
-        }
+      const response = await axios.put(
+        `http://localhost:5000/updateStatusPeserta/${id}`,
+        { status: isApproved ? "Disetujui" : "Ditolak" }
       );
 
-      console.log("Response backend:", response.data); // Log respons dari backend
+      console.log("Response backend:", response.data);
 
-      // Update status di frontend
+      // Perbarui status di state
       setStatus((prev) => ({
         ...prev,
         [id]: isApproved ? "Disetujui" : "Ditolak",
       }));
 
+      // Hapus peserta dari state jika disetujui
+      if (isApproved) {
+        setPeserta((prevPeserta) =>
+          prevPeserta.filter((peserta) => peserta.id !== id)
+        );
+      }
+
       alert(`Peserta ${isApproved ? "disetujui" : "ditolak"}`);
     } catch (error) {
-      console.error("Gagal memperbarui status:", error);
-      alert("Terjadi kesalahan dalam memperbarui status.");
+      console.error("Gagal memperbarui status:", error.response);
+      alert(
+        "Terjadi kesalahan: " + JSON.stringify(error.response?.data, null, 2)
+      );
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      // Mengirim request DELETE ke server
+      const response = await axios.delete(
+        `http://localhost:5000/deletePeserta/${id}` // Sesuaikan URL dengan backend
+      );
+      console.log("Peserta berhasil dihapus", response.data);
+
+      // Menghapus data peserta dari state setelah berhasil dihapus
+      setData((prevData) => prevData.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error(
+        "Gagal menghapus peserta:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -159,25 +213,40 @@ const DataPesertaBaru = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index + 1}</td>
-                    <td>{item.nama_lengkap}</td>
-                    <td>{item.email}</td>
-                    <td>{item.alamat_lengkapi}</td>
-                    <td>{item.nomer_telepon}</td>
-                    <td>{item.paket}</td>
-                    <td>{status[item.id] ? "Disetujui" : "Belum Disetujui"}</td>
-                    <td>
-                      <button
-                        className="btn btn-info btn-sm"
-                        onClick={() => setSelectedData(item)}
+                {peserta
+                  .filter((item) => item.status !== "Disetujui") // Menyaring peserta yang belum disetujui
+                  .map((item, index) => (
+                    <tr key={item.id}>
+                      <td>{index + 1}</td>
+                      <td>{item.nama_lengkap}</td>
+                      <td>{item.email}</td>
+                      <td>{item.alamat_lengkapi}</td>
+                      <td>{item.nomer_telepon}</td>
+                      <td>{item.paket}</td>
+                      <td
+                        style={{
+                          color: status[item.id] ? "green" : "red",
+                          fontWeight: "bold",
+                        }}
                       >
-                        Lihat Detail
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                        {status[item.id] ? "Disetujui" : "Belum Disetujui"}
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-success btn-sm"
+                          onClick={() => handleApproval(item.id, true)}
+                        >
+                          Setujui
+                        </button>
+                        <button
+                          className="btn btn-danger btn-sm ml-2"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Hapus
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

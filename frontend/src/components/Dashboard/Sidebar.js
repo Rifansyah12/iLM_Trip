@@ -73,11 +73,17 @@ const Sidebar = () => {
         </div>
 
         <nav className="mt-2">
-          <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+          <ul
+            className="nav nav-pills nav-sidebar flex-column"
+            data-widget="treeview"
+            role="menu"
+          >
             <li className="nav-item">
               <Link
                 to="/dashboard/Dashboard"
-                className={`nav-link ${location.pathname === "/dashboard/Dashboard" ? "active" : ""}`}
+                className={`nav-link ${
+                  location.pathname === "/dashboard/Dashboard" ? "active" : ""
+                }`}
               >
                 <i className="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
@@ -86,18 +92,29 @@ const Sidebar = () => {
 
             {/* Dropdown Content */}
             <li className={`nav-item ${isContentOpen ? "menu-open" : ""}`}>
-              <a className="nav-link" onClick={() => setIsContentOpen(!isContentOpen)}>
+              <a
+                className="nav-link"
+                onClick={() => setIsContentOpen(!isContentOpen)}
+              >
                 <i className="nav-icon fas fa-book"></i>
                 <p>
                   Content
                   <i className="fas fa-angle-left right"></i>
                 </p>
               </a>
-              <ul className={`nav nav-treeview ${isContentOpen ? "d-block" : "d-none"}`}>
+              <ul
+                className={`nav nav-treeview ${
+                  isContentOpen ? "d-block" : "d-none"
+                }`}
+              >
                 <li className="nav-item">
                   <Link
                     to="/dashboard/mountaintrip"
-                    className={`nav-link ${location.pathname === "/dashboard/mountaintrip" ? "active" : ""}`}
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/mountaintrip"
+                        ? "active"
+                        : ""
+                    }`}
                   >
                     <i className="far fa-circle nav-icon"></i>
                     <p>Mountain Trip</p>
@@ -106,7 +123,9 @@ const Sidebar = () => {
                 <li className="nav-item">
                   <Link
                     to="/dashboard/another"
-                    className={`nav-link ${location.pathname === "/dashboard/another" ? "active" : ""}`}
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/another" ? "active" : ""
+                    }`}
                   >
                     <i className="far fa-circle nav-icon"></i>
                     <p>Another</p>
@@ -115,7 +134,9 @@ const Sidebar = () => {
                 <li className="nav-item">
                   <Link
                     to="/dashboard/merchen"
-                    className={`nav-link ${location.pathname === "/dashboard/merchen" ? "active" : ""}`}
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/merchen" ? "active" : ""
+                    }`}
                   >
                     <i className="far fa-circle nav-icon"></i>
                     <p>Merchandise</p>
@@ -126,18 +147,29 @@ const Sidebar = () => {
 
             {/* Dropdown Data Pendaftaran */}
             <li className={`nav-item ${isDataOpen ? "menu-open" : ""}`}>
-              <a className="nav-link" onClick={() => setIsDataOpen(!isDataOpen)}>
+              <a
+                className="nav-link"
+                onClick={() => setIsDataOpen(!isDataOpen)}
+              >
                 <i className="nav-icon fas fa-table"></i>
                 <p>
                   Data Pendaftaran
                   <i className="fas fa-angle-left right"></i>
                 </p>
               </a>
-              <ul className={`nav nav-treeview ${isDataOpen ? "d-block" : "d-none"}`}>
+              <ul
+                className={`nav nav-treeview ${
+                  isDataOpen ? "d-block" : "d-none"
+                }`}
+              >
                 <li className="nav-item">
                   <Link
                     to="/dashboard/DataPesertaBaru"
-                    className={`nav-link ${location.pathname === "/dashboard/DataPesertaBaru" ? "active" : ""}`}
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/DataPesertaBaru"
+                        ? "active"
+                        : ""
+                    }`}
                   >
                     <i className="far fa-circle nav-icon"></i>
                     <p>Pendaftar Baru</p>
@@ -146,7 +178,11 @@ const Sidebar = () => {
                 <li className="nav-item">
                   <Link
                     to="/dashboard/DataPeserta"
-                    className={`nav-link ${location.pathname === "/dashboard/DataPeserta" ? "active" : ""}`}
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/DataPeserta"
+                        ? "active"
+                        : ""
+                    }`}
                   >
                     <i className="far fa-circle nav-icon"></i>
                     <p>Data Peserta</p>
@@ -155,7 +191,11 @@ const Sidebar = () => {
                 <li className="nav-item">
                   <Link
                     to="/dashboard/Schedule"
-                    className={`nav-link ${location.pathname === "/dashboard/Schedule" ? "active" : ""}`}
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/Schedule"
+                        ? "active"
+                        : ""
+                    }`}
                   >
                     <i className="far fa-circle nav-icon"></i>
                     <p>Schedule</p>

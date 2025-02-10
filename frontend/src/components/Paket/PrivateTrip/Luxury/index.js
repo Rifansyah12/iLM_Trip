@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Import semua gambar yang digunakan
-import SampleImage1 from "../../../../assets/Documentasi/OpenTrip/DO1.jpg";
-import SampleImage2 from "../../../../assets/Documentasi/OpenTrip/DO2.jpg";
-import SampleImage3 from "../../../../assets/Documentasi/OpenTrip/DO3.jpg";
 import Merbabu from "../../../../assets/Gunung/Merbabu/merbabu1.jpg";
-import Prau1 from "../../../../assets/Gunung/Prau/Prau1.jpg";
-import Sindoro from "../../../../assets/Gunung/Sindoro/sindoro1.jpeg";
-import Sumbing from "../../../../assets/Gunung/Sumbing/sumbing2.jpg";
-import Papandayan from "../../../../assets/Gunung/Papandayan/papandayan1.jpg";
-import Pangrango from "../../../../assets/Gunung/Pangrango/pangrango2.jpg";
-import Sangar from "../../../../assets/Gunung/SangarMega/mega.jpg";
-import Gede from "../../../../assets/Gunung/Gede/gede1.jpg";
 
 const OpenTrip = () => {
   const navigate = useNavigate();
@@ -19,16 +9,6 @@ const OpenTrip = () => {
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
 
   // Fungsi untuk membuka modal
-  const openModal = (imageSrc) => {
-    setModalImage(imageSrc);
-    setModalOpen(true);
-  };
-
-  // Fungsi untuk menutup modal
-  const closeModal = () => {
-    setModalOpen(false);
-    setModalImage("");
-  };
 
   return (
     <section

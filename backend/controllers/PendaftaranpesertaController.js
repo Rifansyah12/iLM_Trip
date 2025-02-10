@@ -104,3 +104,53 @@ export const getPendaftaranPeserta = async (req, res) => {
     res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };
+
+export const updateStatusPeserta = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const { id } = req.params;
+
+    if (!["Disetujui", "Ditolak"].includes(status)) {
+      return res.status(400).json({ msg: "Status tidak valid" });
+    }
+
+    const peserta = await PendaftaranPeserta.findOne({ where: { id } });
+
+    if (!peserta) {
+      return res.status(404).json({ msg: "Peserta tidak ditemukan" });
+    }
+
+    await PendaftaranPeserta.update({ status }, { where: { id } });
+
+    res.status(200).json({ msg: `Peserta berhasil ${status.toLowerCase()}` });
+  } catch (error) {
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
+  }
+};
+
+export const deletePendaftaranPeserta = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Mencari peserta berdasarkan ID
+    const peserta = await PendaftaranPeserta.findOne({ where: { id } });
+
+    if (!peserta) {
+      return res.status(404).json({ msg: "Peserta tidak ditemukan" });
+    }
+
+    // Hapus file foto KTP dari server
+    const filePath = `./public/images/fotoKtp/${peserta.fotoKtp}`;
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath); // Menghapus file
+    }
+
+    // Hapus data peserta dari database
+    await PendaftaranPeserta.destroy({ where: { id } });
+
+    res.status(200).json({ msg: "Pendaftaran peserta berhasil dihapus" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
+  }
+};

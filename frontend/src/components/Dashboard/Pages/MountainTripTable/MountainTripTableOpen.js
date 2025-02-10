@@ -142,13 +142,23 @@ const TableOpen = () => {
         }
       );
 
-      // Ambil data terbaru setelah penambahan berhasil
-      const response = await axios.get(
-        `http://localhost:5000/getMountaintrip/${id_layanan}`
-      );
-      setDestinasi(response.data);
+      // Tambahkan delay untuk memastikan data sudah tersimpan sebelum di-fetch
+      setTimeout(async () => {
+        try {
+          const url = `http://localhost:5000/getMountaintrip/${id_layanan}`;
+          console.log("Fetching data from:", url);
 
-      alert("Data berhasil ditambahkan!");
+          const response = await axios.get(url);
+
+          setDestinasi(response.data);
+          alert("Data berhasil ditambahkan!");
+        } catch (err) {
+          console.error("Gagal fetch data terbaru:", err.response || err);
+          alert(
+            "Data berhasil ditambahkan, tetapi gagal memperbarui tampilan."
+          );
+        }
+      }, 1000); // Delay 1 detik sebelum fetch data terbaru
     } catch (err) {
       if (
         err.response &&

@@ -27,18 +27,10 @@ export const createDestinasi = async (req, res) => {
     const { paket, lokasi, harga, keterangan } = req.body;
 
     try {
-<<<<<<< HEAD
       const Privatetrip = req.params.id_private
         ? await PrivateTrip.findOne({ where: { id: req.params.id_private } })
         : null;
 
-=======
-
-      const Privatetrip = req.params.id_private 
-      ? await PrivateTrip.findOne({ where: { id: req.params.id_private } })
-      : null;
-    
->>>>>>> fd02d26f16cecabf9c123edc539d2c23f4836c57
       const Mountaintrip = await MountainTrip.findOne({
         where: {
           id: req.params.id_layanan,
@@ -46,7 +38,6 @@ export const createDestinasi = async (req, res) => {
       });
 
       if (!Mountaintrip) {
-<<<<<<< HEAD
         return res
           .status(404)
           .json({ msg: "Data untuk id_layanan tidak ditemukan" });
@@ -54,14 +45,6 @@ export const createDestinasi = async (req, res) => {
 
       const idPrivateTrip = Privatetrip ? Privatetrip.id : null; // Jika tidak ada, set null
 
-=======
-        return res.status(404).json({ msg: "Data untuk id_layanan tidak ditemukan" });
-      }
-      
-      const idPrivateTrip = Privatetrip ? Privatetrip.id : null; // Jika tidak ada, set null
-     
-      
->>>>>>> fd02d26f16cecabf9c123edc539d2c23f4836c57
       await Destinasi.create({
         paket: paket,
         nama_gunung: nama_gunung,
@@ -71,14 +54,6 @@ export const createDestinasi = async (req, res) => {
         keterangan: keterangan,
         id_layanan: Mountaintrip.id,
         id_privatetrip: idPrivateTrip,
-<<<<<<< HEAD
-=======
-        
-        
-        
-
-
->>>>>>> fd02d26f16cecabf9c123edc539d2c23f4836c57
       });
 
       res.status(201).json({ msg: "Data Berhasil Ditambahkah" });

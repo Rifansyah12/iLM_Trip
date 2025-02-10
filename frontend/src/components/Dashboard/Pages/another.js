@@ -122,7 +122,7 @@ const AnotherAdmin = () => {
                 className="btn btn-primary"
                 onClick={() => setShowModal(true)}
               >
-                Tambah Produk
+                Tambah Content
               </button>
             </div>
 

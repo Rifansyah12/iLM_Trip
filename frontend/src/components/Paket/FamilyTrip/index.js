@@ -7,12 +7,12 @@ import SampleImage3 from "../../../assets/Gunung/Merbabu/merbabu3.JPG";
 import SampleImage4 from "../../../assets/Gunung/Merbabu/merbabu4.JPG";
 import SampleImage5 from "../../../assets/Gunung/Merbabu/merbabu5.JPG";
 import SampleImage6 from "../../../assets/Gunung/Merbabu/merbabu6.JPG";
-import FormData from "../../FormDaftar";
 
-const FamilyTrip = () => {
+const Family = () => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
+  const [showTerms, setShowTerms] = useState(false);
 
   // Fungsi untuk membuka modal
   const openModal = (imageSrc) => {
@@ -34,171 +34,321 @@ const FamilyTrip = () => {
         padding: "50px", // Padding untuk tata letak rapi
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-start", // Disesuaikan agar kiri rata
+        alignItems: "left",
       }}
     >
-      {/* Judul */}
-      <h2>PAKET FAMILY PREMIUM TRIP (IDR 4.999.999 / 4 pax) Via Wates</h2>
-      <h3>Ayah, Ibu, Anak, Anak</h3>
-
-      {/* Informasi Meeting Point */}
+      <h2>PAKET MEDIUM TRIP (IDR 729.999/pax) Via Garung</h2>
+      <h2>Minimal Keberangkatan 16 Orang</h2>
       <div
         style={{
-          backgroundColor: "#333", // Warna latar kotak
-          padding: "20px",
-          borderRadius: "10px",
-          marginTop: "30px",
-          lineHeight: "1.8",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "50px",
+          maxWidth: "90%",
+          flexWrap: "wrap",
+          marginBottom: "50px",
         }}
-      >
-        <div style={{ marginBottom: "20px" }}>
-          <h2 style={{ color: "#FA8806" }}>MEETING POINT:</h2>
-          <p>Basecamp Prau</p>
-        </div>
+      ></div>
 
-        {/* Harga Sudah Termasuk & Tidak Termasuk */}
+      {/* Informasi Tambahan */}
+      {showTerms && (
         <div
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "20px",
-            justifyContent: "space-between",
+            backgroundColor: "#333",
+            padding: "20px",
+            borderRadius: "10px",
+            marginBottom: "30px",
+            lineHeight: "1.8",
+            color: "#fff",
           }}
         >
-          <div style={{ flex: "1" }}>
-            <h2 style={{ color: "#FA8806" }}>HARGA SUDAH TERMASUK:</h2>
-            <ul>
-              {[
-                "Transportasi Ojeg Basecamp pos 1 PP",
-                "Tiket Masuk 2H1M",
-                "Homestay BC",
-                "Kebersihan BC",
-                "Tenda Family",
-                "Tenda Toilet Portable",
-                "Kursi",
-                "Meja",
-                "Matras Alumunium Foil (untuk alas tenda)",
-                "Matras Tidur",
-                "Perlengkapan Makan & Minum",
-                "Welcome Drink Teh/Kopi",
-                "Cooking Set",
-                "Kompor Portable + Gas",
-                "Makan 3x di gunung",
-                "Makan sebelum dan sesudah pendakian di Basecamp",
-                "Sarapan sebelum summits 1x",
-                "Cheff Gunung",
-                "Puding/Nutrijel",
-                "Buah-buahan (semangka / melon) di area camp",
-                "Logistik",
-                "Air mineral 3L / pax",
-                "HT",
-                "Guide Profesional",
-                "Sweeper",
-                "Porter Pribadi Maximal beban 20 KG",
-                "Porter Tenda",
-                "Porter Logistik",
-                "Porter Makan & Minum",
-                "Porter barang (Alat makan+ minum)",
-                "P3K Standar",
-                "Sejadah solat",
-                "Teman & Keluarga baru",
-              ].map((item, index) => (
-                <li key={index}>✓ {item}</li>
-              ))}
-            </ul>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            {/* MEETING POINT */}
+            <div style={{ flex: "1" }}>
+              <h2 style={{ color: "#FA8806" }}>MEETING POINT :</h2>
+              <p>BANDUNG – JAKARTA – TOL TRANS JAWA – BASECAMP</p>
+            </div>
+
+            {/* FLEX CONTAINER FOR REMAINING CONTENT */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+                gap: "20px",
+              }}
+            >
+              {/* HARGA SUDAH TERMASUK */}
+              <div style={{ flex: "1" }}>
+                <h2 style={{ color: "#FA8806" }}>HARGA SUDAH TERMASUK :</h2>
+                <ul>
+                  <li> ✓ Transportasi Hiace / Elf long PP</li>
+                  <li>✓ BBM, parkir, Tol , Tips Driver</li>
+                  <li>✓ Tiket Masuk 2H1M</li>
+                  <li>✓ Homestay BC</li>
+                  <li>✓ kebersihan BC</li>
+                  <li>✓ Tenda kap 4-5 ( diisi max 4 orang)</li>
+                  <li>✓ Tenda Toilet Portable</li>
+                  <li>✓ Matras Alumunium Foil (untuk alas tenda )</li>
+                  <li>✓ Perlengkapan Makan & Minum</li>
+                  <li>✓ Welcome Drink Teh/Kopi</li>
+                  <li>✓ Cooking Set</li>
+                  <li>✓ Kompor Portable + Gas</li>
+                  <li>✓ Makan 3x di gunung</li>
+                  <li>✓ Sarapan sebelum summits 1 x</li>
+                  <li>✓ Cheff Gunung</li>
+                  <li>✓ Puding/Nutrijel</li>
+                  <li>✓ Buah-buahan ( semangka / melon) di area camp</li>
+                  <li>✓ Logistik</li>
+                  <li>✓ HT</li>
+                  <li>✓ Guide Profesional</li>
+                  <li>✓ Sweeper</li>
+                  <li>✓ Porter Tenda</li>
+                  <li>✓ Porter Logistik</li>
+                  <li>✓ Porter Makan & Minum</li>
+                  <li>✓ Porter barang (Alat makan+ minum)</li>
+                  <li>✓ P3K Standar</li>
+                  <li>✓ Sejadah solat</li>
+                  <li>✓ Teman & Keluarga baru</li>
+                </ul>
+              </div>
+
+              {/* TIDAK TERMASUK */}
+              <div style={{ flex: "1" }}>
+                <h2 style={{ color: "#FA8806" }}>TIDAK TERMASUK :</h2>
+                <ul>
+                  <li>× Transportasi Menuju Meeting Point</li>
+                  <li>× Cemilan & Air pribadi</li>
+                  <li>× Perlengkapan Pribadi</li>
+                  <li>× Porter Pribadi</li>
+                  <li>× Surat Sehat</li>
+                  <li>× Asuransi Pribadi</li>
+                  <li>× Biaya Evakuasi</li>
+                  <li>× Ojek</li>
+                  <li>× Tips Crew Sukarela</li>
+                  <li>× dan yang tidak disebutkan di paket</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div style={{ flex: "1" }}>
-            <h2 style={{ color: "#FA8806" }}>TIDAK TERMASUK:</h2>
-            <ul>
-              {[
-                "Transportasi Menuju Meeting Point",
-                "Cemilan",
-                "Perlengkapan Pribadi",
-                "Surat Sehat",
-                "Asuransi Pribadi",
-                "Biaya Evakuasi",
-                "Tips Crew Sukarela",
-                "dan yang tidak disebutkan di paket",
-              ].map((item, index) => (
-                <li key={index}>× {item}</li>
-              ))}
-            </ul>
+          {/* ITINERARY */}
+          <div>
+            <h2 style={{ color: "#FA8806", marginTop: "20px" }}>
+              ITINERARY TRIP
+            </h2>
+
+            <p>
+              <b>MEETING POINT PESERTA :</b>
+            </p>
+            <p>
+              Mepo Bandung: Jumat, 15:30 - 16:00 WIB <br />
+              Mepo Jakarta: Jumat, 19:00 - 20:00 WIB <br />
+              Mepo trans jawa: Kondisional <br />
+              Mepo Basecamp: Sabtu, 06:00
+            </p>
+
+            <p>
+              <b>(HARI KE 1)</b>
+              <br />
+              15:30 - 16:00 = Kumpul, absensi di Mepo Bandung
+              <br />
+              16:00 - 20:00 = Perjalanan & Penjemputan Mepo Jakarta
+              <br />
+              20:00 - 20:30 = Melanjutkan Perjalanan ke Gunung Sumbing
+            </p>
+
+            <p>
+              <b>(HARI KE 2)</b>
+              <br />
+              06:00 - 08:00 = Tiba di basecamp dan prepare pendakian
+              <br />
+              08:00 - 08:30 = Briefing dan berdoa bersama
+              <br />
+              08:30 - 09:00 = Ojek Basecamp - Batas Hutan pos 1 (Ojek, Tidak
+              Termasuk)
+              <br />
+              09:00 - 10:00 = Post 1 - Post 2<br />
+              10:00 - 11:30 = Post 2 – Pengkolan 9<br />
+              11:30 - 12:30 = ISHOMA Makan ke 1<br />
+              12:30 - 14:30 = Menuju Post 3 - Sunrise Camp
+              <br />
+              15:00 - = Enjoy Sunrise Camp
+              <br />
+              18:00 - 20:00 = ISHOMA Makan ke 2 Malam
+              <br />
+              20:00 - = Istirahat
+            </p>
+
+            <p>
+              <b>(HARI KE 3)</b>
+              <br />
+              02:30 - 03:00 = Bangun, Prepare Summits, Sarapan sebelum Summits
+              <br />
+              03:00 - 05:00 = Sunrise Camp - Post 4<br />
+              05:00 - 07:00 = Post 4 - Puncak
+              <br />
+              07:00 - 07:30 = Enjoy Puncak Sumbing
+              <br />
+              07:30 - 09:30 = Turun kembali ke area camp
+              <br />
+              09:30 - 10:30 = Makan ke 3 siang, Prepare Turun
+              <br />
+              10:30 - 14:30 = Camp – Pos Ojek
+              <br />
+              14:30 - 15:00 = Pos 1 Setengah - Basecamp (by Ojek, tidak
+              termasuk)
+              <br />
+              15:00 - 16:00 = ISHOMA, bersih-bersih, prepare pulang
+              <br />
+              16:00 - 02:00 = Perjalanan pulang ke Mepo
+              <br />
+              04:00 - = Trip selesai dan pulang ke rumah masing-masing dengan
+              selamat
+            </p>
+
+            <div>
+              <h2 style={{ color: "#FA8806", marginTop: "20px" }}>CATATAN :</h2>
+              <ul>
+                <li>
+                  Sewaktu Waktu dapat berubah-ubah tergantung fisik dan kondisi
+                  di lapangan. Diharapkan peserta berkoordinasi dengan crew
+                  apabila terjadi sakit atau cedera.
+                </li>
+                <li>
+                  Seluruh peserta harus mengikuti arahan SOP pendakian yang ada
+                  di taman nasional maupun SOP Il’m Trip Organizer, peserta
+                  harus saling membantu, kompak, komunikasi, dan menjaga
+                  kebersamaan satu sama lain.
+                </li>
+                <li>
+                  Jalur Sumbing Via Garung hanya terdapat mata air di Post 1.
+                  Peserta WAJIB membawa air minum pribadi minimal 2-3 botol
+                  (ukuran 1.5L) dengan perhitungan: 1 Botol untuk naik, 1 botol
+                  saat dicamp/summits, dan 1 botol saat turun pendakian.
+                </li>
+                <li>Terdapat warung di beberapa post.</li>
+                <li>
+                  Sampah cemilan dan air minum kemasan pribadi, harap dibawa
+                  turun kembali oleh masing-masing peserta.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-
-        {/* Itinerary */}
-        <div>
-          <h2 style={{ color: "#FA8806", marginTop: "20px" }}>
-            ITINERARY TRIP:
-          </h2>
-          <p>
-            <b>MEETING POINT PESERTA:</b> <br />
-            Mepo Basecamp: Sabtu, 06:00 - 06:30 WIB
-          </p>
-          {/* Hari Ke-1 */}
-          <p>
-            <b>(HARI KE 1)</b> <br />
-            06:00 - 08:00 = Tiba di basecamp dan prepare <br />
-            08:00 - 08:30 = Breafing dan berdoa bersama <br />
-            08:30 - 09:00 = Basecamp - Post 1 (Ojeg) <br />
-            09:00 - 10:30 = Post 1 - Post 2 <br />
-            10:30 - 12:00 = Post 2 - Post 3 <br />
-            12:00 - 13:00 = ISHOMA Makan ke 1 <br />
-            13:00 - 14:00 = Post 3 - Plawangan <br />
-            14:00 - 14:30 = Tiba di Area Camp <br />
-            18:00 - 20:00 = ISHOMA Makan ke 2 Malam (CAMP) <br />
-            20:00 = Istirahat
-          </p>
-          {/* Hari Ke-3 */}
-          <p>
-            <b>(HARI KE 3)</b> <br />
-            03:30 - 04:00 = Bangun, Sarapan, Prepare Summits <br />
-            04:00 - 06:00 = Menuju Puncak Prau <br />
-            06:00 – 06:30 = Enjoy Puncak <br />
-            06:30 - 07:30 = Menuju tempat camp <br />
-            07:30 – 08:00 = Makan ke 3 Pagi, Prepare Turun <br />
-            08:30 - 12:00 = Puncak - Post 1 <br />
-            12:00 - 12:30 = Post 1 - Basecamp (by ojeg, tidak termasuk) <br />
-            12:30 - 13:30 = ISHOMA, bersih bersih, prepare pulang <br />
-            14:00 – 15:00 = Trip selesai dan pulang ke rumah masing-masing
-            dengan selamat
-          </p>
-        </div>
-
-        {/* Catatan */}
-        <div>
-          <h2 style={{ color: "#FA8806", marginTop: "20px" }}>CATATAN:</h2>
-          <ul>
-            <li>
-              Sewaktu-waktu dapat berubah tergantung fisik dan kondisi di
-              lapangan. Diharapkan peserta koordinasi dengan crew apabila
-              terjadi sakit atau cedera.
-            </li>
-            <li>
-              Seluruh peserta harus mengikuti arahan SOP pendakian yang ada di
-              taman nasional maupun SOP Il'm Trip Organizer. Peserta harus
-              saling membantu, kompak, komunikasi, dan menjaga kebersamaan satu
-              sama lain.
-            </li>
-            <li>
-              Jalur Wates terdapat sumber mata air di pos 3. Peserta WAJIB
-              membawa air minum pribadi minimal 2-3 botol (ukuran 1.5L) dengan
-              perhitungan: 1 botol untuk naik, 1 botol saat di camp, dan 1 botol
-              saat turun (refill di mata air).
-            </li>
-            <li>
-              Sampah cemilan dan air minum kemasan pribadi, harap dibawa turun
-              kembali oleh masing-masing peserta.
-            </li>
-          </ul>
+      )}
+      {/* Galeri foto */}
+      <div
+        style={{
+          marginTop: "30px",
+          backgroundColor: "#111",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <h2
+          style={{
+            color: "#FA8806",
+            marginBottom: "20px",
+            textAlign: "left",
+          }}
+        >
+          Galeri Foto Perjalanan
+        </h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "20px",
+          }}
+        >
+          {/* Tambahkan onClick ke setiap gambar */}
+          <img
+            src={SampleImage1}
+            alt="Foto 1"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            onClick={() => openModal(SampleImage1)}
+          />
+          <img
+            src={SampleImage2}
+            alt="Foto 2"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            onClick={() => openModal(SampleImage2)}
+          />
+          {/* Tambahkan gambar lainnya sesuai kebutuhan */}
+          <img
+            src={SampleImage3}
+            alt="Foto 3"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            onClick={() => openModal(SampleImage3)}
+          />
+          <img
+            src={SampleImage4}
+            alt="Foto 4"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            onClick={() => openModal(SampleImage4)}
+          />
+          <img
+            src={SampleImage5}
+            alt="Foto 5"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            onClick={() => openModal(SampleImage5)}
+          />
+          <img
+            src={SampleImage6}
+            alt="Foto 6"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+              cursor: "pointer",
+            }}
+            onClick={() => openModal(SampleImage6)}
+          />
         </div>
       </div>
-
       {/* Tombol Navigasi */}
-      <div style={{ display: "flex", gap: "20px", marginTop: "30px" }}>
+      <div style={{ display: "flex", gap: "20px" }}>
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/")} // Navigasi kembali ke halaman utama
           style={{
             padding: "15px 30px",
             fontSize: "18px",
@@ -211,8 +361,9 @@ const FamilyTrip = () => {
         >
           Kembali ke Beranda
         </button>
+
         <button
-          onClick={openModal}
+          onClick={() => navigate("/FormDaftar")} // Navigasi ke halaman booking
           style={{
             padding: "15px 30px",
             fontSize: "18px",
@@ -225,51 +376,53 @@ const FamilyTrip = () => {
         >
           Pesan Sekarang
         </button>
+
+        <button
+          onClick={() => setShowTerms(!showTerms)}
+          style={{
+            padding: "15px 30px",
+            fontSize: "18px",
+            backgroundColor: "#32CD32",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          {showTerms ? "Tutup Syarat & Ketentuan" : "Lihat Syarat & Ketentuan"}
+        </button>
       </div>
 
       {/* Modal */}
       {isModalOpen && (
-        <div style={modalStyles.overlay}>
-          <div style={modalStyles.modal}>
-            <button onClick={closeModal} style={modalStyles.closeButton}>
-              X
-            </button>
-            <FormData />
-          </div>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+          onClick={closeModal} // Klik luar modal untuk menutup
+        >
+          <img
+            src={modalImage}
+            alt="Modal View"
+            style={{
+              maxWidth: "90%",
+              maxHeight: "90%",
+              borderRadius: "10px",
+            }}
+          />
         </div>
       )}
     </section>
   );
 };
 
-const modalStyles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {
-    backgroundColor: "#fff",
-    padding: "20px",
-    borderRadius: "5px",
-    width: "500px",
-    position: "relative",
-  },
-  closeButton: {
-    position: "absolute",
-    top: "10px",
-    right: "10px",
-    fontSize: "20px",
-    border: "none",
-    backgroundColor: "transparent",
-    cursor: "pointer",
-  },
-};
-
-export default FamilyTrip;
+export default Family;
