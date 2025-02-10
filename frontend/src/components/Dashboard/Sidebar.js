@@ -4,7 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation(); // Untuk mendapatkan lokasi path aktif
+  const [isContentOpen, setIsContentOpen] = useState(false);
+  const [isDataOpen, setIsDataOpen] = useState(false);
+  const location = useLocation();
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
 
@@ -24,7 +26,6 @@ const Sidebar = () => {
 
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-6">
-      {/* Brand Logo */}
       <a href="index3.html" className="brand-link">
         <img
           src="dist/img/Logo_trip.png"
@@ -34,9 +35,8 @@ const Sidebar = () => {
         />
         <span className="brand-text font-weight-light fw-bold">IL'M TRIP</span>
       </a>
-      {/* Sidebar */}
+
       <div className="sidebar">
-        {/* Sidebar user panel (optional) */}
         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
           <div className="image">
             <img
@@ -56,7 +56,6 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* SidebarSearch Form */}
         <div className="form-inline">
           <div className="input-group" data-widget="sidebar-search">
             <input
@@ -72,154 +71,112 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-        {/* Sidebar Menu */}
+
         <nav className="mt-2">
-          <ul
-            className="nav nav-pills nav-sidebar flex-column"
-            data-widget="treeview"
-            role="menu"
-            data-accordion="false"
-          >
-            <li className="nav-item menu-open">
+          <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+            <li className="nav-item">
               <Link
-                to="#"
-                className={`nav-link ${
-                  location.pathname === "/dashboard/Dashboard" ? "active" : ""
-                }`}
+                to="/dashboard/Dashboard"
+                className={`nav-link ${location.pathname === "/dashboard/Dashboard" ? "active" : ""}`}
               >
-                <i className="right fas fa-angle-left" />
+                <i className="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link">
-                <i className="nav-icon fas fa-book" />
+
+            {/* Dropdown Content */}
+            <li className={`nav-item ${isContentOpen ? "menu-open" : ""}`}>
+              <a className="nav-link" onClick={() => setIsContentOpen(!isContentOpen)}>
+                <i className="nav-icon fas fa-book"></i>
                 <p>
                   Content
-                  <i className="fas fa-angle-left right" />
+                  <i className="fas fa-angle-left right"></i>
                 </p>
               </a>
-              <ul className="nav nav-treeview">
+              <ul className={`nav nav-treeview ${isContentOpen ? "d-block" : "d-none"}`}>
                 <li className="nav-item">
                   <Link
-                    to="mountaintrip"
-                    className={`nav-link ${
-                      location.pathname === "/dashboard/mountaintrip"
-                        ? "active"
-                        : ""
-                    }`}
+                    to="/dashboard/mountaintrip"
+                    className={`nav-link ${location.pathname === "/dashboard/mountaintrip" ? "active" : ""}`}
                   >
-                    <i className="far fa-circle nav-icon" />
+                    <i className="far fa-circle nav-icon"></i>
                     <p>Mountain Trip</p>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="another"
-                    className={`nav-link ${
-                      location.pathname === "/dashboard/another" ? "active" : ""
-                    }`}
+                    to="/dashboard/another"
+                    className={`nav-link ${location.pathname === "/dashboard/another" ? "active" : ""}`}
                   >
-                    <i className="far fa-circle nav-icon" />
+                    <i className="far fa-circle nav-icon"></i>
                     <p>Another</p>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="merchen"
-                    className={`nav-link ${
-                      location.pathname === "/dashboard/merchen" ? "active" : ""
-                    }`}
+                    to="/dashboard/merchen"
+                    className={`nav-link ${location.pathname === "/dashboard/merchen" ? "active" : ""}`}
                   >
-                    <i className="far fa-circle nav-icon" />
-                    <p>Merchendise</p>
+                    <i className="far fa-circle nav-icon"></i>
+                    <p>Merchandise</p>
                   </Link>
                 </li>
               </ul>
             </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                <i className="nav-icon fas fa-table" />
+
+            {/* Dropdown Data Pendaftaran */}
+            <li className={`nav-item ${isDataOpen ? "menu-open" : ""}`}>
+              <a className="nav-link" onClick={() => setIsDataOpen(!isDataOpen)}>
+                <i className="nav-icon fas fa-table"></i>
                 <p>
-                  Data pendaftaran
-                  <i className="fas fa-angle-left right" />
+                  Data Pendaftaran
+                  <i className="fas fa-angle-left right"></i>
                 </p>
               </a>
-              <ul className="nav nav-treeview">
+              <ul className={`nav nav-treeview ${isDataOpen ? "d-block" : "d-none"}`}>
                 <li className="nav-item">
                   <Link
-                    to="DataPesertaBaru"
-                    className={`nav-link ${
-                      location.pathname === "/dashboard/DataPesertaBaru"
-                        ? "active"
-                        : ""
-                    }`}
+                    to="/dashboard/DataPesertaBaru"
+                    className={`nav-link ${location.pathname === "/dashboard/DataPesertaBaru" ? "active" : ""}`}
                   >
-                    <i className="far fa-circle nav-icon" />
-                    <p>Pedaftar Baru</p>
+                    <i className="far fa-circle nav-icon"></i>
+                    <p>Pendaftar Baru</p>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="DataPeserta"
-                    className={`nav-link ${
-                      location.pathname === "/dashboard/DataPeserta"
-                        ? "active"
-                        : ""
-                    }`}
+                    to="/dashboard/DataPeserta"
+                    className={`nav-link ${location.pathname === "/dashboard/DataPeserta" ? "active" : ""}`}
                   >
-                    <i className="far fa-circle nav-icon" />
-                    <p>DataPeserta</p>
+                    <i className="far fa-circle nav-icon"></i>
+                    <p>Data Peserta</p>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="Schedule"
-                    className={`nav-link ${
-                      location.pathname === "/dashboard/Schedule"
-                        ? "active"
-                        : ""
-                    }`}
+                    to="/dashboard/Schedule"
+                    className={`nav-link ${location.pathname === "/dashboard/Schedule" ? "active" : ""}`}
                   >
-                    <i className="far fa-circle nav-icon" />
+                    <i className="far fa-circle nav-icon"></i>
                     <p>Schedule</p>
                   </Link>
                 </li>
               </ul>
             </li>
-            <li className="nav-item menu-open">
+
+            {/* Logout */}
+            <li className="nav-item">
               <Link
-                to="#"
-                className={`nav-link ${
-                  location.pathname === "/logout" ? "active" : ""
-                }`}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  textAlign: "center",
-                  width: "100%",
-                }}
+                to="/logout"
+                className="nav-link"
+                style={{ textAlign: "center", width: "100%" }}
               >
-                <i />
-                <p
-                  style={{
-                    textAlign: "center",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  Log Out
-                </p>
+                <p>Log Out</p>
               </Link>
             </li>
           </ul>
         </nav>
-        {/* /.sidebar-menu */}
       </div>
-      {/* /.sidebar */}
     </aside>
   );
 };
