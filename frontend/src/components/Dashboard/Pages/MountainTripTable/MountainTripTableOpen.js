@@ -37,7 +37,7 @@ const TableOpen = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/getDestinasiByIdLayanan/${id_layanan}`
+          `http://localhost:5000/getDestinasiByIdMountrip/${id_layanan}`
         );
 
         setDestinasi(response.data);
@@ -157,6 +157,7 @@ const TableOpen = () => {
     }
   };
 
+  console.log("id Lyanan",id_layanan)
   return (
     <div className="wrapper">
       <div className="content-wrapper">

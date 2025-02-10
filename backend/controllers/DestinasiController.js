@@ -27,22 +27,21 @@ export const createDestinasi = async(req, res)=>{
     
     try {
 
-      const Privatetrip = await PrivateTrip.findOne({
-        where:{
-          id:req.params.id_private
-        }
-      });
-
+      const Privatetrip = req.params.id_private 
+      ? await PrivateTrip.findOne({ where: { id: req.params.id_private } })
+      : null;
+    
       const Mountaintrip = await MountainTrip.findOne({
         where:{
           id: req.params.id_layanan
         }
       });
 
-      if(!Privatetrip || !Mountaintrip){
-        return res.status(404).json({msg: "Data untuk id_layanan, dan id_private , tidak ditemukan"});
+      if (!Mountaintrip) {
+        return res.status(404).json({ msg: "Data untuk id_layanan tidak ditemukan" });
       }
-
+      
+      const idPrivateTrip = Privatetrip ? Privatetrip.id : null; // Jika tidak ada, set null
      
       
       await Destinasi.create({
@@ -53,7 +52,7 @@ export const createDestinasi = async(req, res)=>{
         foto: fileName,
         keterangan: keterangan,
         id_layanan: Mountaintrip.id,
-        id_privatetrip: Privatetrip.id,
+        id_privatetrip: idPrivateTrip,
         
         
         

@@ -169,7 +169,7 @@ const App = () => {
             element={<TablePrivateLuxury />}
           />
           <Route
-            path="mountaintrip/table/Open"
+            path="mountaintrip/table/Open/:id_layanan"
             element={<MountainTripTableOpen />}
           />
           <Route
