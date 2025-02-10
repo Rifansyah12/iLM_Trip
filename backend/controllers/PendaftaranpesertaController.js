@@ -6,7 +6,7 @@ import Destinasi from "../models/DestinasiModels.js";
 import moment from "moment";
 
 export const createPendaftaranPeserta = async (req, res) => {
-  if (!req.files || !req.files.fotoKtp) 
+  if (!req.files || !req.files.fotoKtp)
     return res.status(400).json({ msg: "No file uploaded" });
 
   const file = req.files.fotoKtp;
@@ -29,7 +29,6 @@ export const createPendaftaranPeserta = async (req, res) => {
       where: { id: req.params.id_destinasi },
     });
 
-    
     if (!destinasi) {
       return res.status(404).json({ msg: "Destinasi tidak ditemukan" });
     }
@@ -86,7 +85,6 @@ export const createPendaftaranPeserta = async (req, res) => {
     res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };
-
 
 export const getPendaftaranPeserta = async (req, res) => {
   try {

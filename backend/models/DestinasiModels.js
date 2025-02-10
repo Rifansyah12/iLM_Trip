@@ -49,26 +49,24 @@ const Destinasi = db.define(
       type: DataTypes.TEXT, // Menggunakan TEXT untuk deskripsi panjang
       allowNull: true,
     },
-    id_layanan:{
-      type : DataTypes.INTEGER,
+    id_layanan: {
+      type: DataTypes.INTEGER,
       allowNull: false,
 
-      references:{
-       model: "table_mountaintrip",
-       key: "id",
-
-      }
+      references: {
+        model: "table_mountaintrip",
+        key: "id",
+      },
     },
-    id_privatetrip:{
-      type : DataTypes.INTEGER,
+    id_privatetrip: {
+      type: DataTypes.INTEGER,
       allowNull: true,
 
-      references:{
-       model: "table_privatetrip",
-       key: "id",
-
-      }
-    }
+      references: {
+        model: "table_privatetrip",
+        key: "id",
+      },
+    },
   },
   {
     freezeTableName: true, // Menjaga nama tabel tetap 'table_des'
