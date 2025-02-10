@@ -6,6 +6,8 @@ const DataPesertaBaru = () => {
   const [data, setData] = useState([]);
   const [isFormVisible, setFormVisible] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
+  const [status, setStatus] = useState({}); // Status peserta
+
   const [formData, setFormData] = useState({
     nama_lengkap: "",
     email: "",
@@ -88,6 +90,43 @@ const DataPesertaBaru = () => {
       setError(error.response?.data?.msg || "Terjadi kesalahan server");
     }
   };
+
+  const handleApproval = async (id, isApproved) => {
+    try {
+      // Ambil data peserta berdasarkan id
+      const { data } = await axios.get(
+        "http://localhost:5000/getPendaftaranpeserta"
+      );
+      const peserta = data.find((p) => p.id === id);
+
+      if (!peserta) {
+        console.error("Peserta tidak ditemukan");
+        return alert("Peserta tidak ditemukan!");
+      }
+
+      // Kirim request untuk mengubah status peserta
+      const response = await axios.post(
+        `http://localhost:5000/updateStatusPeserta/${peserta.destinasi.id_destinasi}`,
+        {
+          status: isApproved ? "Disetujui" : "Ditolak",
+        }
+      );
+
+      console.log("Response backend:", response.data); // Log respons dari backend
+
+      // Update status di frontend
+      setStatus((prev) => ({
+        ...prev,
+        [id]: isApproved ? "Disetujui" : "Ditolak",
+      }));
+
+      alert(`Peserta ${isApproved ? "disetujui" : "ditolak"}`);
+    } catch (error) {
+      console.error("Gagal memperbarui status:", error);
+      alert("Terjadi kesalahan dalam memperbarui status.");
+    }
+  };
+
   return (
     <div className="wrapper">
       <div className="content-wrapper">
@@ -115,6 +154,7 @@ const DataPesertaBaru = () => {
                   <th>Alamat</th>
                   <th>No. Telepon</th>
                   <th>Paket</th>
+                  <th>Status</th>
                   <th>Opsi</th>
                 </tr>
               </thead>
@@ -127,6 +167,7 @@ const DataPesertaBaru = () => {
                     <td>{item.alamat_lengkapi}</td>
                     <td>{item.nomer_telepon}</td>
                     <td>{item.paket}</td>
+                    <td>{status[item.id] ? "Disetujui" : "Belum Disetujui"}</td>
                     <td>
                       <button
                         className="btn btn-info btn-sm"
@@ -535,7 +576,12 @@ const DataPesertaBaru = () => {
                   marginTop: "20px",
                 }}
               >
-                <button className="btn btn-primary">Download Data</button>
+                <button
+                  className="btn btn-success btn-sm"
+                  onClick={() => handleApproval(selectedData.id, true)}
+                >
+                  Setujui
+                </button>
                 <button
                   className="btn btn-danger"
                   onClick={() => setSelectedData(null)}
