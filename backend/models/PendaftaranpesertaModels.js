@@ -105,7 +105,6 @@ const PendaftaranPeserta = db.define(
       validate: {
         len: [0, 255],
       },
-
     },
     id_destinasi: {
       type: DataTypes.INTEGER,

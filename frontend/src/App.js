@@ -17,13 +17,6 @@ import PrivateTrip from "./pages/Paket/PrivateTrip";
 import OpenTrip from "./pages/Paket/OpenTrip";
 // Gunung
 import Merbabu from "./pages/Paket/OpenTrip/Gunung/merbabu/index";
-import Prau from "./pages/Paket/OpenTrip/Gunung/prau";
-import Gede from "./pages/Paket/OpenTrip/Gunung/gede";
-import Pangrango from "./pages/Paket/OpenTrip/Gunung/pangrango";
-import Papandayan from "./pages/Paket/OpenTrip/Gunung/papandayan";
-import Sumbing from "./pages/Paket/OpenTrip/Gunung/sumbing";
-import Sindoro from "./pages/Paket/OpenTrip/Gunung/sindoro";
-import Sangar from "./pages/Paket/OpenTrip/Gunung/sangar";
 
 // Login & Admin Pages
 import LoginPage from "./components/Login";
@@ -128,19 +121,6 @@ const App = () => {
         <Route path="/Kontak" element={<Kontak />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Paket/OpenTrip/Gunung/merbabu" element={<Merbabu />} />
-        <Route path="/Paket/OpenTrip/Gunung/prau" element={<Prau />} />
-        <Route path="/Paket/OpenTrip/Gunung/gede" element={<Gede />} />
-        <Route
-          path="/Paket/OpenTrip/Gunung/pangrango"
-          element={<Pangrango />}
-        />
-        <Route
-          path="/Paket/OpenTrip/Gunung/papandayan"
-          element={<Papandayan />}
-        />
-        <Route path="/Paket/OpenTrip/Gunung/sindoro" element={<Sindoro />} />
-        <Route path="/Paket/OpenTrip/Gunung/sumbing" element={<Sumbing />} />
-        <Route path="/Paket/OpenTrip/Gunung/sangar" element={<Sangar />} />
         <Route path="/Paket/PrivateTrip/Premium" element={<Premium />} />
         <Route
           path="/Paket/PrivateTrip/Premium/Destinasi"

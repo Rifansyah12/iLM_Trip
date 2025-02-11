@@ -6,7 +6,7 @@ import Destinasi from "../models/DestinasiModels.js";
 import moment from "moment";
 
 export const createPendaftaranPeserta = async (req, res) => {
-  if (!req.files || !req.files.fotoKtp) 
+  if (!req.files || !req.files.fotoKtp)
     return res.status(400).json({ msg: "No file uploaded" });
 
   const file = req.files.fotoKtp;
@@ -29,7 +29,6 @@ export const createPendaftaranPeserta = async (req, res) => {
       where: { id: req.params.id_destinasi },
     });
 
-    
     if (!destinasi) {
       return res.status(404).json({ msg: "Destinasi tidak ditemukan" });
     }
@@ -87,7 +86,6 @@ export const createPendaftaranPeserta = async (req, res) => {
   }
 };
 
-
 export const getPendaftaranPeserta = async (req, res) => {
   try {
     const pendaftaran = await PendaftaranPeserta.findAll({
@@ -107,11 +105,16 @@ export const getPendaftaranPeserta = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 export const updateStatusPendaftaran = async (req, res) => {
+=======
+export const updateStatusPeserta = async (req, res) => {
+>>>>>>> bakcup-commit-aa265d6
   try {
     const { status } = req.body;
     const { id } = req.params;
 
+<<<<<<< HEAD
     // Cek apakah pendaftaran peserta dengan ID tersebut ada
     const pendaftaran = await PendaftaranPeserta.findOne({
       where: { id },
@@ -125,11 +128,53 @@ export const updateStatusPendaftaran = async (req, res) => {
     await PendaftaranPeserta.update({ status }, { where: { id } });
 
     res.status(200).json({ msg: "Status berhasil diperbarui" });
+=======
+    if (!["Disetujui", "Ditolak"].includes(status)) {
+      return res.status(400).json({ msg: "Status tidak valid" });
+    }
+
+    const peserta = await PendaftaranPeserta.findOne({ where: { id } });
+
+    if (!peserta) {
+      return res.status(404).json({ msg: "Peserta tidak ditemukan" });
+    }
+
+    await PendaftaranPeserta.update({ status }, { where: { id } });
+
+    res.status(200).json({ msg: `Peserta berhasil ${status.toLowerCase()}` });
+  } catch (error) {
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
+  }
+};
+
+export const deletePendaftaranPeserta = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Mencari peserta berdasarkan ID
+    const peserta = await PendaftaranPeserta.findOne({ where: { id } });
+
+    if (!peserta) {
+      return res.status(404).json({ msg: "Peserta tidak ditemukan" });
+    }
+
+    // Hapus file foto KTP dari server
+    const filePath = `./public/images/fotoKtp/${peserta.fotoKtp}`;
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath); // Menghapus file
+    }
+
+    // Hapus data peserta dari database
+    await PendaftaranPeserta.destroy({ where: { id } });
+
+    res.status(200).json({ msg: "Pendaftaran peserta berhasil dihapus" });
+>>>>>>> bakcup-commit-aa265d6
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };
+<<<<<<< HEAD
 
 
 export const getPendaftaranPesertaById = async(req, res)=>{
@@ -161,3 +206,5 @@ export const getPendaftaranPesertaById = async(req, res)=>{
 
 }
 
+=======
+>>>>>>> bakcup-commit-aa265d6

@@ -17,7 +17,9 @@ const TableOpen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
 
+  const API_URL = "http://localhost:5000";
   const [newDestinasi, setNewDestinasi] = useState({
+    Judul: "",
     nama_gunung: "",
     lokasi: "",
     paket: "",
@@ -40,9 +42,9 @@ const TableOpen = () => {
           `http://localhost:5000/getDestinasiByIdMountrip/${id_layanan}`
         );
 
-        setDestinasi(response.data);
+        setDestinasi(response.data.length > 0 ? response.data : []);
       } catch (err) {
-        setError(err.response?.data?.message || "Gagal mengambil data");
+        setDestinasi([]); // Jika terjadi error, kosongkan data
       } finally {
         setLoading(false);
       }
@@ -99,43 +101,74 @@ const TableOpen = () => {
   };
 
   // Fungsi untuk mengirimkan data ke backend
+
   const handleAddData = async () => {
     if (!selectedTrip) {
       alert("Silakan pilih layanan gunung terlebih dahulu!");
       return;
     }
 
-    // Pastikan id_layanan sudah ada
+    const id_layanan = selectedTrip.id || selectedTrip; // Jika selectedTrip adalah string
+    console.log("ID Layanan yang dikirim:", id_layanan);
+
     if (!id_layanan) {
       alert("ID layanan tidak ditemukan!");
       return;
     }
 
-    const formData = new FormData();
-
-    formData.append("nama_gunung", newDestinasi.nama_gunung);
-    formData.append("lokasi", newDestinasi.lokasi);
-    formData.append("paket", newDestinasi.paket);
-    formData.append("harga", newDestinasi.harga);
-    formData.append("keterangan", newDestinasi.keterangan);
-    formData.append("foto", file);
-
-    // Kirim id_layanan yang valid
-    formData.append("id_layanan", selectedTrip); // Kirim id layanan yang dipilih
+    if (!file) {
+      alert("Silakan pilih gambar terlebih dahulu!");
+      return;
+    }
 
     try {
+      const formData = new FormData();
+      formData.append("judul", newDestinasi.judul);
+      formData.append("nama_gunung", newDestinasi.nama_gunung);
+      formData.append("lokasi", newDestinasi.lokasi);
+      formData.append("paket", newDestinasi.paket);
+      formData.append("harga", newDestinasi.harga);
+      formData.append("keterangan", newDestinasi.keterangan);
+      formData.append("foto", file); // Sesuai dengan backend yang menggunakan req.files.foto
+
+      // Kirim data ke backend
       await axios.post(
-        `http://localhost:5000/createDestinasi/${selectedTrip}`,
-        formData
+        `http://localhost:5000/createDestinasi/${id_layanan}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Pastikan header sesuai untuk file upload
+          },
+        }
       );
 
-      const response = await axios.get(
-        `http://localhost:5000/getMountaintrip/${id_layanan}` // Update URL ke id_layanan yang valid
-      );
-      setDestinasi(response.data);
+      // Tambahkan delay untuk memastikan data sudah tersimpan sebelum di-fetch
+      setTimeout(async () => {
+        try {
+          const url = `http://localhost:5000/getMountaintrip/${id_layanan}`;
+          console.log("Fetching data from:", url);
+
+          const response = await axios.get(url);
+
+          setDestinasi(response.data);
+          alert("Data berhasil ditambahkan!");
+        } catch (err) {
+          console.error("Gagal fetch data terbaru:", err.response || err);
+          alert(
+            "Data berhasil ditambahkan, tetapi gagal memperbarui tampilan."
+          );
+        }
+      }, 1000); // Delay 1 detik sebelum fetch data terbaru
     } catch (err) {
-      alert("Gagal menambahkan data");
-      console.error(err);
+      if (
+        err.response &&
+        (err.response.status === 201 || err.response.status === 204)
+      ) {
+        alert("Data berhasil ditambahkan! (dari catch block)");
+      } else {
+        alert("Gagal menambahkan data");
+        console.error("Error:", err.response || err);
+      }
     }
   };
 
@@ -152,17 +185,23 @@ const TableOpen = () => {
       // Perbarui state dengan menghapus destinasi yang telah dihapus
       setDestinasi(destinasi.filter((item) => item.id !== id));
     } catch (err) {
+      console.error("Error Response:", err.response); // Tambahkan ini untuk melihat response backend
       alert("Gagal menghapus data");
-      console.error(err);
     }
   };
 
-  console.log("id Lyanan",id_layanan)
+  console.log("id_layanan", id_layanan);
+  const tripNames = {
+    2: "Open Trip",
+    3: "Family Trip",
+    4: "Gathering Kantor",
+  };
+
   return (
     <div className="wrapper">
       <div className="content-wrapper">
         <div className="content-header">
-          <h1 className="m-0">Destinasi Trip</h1> {/* Judul diubah */}
+          <h1 className="m-0">Destinasi {tripNames[id_layanan] || "Trip"}</h1>
         </div>
 
         <section className="content">
@@ -176,6 +215,69 @@ const TableOpen = () => {
                 Tambah Data
               </button>
             </div>
+
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Judul</th>
+                  <th>Nama Gunung</th>
+                  <th>Lokasi</th>
+                  <th>Paket</th>
+                  <th>Harga</th>
+                  <th>Foto</th>
+                  <th>Keterangan</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentData.length > 0 ? (
+                  currentData.map((destinasi, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{destinasi.judul}</td>
+                      <td>{destinasi.nama_gunung}</td>
+                      <td>{destinasi.lokasi}</td>
+                      <td>{destinasi.paket}</td>
+                      <td>{destinasi.harga}</td>
+                      <td>
+                        {destinasi.foto ? (
+                          <img
+                            src={`http://localhost:5000/images/Destinasi/${destinasi.foto}`}
+                            alt="Foto"
+                            style={{ width: 50, height: 50 }}
+                          />
+                        ) : (
+                          "Tidak ada foto"
+                        )}
+                      </td>
+                      <td>{destinasi.keterangan}</td>
+                      <td>
+                        {destinasi.id !== id_layanan ? (
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleDelete(destinasi.id)}
+                          >
+                            Hapus
+                          </button>
+                        ) : (
+                          "-"
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan="9"
+                      style={{ textAlign: "center", fontWeight: "bold" }}
+                    >
+                      Belum Ada Data
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
 
             {/* FORM TAMBAH DATA  */}
             <div
@@ -321,36 +423,6 @@ const TableOpen = () => {
                 </div>
               </div>
             </div>
-
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nama Gunung</th>
-                  <th>Lokasi</th>
-                  <th>Harga</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentData.map((destinasi, index) => (
-                  <tr key={destinasi.id}>
-                    <td>{index + 1}</td>
-                    <td>{destinasi.nama_gunung}</td>
-                    <td>{destinasi.lokasi}</td>
-                    <td>{destinasi.harga}</td>
-                    <td>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => handleDelete(destinasi.id)}
-                      >
-                        Hapus
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
 
             {/* Pagination */}
             <nav>
