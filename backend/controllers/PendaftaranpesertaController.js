@@ -106,3 +106,58 @@ export const getPendaftaranPeserta = async (req, res) => {
     res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };
+
+export const updateStatusPendaftaran = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const { id } = req.params;
+
+    // Cek apakah pendaftaran peserta dengan ID tersebut ada
+    const pendaftaran = await PendaftaranPeserta.findOne({
+      where: { id },
+    });
+
+    if (!pendaftaran) {
+      return res.status(404).json({ msg: "Pendaftaran tidak ditemukan" });
+    }
+
+    // Update status pendaftaran
+    await PendaftaranPeserta.update({ status }, { where: { id } });
+
+    res.status(200).json({ msg: "Status berhasil diperbarui" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
+  }
+};
+
+
+export const getPendaftaranPesertaById = async(req, res)=>{
+  try {
+    const {id} = req.params
+
+    const pendaftaran = await PendaftaranPeserta.findOne({
+      where: {id},
+      include: [
+        {
+          model: Destinasi,
+          as: 'destinasi',
+          attributes: ["id", "nama_gunung", "lokasi", "keterangan"],
+        }
+      ]
+    });
+
+    if(!pendaftaran){
+      return res.status(404).json({msg: "Pendaftaran tidak ditemukan"});
+
+    }
+
+    return res.status(200).json(pendaftaran);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({msg: "Terjadi Kesalahan server"});
+    
+  }
+
+}
+
