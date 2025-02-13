@@ -114,7 +114,7 @@ const App = () => {
         <Route path="/Paket/Another/explore" element={<Explore />} />
         <Route path="/tourpage/home" element={<Tourpage />} />
         <Route path="/Paket/PrivateTrip" element={<PrivateTrip />} />
-        <Route path="/Paket/OpenTrip" element={<OpenTrip />} />
+        <Route path="/Paket/OpenTrip/:id_layanan" element={<OpenTrip />} />
         <Route path="/Paket/FamilyTrip" element={<FamilyTrip />} />
         <Route path="/Paket/Gathering" element={<Gathering />} />
         <Route path="/Testimoni/Merchen" element={<TestimoniHome />} />
