@@ -252,3 +252,16 @@ export const getDestinasiByIdPrivate = async (req, res) => {
     res.status(500).json({ message: "Terjadi kesalahan pada server" });
   }
 };
+
+export const getDestinasiById = async(req, res)=>{
+  const response = await Destinasi.findOne({
+    attributes: ['paket','nama_gunung', 'lokasi', 'harga', 'foto', 'keterangan', 'id_layanan', 'id_privatetrip'],
+    where:{
+      id: req.params.id
+    }
+  });
+
+  if(!response) return res.status(404).json({msg: "Destinasi Tidak ditemukan"});
+
+  res.status(200).json(response);
+}

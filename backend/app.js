@@ -25,19 +25,19 @@ const store = new sessionStore({
 
 // untuk mengecek apakah database terhubung
 
-async function initializeDatabase() {
-  try {
-    await db.authenticate();
-    console.log("Database Connected..");
+// async function initializeDatabase() {
+//   try {
+//     await db.authenticate();
+//     console.log("Database Connected..");
 
-    await db.sync({ alter: true });
-    console.log("Data dimodel telah dibuat ...");
-  } catch (error) {
-    console.log("Database tidak terhubung..", error);
-  }
-}
+//     await db.sync({ alter: true });
+//     console.log("Data dimodel telah dibuat ...");
+//   } catch (error) {
+//     console.log("Database tidak terhubung..", error);
+//   }
+// }
 
-initializeDatabase();
+// initializeDatabase();
 
 initRelationships();
 app.use(
