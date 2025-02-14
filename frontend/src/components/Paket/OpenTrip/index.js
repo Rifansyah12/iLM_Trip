@@ -125,7 +125,7 @@ const OpenTrip = () => {
           margin: "0 auto", // Membuat konten berada di tengah secara horizontal
         }}
       >
-         {destinasi.length}
+        
       {destinasi.map((destination, index) => (
         <div
           key={index}
@@ -212,7 +212,7 @@ const OpenTrip = () => {
             <button
               onClick={() =>
                 navigate(
-                  `/Paket/OpenTrip/Gunung/${destination.id}`
+                  `/Paket/OpenTrip/Gunung/merbabu/${destination.id}`
                 )
               }
               style={{

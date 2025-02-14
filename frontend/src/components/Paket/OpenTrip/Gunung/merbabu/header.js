@@ -3,7 +3,7 @@ import Background1 from "../../../../../assets/Trip/bg2.png";
 import Background2 from "../../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 import Background3 from "../../../../../assets/Gunung/Merbabu/merbabu2.jpg"; // Tambahkan gambar lain jika diperlukan
 
-function Header() {
+function Header({destinasi}) {
   const [currentImage, setCurrentImage] = useState(Background1); // Gambar pertama sebagai default
 
   // Gambar latar belakang yang akan diputar
@@ -96,12 +96,12 @@ function Header() {
       <img
         className="Volcano37791591280"
         style={imageStyle}
-        src={currentImage} // Menggunakan gambar yang disimpan dalam state
+        src={`http://localhost:5000/images/Destinasi/${destinasi.foto}`} // Menggunakan gambar yang disimpan dalam state
         alt="Background"
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        Gunung Merbabu
+        {destinasi.nama_gunung}
         {/* <p
           style={{
             color: "#ffff",
@@ -129,7 +129,7 @@ function Header() {
             marginTop: "20px", // Jarak antara teks Nikmati dan Lokasi
           }}
         >
-          LOKASI: Jawa Tengah, Indonesia
+          LOKASI: {destinasi.lokasi}
         </p>
       </div>
       {/* Rating Section */}

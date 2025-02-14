@@ -34,7 +34,7 @@ const Paket = () => {
   >
     {mountainTrips.map((trip) => {
       const layananSlug = trip.nama_layanan.toLowerCase();
-      const linkTo = layananSlug === "private trip" ? "/Paket/PrivateTrip" : `/Paket/OpenTrip/${trip.id}`;
+      const linkTo = layananSlug === "private trip" ? `/Paket/PrivateTrip` : `/Paket/OpenTrip/${trip.id}`;
   
       return (
         <div

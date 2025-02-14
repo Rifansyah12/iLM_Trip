@@ -8,7 +8,7 @@ import SampleImage4 from "../../../../../assets/Gunung/Merbabu/merbabu4.JPG";
 import SampleImage5 from "../../../../../assets/Gunung/Merbabu/merbabu5.JPG";
 import SampleImage6 from "../../../../../assets/Gunung/Merbabu/merbabu6.JPG";
 
-const Merbabu = () => {
+const Merbabu = ({destinasi}) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
@@ -37,7 +37,7 @@ const Merbabu = () => {
         alignItems: "left",
       }}
     >
-      <h2>PAKET MEDIUM TRIP (IDR 729.999/pax) Via Garung</h2>
+      <h2>PAKET {destinasi.paket}  (IDR {destinasi.harga}/pax) {destinasi.nama_gunung}</h2>
       <h2>Minimal Keberangkatan 16 Orang</h2>
       <div
         style={{
