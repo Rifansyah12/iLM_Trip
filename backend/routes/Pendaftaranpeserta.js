@@ -9,7 +9,7 @@ import {
 
 const route = express.Router();
 
-route.post("/createPendaftaran/:id_destinasi", createPendaftaranPeserta);
+route.post("/createPendaftaran", createPendaftaranPeserta);
 route.get("/getPendaftaranpeserta", getPendaftaranPeserta);
 route.get("/getPendaftaranById/:id", getPendaftaranPesertaById);
 route.put("/updateStatus/:id", updateStatusPendaftaran); // Sesuai dengan nama di controller

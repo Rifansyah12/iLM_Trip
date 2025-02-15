@@ -25,13 +25,8 @@ export const createPendaftaranPeserta = async (req, res) => {
 
   try {
     // Periksa apakah id_destinasi valid
-    const destinasi = await Destinasi.findOne({
-      where: { id: req.params.id_destinasi },
-    });
+    
 
-    if (!destinasi) {
-      return res.status(404).json({ msg: "Destinasi tidak ditemukan" });
-    }
 
     // Simpan file foto KTP ke folder
     file.mv(filePath, async (err) => {
@@ -50,6 +45,7 @@ export const createPendaftaranPeserta = async (req, res) => {
         meetingPoint,
         keterangan,
         kesehatan,
+        id_destinasi
       } = req.body;
 
       const tanggal = moment().format("YYYY-MM-DD HH:mm:ss"); // Set default tanggal saat ini
@@ -71,7 +67,7 @@ export const createPendaftaranPeserta = async (req, res) => {
           kesehatan,
           status: "Belum Disetujui", // Status default
           fotoKtp: fileName,
-          id_destinasi: destinasi.id,
+          id_destinasi,
         });
 
         res.status(201).json({ msg: "Pendaftaran berhasil ditambahkan" });

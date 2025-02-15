@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import moment from 'moment'
 import NewImage from "../../assets/logo/Logo_trip2.png";
 import Background from "../../assets/volcano-3779159_1280.png";
 import axios from "axios";
 
 const containerStyle = {
+
   backgroundColor: "transparent",
   padding: "50px",
   display: "flex",
@@ -73,38 +76,88 @@ const submitButtonStyle = {
 };
 
 const MultiStepForm = () => {
+
+  
   const [formData, setFormData] = useState({
-    nama: "",
-    email: "",
-    alamat: "",
+    nama_lengkap: "",
+    email : "",
+    alamat_lengkapi: "",
     domisili: "",
-    telepon: "",
-    teleponDarurat: "",
+    nomer_telepon: "",
+    nomertelp_darurat: "",
     pekerjaan: "",
-    gunung: "",
-    tanggal: "",
-    paket: "",
     fasilitas: "",
     meetingPoint: "",
     keterangan: "",
-    fotoKTP: null,
-    setuju: false,
+    fotoKtp: null,
+
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]:
-        type === "checkbox" ? checked : type === "file" ? files[0] : value,
-    });
+  const [message, setMessage] = useState("");
+  const [destinasiList, setDestinasiList] = useState([]);
+
+  useEffect(() => {
+    // Ambil data destinasi dari backend
+    axios
+      .get("http://localhost:5000/getDestinasi")
+      .then((response) => {
+        setDestinasiList(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching destinasi:", error);
+      });
+  }, [])
+
+  const handleChange = (e)=>{
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  }
+
+  
+ 
+
+
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, fotoKtp: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Formulir berhasil dikirim!");
-    console.log(formData);
+    const formDataToSend = new FormData();
+
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/createPendaftaran`,
+        formDataToSend,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      setMessage(res.data.msg);
+      setFormData({
+        nama_lengkap: "",
+        email: "",
+        alamat_lengkapi: "",
+        domisili: "",
+        nomer_telepon: "",
+        nomertelp_darurat: "",
+        pekerjaan: "",
+        paket: "",
+        fasilitas: "",
+        meetingPoint: "",
+        keterangan: "",
+        kesehatan: "",
+        fotoKtp: null,
+      });
+    } catch (error) {
+      setMessage(error.response?.data?.msg || "Terjadi kesalahan.");
+    }
   };
+
 
   return (
     <div style={containerStyle}>
@@ -131,6 +184,7 @@ const MultiStepForm = () => {
           >
             Formulir Pendaftaran
           </h2>
+          {message && <div className="alert alert-info">{message}</div>}
 
           <form onSubmit={handleSubmit}>
             {/* Nama - Pekerjaan - Keterangan */}
@@ -138,9 +192,9 @@ const MultiStepForm = () => {
               <label style={labelStyle}>Nama:</label>
               <input
                 type="text"
-                name="nama"
+                name="nama_lengkap"
                 style={inputStyle}
-                value={formData.nama}
+                value={formData.nama_lengkap}
                 onChange={handleChange}
               />
               <label style={labelStyle}>Pekerjaan:</label>
@@ -171,20 +225,22 @@ const MultiStepForm = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
-              <label style={labelStyle}>Gunung:</label>
-              <input
-                type="text"
-                name="gunung"
-                style={inputStyle}
-                value={formData.gunung}
-                onChange={handleChange}
-              />
+             <label>Pilih Gunung:</label>
+          <select name="id_destinasi" value={formData.id_destinasi} onChange={handleChange}>
+            <option value="">Pilih Gunung</option>
+            {destinasiList.map((destinasi) => (
+              <option key={destinasi.id} value={destinasi.id}>
+                {destinasi.nama_gunung} 
+              </option>
+            ))}
+          </select>
               <label style={labelStyle}>Foto KTP:</label>
               <input
                 type="file"
-                name="fotoKTP"
+                name="fotoKtp"
+                accept=".jpg,.jpeg,.png"
                 style={fileInputStyle}
-                onChange={handleChange}
+                onChange={handleFileChange}
               />
             </div>
 
@@ -193,9 +249,9 @@ const MultiStepForm = () => {
               <label style={labelStyle}>Alamat:</label>
               <input
                 type="text"
-                name="alamat"
+                name="alamat_lengkapi"
                 style={inputStyle}
-                value={formData.alamat}
+                value={formData.alamat_lengkapi}
                 onChange={handleChange}
               />
               <label style={labelStyle}>Tanggal:</label>
@@ -233,9 +289,9 @@ const MultiStepForm = () => {
               <label style={labelStyle}>Telepon:</label>
               <input
                 type="tel"
-                name="telepon"
+                name="nomer_telepon"
                 style={inputStyle}
-                value={formData.telepon}
+                value={formData.nomer_telepon}
                 onChange={handleChange}
               />
               <label style={labelStyle}>Fasilitas:</label>
@@ -253,9 +309,9 @@ const MultiStepForm = () => {
               <label style={labelStyle}>Telepon Darurat:</label>
               <input
                 type="tel"
-                name="teleponDarurat"
+                name="nomertelp_darurat"
                 style={inputStyle}
-                value={formData.teleponDarurat}
+                value={formData.nomertelp_darurat}
                 onChange={handleChange}
               />
               <label style={labelStyle}>Meeting Point:</label>
@@ -264,6 +320,14 @@ const MultiStepForm = () => {
                 name="meetingPoint"
                 style={inputStyle}
                 value={formData.meetingPoint}
+                onChange={handleChange}
+              />
+              <label style={labelStyle}>Riwayat Kesehatan</label>
+              <input
+                type="text"
+                name="kesehatan"
+                style={inputStyle}
+                value={formData.kesehatan}
                 onChange={handleChange}
               />
             </div>

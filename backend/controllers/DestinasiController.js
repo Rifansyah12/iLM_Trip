@@ -253,15 +253,25 @@ export const getDestinasiByIdPrivate = async (req, res) => {
   }
 };
 
-export const getDestinasiById = async(req, res)=>{
-  const response = await Destinasi.findOne({
-    attributes: ['paket','nama_gunung', 'lokasi', 'harga', 'foto', 'keterangan', 'id_layanan', 'id_privatetrip'],
-    where:{
-      id: req.params.id
+export const getDestinasiById = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10); // Konversi id ke integer
+    if (isNaN(id)) {
+      return res.status(400).json({ msg: "ID harus berupa angka" });
     }
-  });
 
-  if(!response) return res.status(404).json({msg: "Destinasi Tidak ditemukan"});
+    const response = await Destinasi.findOne({
+      attributes: ['id', 'paket', 'nama_gunung', 'lokasi', 'harga', 'foto', 'keterangan', 'id_layanan', 'id_privatetrip'],
+      where: { id: id }
+    });
 
-  res.status(200).json(response);
-}
+    if (!response) {
+      return res.status(404).json({ msg: "Destinasi Tidak ditemukan" });
+    }
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
+  }
+};

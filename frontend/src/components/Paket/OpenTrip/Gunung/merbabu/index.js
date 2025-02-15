@@ -26,6 +26,7 @@ const Merbabu = ({destinasi}) => {
     setModalImage("");
   };
 
+  console.log("Data Destinasi: ", destinasi)
   return (
     <section
       style={{
@@ -142,7 +143,7 @@ const Merbabu = ({destinasi}) => {
           {/* ITINERARY */}
           <div>
             <h2 style={{ color: "#FA8806", marginTop: "20px" }}>
-              ITINERARY TRIP
+              ITINERARY TRIP 
             </h2>
 
             <p>
@@ -182,7 +183,7 @@ const Merbabu = ({destinasi}) => {
               <br />
               15:00 - = Enjoy Sunrise Camp
               <br />
-              18:00 - 20:00 = ISHOMA Makan ke 2 Malam
+              18:00 - 20:00 = ISHOMA Makan ke 2 Malam 
               <br />
               20:00 - = Istirahat
             </p>
@@ -359,11 +360,12 @@ const Merbabu = ({destinasi}) => {
             cursor: "pointer",
           }}
         >
-          Kembali ke Beranda
+          Kembali ke Beranda 
         </button>
+       
 
         <button
-          onClick={() => navigate("/FormDaftar")} // Navigasi ke halaman booking
+          onClick={() => navigate(`/FormDaftar`)} // Navigasi ke halaman booking
           style={{
             padding: "15px 30px",
             fontSize: "18px",
