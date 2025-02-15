@@ -99,7 +99,7 @@ const Blog = () => {
                   <th>No</th>
                   <th>Judul Blog</th>
                   <th>Konten</th>
-                  <th>Gambar</th>
+                  {/* <th>Gambar</th> */}
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -109,7 +109,7 @@ const Blog = () => {
                     <td>{indexOfFirstData + index + 1}.</td>
                     <td>{item.title}</td>
                     <td>{item.content}</td>
-                    <td>
+                    {/* <td>
                       {item.image ? (
                         <img
                           src={item.image}
@@ -119,7 +119,7 @@ const Blog = () => {
                       ) : (
                         "Tidak ada gambar"
                       )}
-                    </td>
+                    </td> */}
                     <td>
                       <button
                         className="btn btn-sm btn-warning mr-2"
