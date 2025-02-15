@@ -88,7 +88,6 @@ const Home = () => (
       <Paket />
       <div style={{ backgroundColor: "#000000", padding: "20px" }}>
         <Galeri />
-        <Testimoni />
       </div>
     </main>
   </>
