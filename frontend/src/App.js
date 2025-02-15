@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header/index";
 // Public Pages
 import Galeri from "./pages/Galeri";
+import Blog from "./pages/Blog";
 import Paket from "./pages/Paket";
 import PaketHome from "./pages/Paket/Home";
 import PaketAnother from "./pages/Paket/Another";
@@ -52,6 +53,7 @@ import DataPesertaBaru from "./components/Dashboard/Pages/DataPeserta/DataPesert
 import Schedule from "./components/Dashboard/Pages/DataPeserta/Schedule";
 import DataPeserta from "./components/Dashboard/Pages/DataPeserta/DataPeserta";
 import MerchenAdmin from "./components/Dashboard/Pages/merchen";
+import BlogAdmin from "./components/Dashboard/Blog";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -108,6 +110,7 @@ const App = () => {
         <Route path="/TentangKami" element={<TentangKami />} />
         <Route path="/Galeri" element={<Galeri />} />
         <Route path="/Ebook" element={<Ebook />} />
+        <Route path="/Blog" element={<Blog />} />
         <Route path="/Paket" element={<Paket />} />
         <Route path="/Paket/Home" element={<PaketHome />} />
         <Route path="/Paket/Another" element={<PaketAnother />} />
@@ -120,8 +123,14 @@ const App = () => {
         <Route path="/Testimoni/Merchen" element={<TestimoniHome />} />
         <Route path="/Kontak" element={<Kontak />} />
         <Route path="/Login" element={<LoginPage />} />
-        <Route path="/Paket/OpenTrip/Gunung/merbabu/:id" element={<Merbabu />} />
-        <Route path="/Paket/PrivateTrip/Premium/:id_privatetrip" element={<Premium />} />
+        <Route
+          path="/Paket/OpenTrip/Gunung/merbabu/:id"
+          element={<Merbabu />}
+        />
+        <Route
+          path="/Paket/PrivateTrip/Premium/:id_privatetrip"
+          element={<Premium />}
+        />
         <Route
           path="/Paket/PrivateTrip/Premium/Destinasi"
           element={<DestinasiPremium />}
@@ -162,6 +171,7 @@ const App = () => {
           />
           <Route path="another" element={<AnotherAdmin />} />
           <Route path="merchen" element={<MerchenAdmin />} />
+          <Route path="blog" element={<BlogAdmin />} />
           <Route path="dashboard" element={<DashboardAdmin />} />
 
           <Route path="DataPesertaBaru" element={<DataPesertaBaru />} />

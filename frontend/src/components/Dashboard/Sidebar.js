@@ -142,6 +142,17 @@ const Sidebar = () => {
                     <p>Merchandise</p>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    to="/dashboard/blog"
+                    className={`nav-link ${
+                      location.pathname === "/dashboard/merchen" ? "active" : ""
+                    }`}
+                  >
+                    <i className="far fa-circle nav-icon"></i>
+                    <p>Blog</p>
+                  </Link>
+                </li>
               </ul>
             </li>
 

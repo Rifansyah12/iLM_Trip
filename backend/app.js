@@ -12,6 +12,7 @@ import AdminRoute from "./routes/AdminRoutes.js";
 import MountaintripRoute from "./routes/MountaintripRoutes.js";
 import AnothertripRoute from "./routes/AnotherRoutes.js";
 import PendaftranpesertaRoute from "./routes/Pendaftaranpeserta.js";
+import Blog from "./routes/blogRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -69,6 +70,7 @@ app.use(AdminRoute);
 app.use(MountaintripRoute);
 app.use(AnothertripRoute);
 app.use(PendaftranpesertaRoute);
+app.use(Blog);
 
 app.listen(process.env.APP_PORT, () => {
   console.log(`Server Running on http://localhost:${process.env.APP_PORT}`);
