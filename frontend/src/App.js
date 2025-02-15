@@ -182,8 +182,11 @@ const App = () => {
       </Routes>
 
       {!isAdminPage && (
-        <button
-          className="btn btn-success btn-livechat"
+        <a
+          href="https://wa.me/6281234567890" // Ganti dengan nomor WhatsApp tujuan
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary btn-livechat"
           style={{
             position: "fixed",
             bottom: "20px",
@@ -196,33 +199,15 @@ const App = () => {
             justifyContent: "center",
             alignItems: "center",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            backgroundColor: "#25D366", // Warna hijau khas WhatsApp
+            textDecoration: "none",
           }}
-          onClick={() => setIsChatOpen(true)}
         >
           <i
-            className="bi bi-chat-dots"
+            className="bi bi-whatsapp" // Menggunakan ikon WhatsApp Bootstrap
             style={{ fontSize: "24px", color: "white" }}
           ></i>
-        </button>
-      )}
-
-      {isChatOpen && !isAdminPage && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "0",
-            right: "0",
-            width: "400px",
-            height: "60%",
-            backgroundColor: "white",
-            boxShadow: "0 -4px 6px rgba(0, 0, 0, 0.1)",
-            zIndex: 1100,
-            borderTopLeftRadius: "15px",
-            borderTopRightRadius: "15px",
-          }}
-        >
-          <ChatRoom onClose={() => setIsChatOpen(false)} />
-        </div>
+        </a>
       )}
 
       {!isAdminPage && <Footer />}
