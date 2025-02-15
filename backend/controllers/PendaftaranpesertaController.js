@@ -104,24 +104,34 @@ export const updateStatusPendaftaran = async (req, res) => {
     const { status } = req.body;
     const { id } = req.params;
 
-    if (!["Disetujui", "Ditolak", "Belum Disetujui"].includes(status)) {
+    // Validasi status yang diperbolehkan
+    const validStatuses = ["Disetujui", "Ditolak", "Belum Disetujui"];
+    if (!validStatuses.includes(status)) {
       return res.status(400).json({ msg: "Status tidak valid" });
     }
 
-    const pendaftaran = await PendaftaranPeserta.findOne({ where: { id } });
+    // Cari pendaftaran berdasarkan ID
+    const pendaftaran = await PendaftaranPeserta.findByPk(id);
 
     if (!pendaftaran) {
       return res.status(404).json({ msg: "Pendaftaran tidak ditemukan" });
     }
 
-    await PendaftaranPeserta.update({ status }, { where: { id } });
+    // Logging status sebelumnya (opsional, untuk debugging)
+    console.log(`Status sebelumnya: ${pendaftaran.status}`);
 
-    res
+    // Update status pendaftaran
+    await pendaftaran.update({ status });
+
+    // Logging status setelah update
+    console.log(`Status diperbarui menjadi: ${status}`);
+
+    return res
       .status(200)
       .json({ msg: `Status berhasil diperbarui menjadi ${status}` });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ msg: "Terjadi kesalahan server" });
+    return res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };
 

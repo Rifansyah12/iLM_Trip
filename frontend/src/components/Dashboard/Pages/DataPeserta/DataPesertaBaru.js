@@ -135,7 +135,7 @@ const DataPesertaBaru = () => {
   const handleApproval = async (id, isApproved) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/updateStatusPeserta/${id}`,
+        `http://localhost:5000/updateStatus/${id}`,
         { status: isApproved ? "Disetujui" : "Ditolak" }
       );
 

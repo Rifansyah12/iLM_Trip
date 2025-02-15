@@ -146,7 +146,7 @@ const Sidebar = () => {
                   <Link
                     to="/dashboard/blog"
                     className={`nav-link ${
-                      location.pathname === "/dashboard/merchen" ? "active" : ""
+                      location.pathname === "/dashboard/blog" ? "active" : ""
                     }`}
                   >
                     <i className="far fa-circle nav-icon"></i>
