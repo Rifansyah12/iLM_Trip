@@ -1,82 +1,73 @@
-.App {
-  text-align: center;
+/* Ukuran default logo */
+.navbar-logo {
+  width: 145px;
+  height: 84px;
+  transition: all 0.3s ease-in-out;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Saat layar lebih kecil dari 991px (mobile) */
+@media (max-width: 991px) {
+  .navbar-logo {
+    width: 100px; /* Sesuaikan ukuran logo saat mobile */
+    height: auto;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Desktop View */
-.desktop-menu {
-  display: flex;
-}
-
-.mobile-menu,
-.mobile-menu-btn {
-  display: none;
-}
-
-/* Mobile View */
-@media (max-width: 768px) {
-  .desktop-menu {
-    display: none;
+/* Ubah background navbar menjadi hitam saat menu terbuka di mobile */
+@media (max-width: 991px) {
+  .mobile-menu-open {
+    background: black !important;
   }
 
-  .mobile-menu-btn {
-    display: block;
+  .mobile-menu-open .navbar-collapse {
+    background: black;
+    padding: 10px;
   }
 
-  .mobile-menu {
-    display: block;
+  .mobile-menu-open .nav-link {
+    color: white !important;
+  }
+
+  .mobile-menu-open .dropdown-menu {
+    background: black;
+  }
+
+  .mobile-menu-open .dropdown-item {
+    color: white !important;
   }
 }
 
-/* Background color for custom navbar */
-.bg-custom {
-  background-color: #46a19d !important;
-}
+/* HEADER */
+@media (max-width: 991px) {
+  .header .PilihPetualanganAndaCapaiPuncaknya {
+    font-size: 35px;
+    top: 0px;
+    left: 30px;
+    padding-right: 30px;
+    max-width: 70%;
+  }
 
-/* Live chat button styling for better readability */
-.btn-livechat {
-  border-radius: 20px;
-  font-size: 18px;
-  padding: 10px 30px;
-  width: auto; /* Agar sesuai konten */
+  .header .PilihPetualanganAndaCapaiPuncaknya p {
+    font-size: 20px;
+    margin: 20px 0;
+  }
+
+  .header button {
+    font-size: 20px;
+    width: 160px;
+    height: 40px;
+  }
+
+  .header img.NewImage {
+    width: 25%;
+    top: 15px;
+    right: 15px;
+  }
 }
 
 /* Mengubah warna teks pada navbar menu */
 /* Mengatur font dan warna untuk teks menu navbar */
+
 .nav-link {
   color: #ffffff !important; /* Warna teks navbar */
   font-family: "Belanosima", sans-serif; /* Font Belanosima */
@@ -97,6 +88,18 @@
   color: #ffd700 !important; /* Warna teks saat hover */
 }
 
+/* Background color for custom navbar */
+.bg-custom {
+  background-color: #46a19d !important;
+}
+
+/* Live chat button styling for better readability */
+.btn-livechat {
+  border-radius: 20px;
+  font-size: 18px;
+  padding: 10px 30px;
+  width: auto; /* Agar sesuai konten */
+}
 /* Pastikan tombol Live Chat juga memakai font Belanosima */
 .btn-livechat {
   font-family: "Belanosima", sans-serif;

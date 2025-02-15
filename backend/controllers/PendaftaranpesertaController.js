@@ -25,13 +25,6 @@ export const createPendaftaranPeserta = async (req, res) => {
 
   try {
     // Periksa apakah id_destinasi valid
-    const destinasi = await Destinasi.findOne({
-      where: { id: req.params.id_destinasi },
-    });
-
-    if (!destinasi) {
-      return res.status(404).json({ msg: "Destinasi tidak ditemukan" });
-    }
 
     // Simpan file foto KTP ke folder
     file.mv(filePath, async (err) => {
@@ -50,6 +43,7 @@ export const createPendaftaranPeserta = async (req, res) => {
         meetingPoint,
         keterangan,
         kesehatan,
+        id_destinasi,
       } = req.body;
 
       const tanggal = moment().format("YYYY-MM-DD HH:mm:ss"); // Set default tanggal saat ini
@@ -71,7 +65,7 @@ export const createPendaftaranPeserta = async (req, res) => {
           kesehatan,
           status: "Belum Disetujui", // Status default
           fotoKtp: fileName,
-          id_destinasi: destinasi.id,
+          id_destinasi,
         });
 
         res.status(201).json({ msg: "Pendaftaran berhasil ditambahkan" });
@@ -105,25 +99,28 @@ export const getPendaftaranPeserta = async (req, res) => {
   }
 };
 
-export const updateStatusPeserta = async (req, res) => {
+export const updateStatusPendaftaran = async (req, res) => {
   try {
     const { status } = req.body;
     const { id } = req.params;
 
-    if (!["Disetujui", "Ditolak"].includes(status)) {
+    if (!["Disetujui", "Ditolak", "Belum Disetujui"].includes(status)) {
       return res.status(400).json({ msg: "Status tidak valid" });
     }
 
-    const peserta = await PendaftaranPeserta.findOne({ where: { id } });
+    const pendaftaran = await PendaftaranPeserta.findOne({ where: { id } });
 
-    if (!peserta) {
-      return res.status(404).json({ msg: "Peserta tidak ditemukan" });
+    if (!pendaftaran) {
+      return res.status(404).json({ msg: "Pendaftaran tidak ditemukan" });
     }
 
     await PendaftaranPeserta.update({ status }, { where: { id } });
 
-    res.status(200).json({ msg: `Peserta berhasil ${status.toLowerCase()}` });
+    res
+      .status(200)
+      .json({ msg: `Status berhasil diperbarui menjadi ${status}` });
   } catch (error) {
+    console.error(error.message);
     res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };
@@ -149,6 +146,32 @@ export const deletePendaftaranPeserta = async (req, res) => {
     await PendaftaranPeserta.destroy({ where: { id } });
 
     res.status(200).json({ msg: "Pendaftaran peserta berhasil dihapus" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
+  }
+};
+
+export const getPendaftaranPesertaById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const pendaftaran = await PendaftaranPeserta.findOne({
+      where: { id },
+      include: [
+        {
+          model: Destinasi,
+          as: "destinasi",
+          attributes: ["id", "nama_gunung", "lokasi", "keterangan"],
+        },
+      ],
+    });
+
+    if (!pendaftaran) {
+      return res.status(404).json({ msg: "Pendaftaran tidak ditemukan" });
+    }
+
+    return res.status(200).json(pendaftaran);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: "Terjadi kesalahan server" });

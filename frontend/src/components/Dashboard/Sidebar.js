@@ -188,19 +188,6 @@ const Sidebar = () => {
                     <p>Data Peserta</p>
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link
-                    to="/dashboard/Schedule"
-                    className={`nav-link ${
-                      location.pathname === "/dashboard/Schedule"
-                        ? "active"
-                        : ""
-                    }`}
-                  >
-                    <i className="far fa-circle nav-icon"></i>
-                    <p>Schedule</p>
-                  </Link>
-                </li>
               </ul>
             </li>
 

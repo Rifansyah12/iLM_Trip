@@ -15,7 +15,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className="navbar navbar-expand-lg"
+      className={`navbar navbar-expand-lg ${
+        menuOpen ? "mobile-menu-open" : ""
+      }`}
       style={{
         width: "100%",
         height: "89px",
@@ -28,7 +30,7 @@ const Navbar = () => {
       <div className="container-fluid d-flex align-items-center">
         {/* Logo di sebelah kiri */}
         <Link to="/" className="navbar-brand">
-          <img src={logoImage} alt="Logo" width="145" height="84" />
+          <img src={logoImage} alt="Logo" className="navbar-logo" />
         </Link>
 
         {/* Navbar Toggle for Mobile */}
@@ -68,9 +70,9 @@ const Navbar = () => {
             <Link className="nav-link fs-4 ms-4" to="/Ebook">
               Ebooks
             </Link>
-            {/* <Link className="nav-link fs-4 ms-4" to="/Booking">
-              Booking
-            </Link> */}
+            <Link className="nav-link fs-4 ms-4" to="/Blog">
+              Blog
+            </Link>
             {/* Dropdown Lainnya */}
             <div className="nav-item dropdown fs-4 ms-4">
               <Link

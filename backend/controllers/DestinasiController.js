@@ -24,7 +24,7 @@ export const createDestinasi = async (req, res) => {
 
   file.mv(`./public/images/Destinasi/${fileName}`, async (err) => {
     if (err) return res.status(500).json({ msg: err.message });
-    const { paket, lokasi, harga, keterangan } = req.body;
+    const { paket, lokasi, harga, keterangan, deskripsi } = req.body;
 
     try {
       const Privatetrip = req.params.id_private
@@ -52,6 +52,7 @@ export const createDestinasi = async (req, res) => {
         harga: harga,
         foto: fileName,
         keterangan: keterangan,
+        deskripsi: deskripsi,
         id_layanan: Mountaintrip.id,
         id_privatetrip: idPrivateTrip,
       });
@@ -131,7 +132,8 @@ export const updateDestinasi = async (req, res) => {
       });
     }
 
-    const { paket, nama_gunung, lokasi, harga, keterangan } = req.body;
+    const { paket, nama_gunung, lokasi, harga, keterangan, deskripsi } =
+      req.body;
     const id_layanan = req.body.id_layanan
       ? parseInt(req.body.id_layanan)
       : null;
@@ -147,6 +149,7 @@ export const updateDestinasi = async (req, res) => {
         harga: harga,
         foto: fileName,
         keterangan: keterangan,
+        deskripsi: deskripsi,
         id_layanan: id_layanan,
         id_privatetrip: id_privatetrip,
       },
@@ -250,5 +253,39 @@ export const getDestinasiByIdPrivate = async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: "Terjadi kesalahan pada server" });
+  }
+};
+
+export const getDestinasiById = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10); // Konversi id ke integer
+    if (isNaN(id)) {
+      return res.status(400).json({ msg: "ID harus berupa angka" });
+    }
+
+    const response = await Destinasi.findOne({
+      attributes: [
+        "id",
+        "paket",
+        "nama_gunung",
+        "lokasi",
+        "harga",
+        "foto",
+        "keterangan",
+        "deskripsi",
+        "id_layanan",
+        "id_privatetrip",
+      ],
+      where: { id: id },
+    });
+
+    if (!response) {
+      return res.status(404).json({ msg: "Destinasi Tidak ditemukan" });
+    }
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Terjadi kesalahan server" });
   }
 };

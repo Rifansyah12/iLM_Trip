@@ -49,6 +49,10 @@ const Destinasi = db.define(
       type: DataTypes.TEXT, // Menggunakan TEXT untuk deskripsi panjang
       allowNull: true,
     },
+    deskripsi: {
+      type: DataTypes.TEXT, // Menambahkan deskripsi destinasi
+      allowNull: true,
+    },
     id_layanan: {
       type: DataTypes.INTEGER,
       allowNull: false,

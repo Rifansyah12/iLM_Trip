@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Untuk melakukan request ke API
 import "react-summernote/dist/react-summernote.css";
-import "summernote/dist/summernote-bs4.js"; // Import JS untuk Summernote
-import ReactSummernote from "react-summernote"; // Import komponen ReactSummernote
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import { useParams } from "react-router-dom";
 
@@ -26,6 +26,7 @@ const TableOpen = () => {
     harga: "",
     foto: null,
     keterangan: "",
+    deskripsi: "",
   });
   const [file, setFile] = useState(null);
 
@@ -129,6 +130,7 @@ const TableOpen = () => {
       formData.append("paket", newDestinasi.paket);
       formData.append("harga", newDestinasi.harga);
       formData.append("keterangan", newDestinasi.keterangan);
+      formData.append("deskripsi", newDestinasi.deskripsi);
       formData.append("foto", file); // Sesuai dengan backend yang menggunakan req.files.foto
 
       // Kirim data ke backend
@@ -226,7 +228,8 @@ const TableOpen = () => {
                   <th>Paket</th>
                   <th>Harga</th>
                   <th>Foto</th>
-                  <th>Keterangan</th>
+                  <th>Keterangan Gunung </th>
+                  <th>deskripsi</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -252,6 +255,11 @@ const TableOpen = () => {
                         )}
                       </td>
                       <td>{destinasi.keterangan}</td>
+                      <td
+                        dangerouslySetInnerHTML={{
+                          __html: destinasi.deskripsi,
+                        }}
+                      ></td>
                       <td>
                         {destinasi.id !== id_layanan ? (
                           <button
@@ -350,30 +358,33 @@ const TableOpen = () => {
                       </div>
 
                       <div className="form-group">
-                        <label>Keterangan</label>
-                        <ReactSummernote
-                          value={newDestinasi.keterangan}
-                          options={{
-                            height: 200, // Menentukan tinggi editor
-                            toolbar: [
-                              [
-                                "style",
-                                ["bold", "italic", "underline", "clear"],
-                              ],
-                              [
-                                "font",
-                                ["strikethrough", "superscript", "subscript"],
-                              ],
-                              ["para", ["ul", "ol", "paragraph"]],
-                              ["insert", ["link", "picture"]],
-                              ["view", ["fullscreen", "codeview"]],
-                            ],
-                          }}
+                        <label>Keterangan Gunung</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="keterangan"
+                          onChange={handleInputChange}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Deskripsi</label>
+                        <ReactQuill
+                          value={newDestinasi.deskripsi}
                           onChange={(content) => {
                             setNewDestinasi({
                               ...newDestinasi,
-                              keterangan: content,
+                              deskripsi: content,
                             });
+                          }}
+                          modules={{
+                            toolbar: [
+                              [{ header: "1" }, { header: "2" }, { font: [] }],
+                              [{ list: "ordered" }, { list: "bullet" }],
+                              ["bold", "italic", "underline"],
+                              ["link", "image"],
+                              ["clean"],
+                            ],
                           }}
                         />
                       </div>
@@ -386,7 +397,6 @@ const TableOpen = () => {
                           onChange={handleFileChange}
                         />
                       </div>
-
                       <div className="form-group">
                         <label>Layanan</label>
                         <select

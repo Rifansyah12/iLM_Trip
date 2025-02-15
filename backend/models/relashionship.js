@@ -2,6 +2,7 @@ import PrivateTrip from "./PrivatTripModels.js";
 import MountainTrip from "./LayananMountainTrip.js";
 import Destinasi from "./DestinasiModels.js";
 import PendaftaranPeserta from "./PendaftaranpesertaModels.js";
+import Gallery from "./GaleriPerjalananModels.js";
 
 // Inisialisasi relasi
 MountainTrip.hasMany(PrivateTrip, { 
@@ -50,6 +51,17 @@ Destinasi.hasMany(PendaftaranPeserta, {
 });
 
 PendaftaranPeserta.belongsTo(Destinasi, {
+  foreignKey: "id_destinasi",
+  as: "destinasi",
+});
+
+// Relasi Destinasi dan Gallery
+Destinasi.hasMany(Gallery, {
+  foreignKey: "id_destinasi",
+  as: "gallery",
+});
+
+Gallery.belongsTo(Destinasi, {
   foreignKey: "id_destinasi",
   as: "destinasi",
 });

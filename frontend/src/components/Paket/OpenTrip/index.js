@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 // Import semua gambar yang digunakan
 import SampleImage1 from "../../../assets/Documentasi/OpenTrip/DO1.jpg";
 import SampleImage2 from "../../../assets/Documentasi/OpenTrip/DO2.jpg";
@@ -10,6 +11,26 @@ const OpenTrip = () => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
+  const { id_layanan } = useParams();
+  const [destinasi, setDestinasi] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    const fetchDestinasi = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/getDestinasiByIdMountrip/${id_layanan}`
+        );
+        setDestinasi(response.data);
+      } catch (error) {
+        setError("Data tidak ditemukan atau terjadi kesalahan pada server");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDestinasi();
+  }, [id_layanan]);
 
   // Fungsi untuk membuka modal
   const openModal = (imageSrc) => {
@@ -105,114 +126,125 @@ const OpenTrip = () => {
           margin: "0 auto", // Membuat konten berada di tengah secara horizontal
         }}
       >
-        <div style={{ textAlign: "left", marginTop: "20px" }}>
-          <h2
-            style={{
-              fontSize: "36px",
-              marginBottom: "10px",
-              borderBottom: "2px solid #ffff",
-              display: "inline-block",
-              paddingBottom: "5px",
-              width: "fit-content",
-              fontFamily: "'Belanosima', sans-serif",
-            }}
-          >
-            Gunung Merbabu
-          </h2>
-          <p
-            style={{
-              fontSize: "36px",
-              marginTop: "10px",
-              color: "#ccc",
-              fontFamily: "'Belanosima', sans-serif",
-            }}
-          >
-            Jawa Tengah, Indonesia
-          </p>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: "0px",
-          }}
-        >
-          <div style={{ flex: 2, textAlign: "left" }}>
-            <p
-              style={{
-                fontSize: "18px",
-                marginBottom: "100px",
-                fontFamily: "'Belanosima', sans-serif",
-              }}
-            >
-              Gunung Merbabu adalah salah satu gunung yang terletak di Jawa
-              Tengah, Indonesia, dengan ketinggian sekitar 3.145 meter di atas
-              permukaan laut. Gunung ini terkenal akan jalur pendakiannya yang
-              indah, melewati padang rumput luas dan hutan pegunungan yang asri.
-              Dari puncaknya, pendaki dapat menikmati pemandangan memukau,
-              termasuk panorama Gunung Merapi, Sindoro, Sumbing, dan pegunungan
-              lain di sekitarnya. Gunung Merbabu juga memiliki daya tarik berupa
-              kawah-kawah kecil yang menambah keunikan pengalaman pendakian.
-            </p>
-          </div>
-          <div style={{ flex: 2, textAlign: "center" }}>
-            <img
-              src={Merbabu}
-              alt="Gunung Merbabu"
-              style={{
-                width: "300px", // Perkecil lebar gambar
-                height: "300px",
-                borderRadius: "10px",
-                objectFit: "cover",
-                marginTop: "-150px", // Gambar dinaikkan sedikit ke atas
-              }}
-            />
-            <p
-              style={{
-                fontSize: "40px",
-                color: "#ffff",
-                marginTop: "10px",
-                fontFamily: "'Belanosima', sans-serif",
-              }}
-            >
-              Medium Trip
-            </p>
-          </div>
-        </div>
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: "20px",
-            paddingBottom: "20px",
-          }}
-        >
-          <button
-            onClick={() => navigate("/Paket/OpenTrip/Gunung/merbabu")}
-            style={{
-              fontSize: "20px",
-              fontWeight: "bold",
-              marginBottom: "10px",
-              backgroundColor: "#FA8806",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              padding: "10px 20px",
-              cursor: "pointer",
-              fontFamily: "'Belanosima', sans-serif",
-            }}
-          >
-            IDR. 500.000 / Jelajahi
-          </button>
+        {destinasi.map((destination, index) => (
           <div
+            key={index}
             style={{
-              marginTop: "10px",
-              borderTop: "1px solid #ccc",
-              width: "100%",
+              maxWidth: "800px",
+              margin: "0 auto",
+              marginBottom: "50px",
             }}
-          ></div>
-        </div>
+          >
+            <div style={{ textAlign: "left", marginTop: "20px" }}>
+              <h2
+                style={{
+                  fontSize: "36px",
+                  marginBottom: "10px",
+                  borderBottom: "2px solid #ffff",
+                  display: "inline-block",
+                  paddingBottom: "5px",
+                  width: "fit-content",
+                  fontFamily: "'Belanosima', sans-serif",
+                }}
+              >
+                {destination.nama_gunung}
+              </h2>
+              <p
+                style={{
+                  fontSize: "36px",
+                  marginTop: "10px",
+                  color: "#ccc",
+                  fontFamily: "'Belanosima', sans-serif",
+                }}
+              >
+                {destination.lokasi}
+              </p>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row", // Biar tetap horizontal
+                alignItems: "flex-start", // Sejajarkan dari atas
+                gap: "20px", // Tambahkan jarak antar elemen
+              }}
+            >
+              <div style={{ flex: 1, textAlign: "left" }}>
+                <p
+                  style={{
+                    fontSize: "18px",
+                    marginBottom: "100px",
+                    fontFamily: "'Belanosima', sans-serif",
+                  }}
+                >
+                  {destination.keterangan}
+                </p>
+              </div>
+              <div style={{ flex: 1, textAlign: "left" }}>
+                <img
+                  src={`http://localhost:5000/images/Destinasi/${destination.foto}`}
+                  alt={destination.nama_gunung}
+                  style={{
+                    width: "300px",
+                    height: "300px",
+                    borderRadius: "10px",
+                    objectFit: "cover",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => openModal(destination.foto || Merbabu)}
+                />
+
+                <p
+                  style={{
+                    fontSize: "50px",
+                    color: "#FFFF00",
+                    marginBottom: "100px",
+                    fontFamily: "'Belanosima', sans-serif",
+                    maxWidth: "100%", // Pastikan teks tidak menyempit terlalu kecil
+                  }}
+                >
+                  {destination.paket}
+                </p>
+              </div>
+            </div>
+
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: "20px",
+                paddingBottom: "20px",
+              }}
+            >
+              <button
+                onClick={() =>
+                  navigate(`/Paket/OpenTrip/Gunung/merbabu/${destination.id}`)
+                }
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  marginBottom: "10px",
+                  backgroundColor: "#FA8806",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                  cursor: "pointer",
+                  fontFamily: "'Belanosima', sans-serif",
+                }}
+              >
+                IDR. {destination.mountaintrip?.harga_paket || "500.000"} /
+                Jelajahi
+              </button>
+              <div
+                style={{
+                  marginTop: "10px",
+                  borderTop: "1px solid #ccc",
+                  width: "100%",
+                }}
+              ></div>
+            </div>
+          </div>
+        ))}
       </div>
       {/* end content trip Merbabu*/}
     </section>
