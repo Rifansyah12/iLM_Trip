@@ -120,132 +120,132 @@ const OpenTrip = () => {
         LAYANAN MOUNTAIN TRIP :
       </h1>
       {/* content trip Merbabu */}
-      <div
-        style={{
-          maxWidth: "800px", // Menentukan lebar maksimum konten
-          margin: "0 auto", // Membuat konten berada di tengah secara horizontal
-        }}
-      >
-        {destinasi.map((destination, index) => (
-          <div
-            key={index}
-            style={{
-              maxWidth: "800px",
-              margin: "0 auto",
-              marginBottom: "50px",
-            }}
-          >
-            <div style={{ textAlign: "left", marginTop: "20px" }}>
-              <h2
-                style={{
-                  fontSize: "36px",
-                  marginBottom: "10px",
-                  borderBottom: "2px solid #ffff",
-                  display: "inline-block",
-                  paddingBottom: "5px",
-                  width: "fit-content",
-                  fontFamily: "'Belanosima', sans-serif",
-                }}
-              >
-                {destination.nama_gunung}
-              </h2>
-              <p
-                style={{
-                  fontSize: "36px",
-                  marginTop: "10px",
-                  color: "#ccc",
-                  fontFamily: "'Belanosima', sans-serif",
-                }}
-              >
-                {destination.lokasi}
-              </p>
-            </div>
-
+        <div
+          style={{
+            maxWidth: "800px", // Menentukan lebar maksimum konten
+            margin: "0 auto", // Membuat konten berada di tengah secara horizontal
+          }}
+        >
+          {destinasi.map((destination, index) => (
             <div
+              key={index}
               style={{
-                display: "flex",
-                flexDirection: "row", // Biar tetap horizontal
-                alignItems: "flex-start", // Sejajarkan dari atas
-                gap: "20px", // Tambahkan jarak antar elemen
+                maxWidth: "800px",
+                margin: "0 auto",
+                marginBottom: "50px",
               }}
             >
-              <div style={{ flex: 1, textAlign: "left" }}>
-                <p
+              <div style={{ textAlign: "left", marginTop: "20px" }}>
+                <h2
                   style={{
-                    fontSize: "18px",
-                    marginBottom: "100px",
+                    fontSize: "36px",
+                    marginBottom: "10px",
+                    borderBottom: "2px solid #ffff",
+                    display: "inline-block",
+                    paddingBottom: "5px",
+                    width: "fit-content",
                     fontFamily: "'Belanosima', sans-serif",
                   }}
                 >
-                  {destination.keterangan}
-                </p>
-              </div>
-              <div style={{ flex: 1, textAlign: "left" }}>
-                <img
-                  src={`http://localhost:5000/images/Destinasi/${destination.foto}`}
-                  alt={destination.nama_gunung}
-                  style={{
-                    width: "300px",
-                    height: "300px",
-                    borderRadius: "10px",
-                    objectFit: "cover",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => openModal(destination.foto || Merbabu)}
-                />
-
+                  {destination.nama_gunung}
+                </h2>
                 <p
                   style={{
-                    fontSize: "50px",
-                    color: "#FFFF00",
-                    marginBottom: "100px",
+                    fontSize: "36px",
+                    marginTop: "10px",
+                    color: "#ccc",
                     fontFamily: "'Belanosima', sans-serif",
-                    maxWidth: "100%", // Pastikan teks tidak menyempit terlalu kecil
                   }}
                 >
-                  {destination.paket}
+                  {destination.lokasi}
                 </p>
               </div>
-            </div>
 
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "20px",
-                paddingBottom: "20px",
-              }}
-            >
-              <button
-                onClick={() =>
-                  navigate(`/Paket/OpenTrip/Gunung/merbabu/${destination.id}`)
-                }
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  marginBottom: "10px",
-                  backgroundColor: "#FA8806",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "5px",
-                  padding: "10px 20px",
-                  cursor: "pointer",
-                  fontFamily: "'Belanosima', sans-serif",
-                }}
-              >
-                IDR. {destination.mountaintrip?.harga_paket || "500.000"} /
-                Jelajahi
-              </button>
               <div
                 style={{
-                  marginTop: "10px",
-                  borderTop: "1px solid #ccc",
-                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row", // Biar tetap horizontal
+                  alignItems: "flex-start", // Sejajarkan dari atas
+                  gap: "20px", // Tambahkan jarak antar elemen
                 }}
-              ></div>
+              >
+                <div style={{ flex: 1, textAlign: "left" }}>
+                  <p
+                    style={{
+                      fontSize: "18px",
+                      marginBottom: "100px",
+                      fontFamily: "'Belanosima', sans-serif",
+                    }}
+                  >
+                    {destination.keterangan}
+                  </p>
+                </div>
+                <div style={{ flex: 1, textAlign: "left" }}>
+                  <img
+                    src={`http://localhost:5000/images/Destinasi/${destination.foto}`}
+                    alt={destination.nama_gunung}
+                    style={{
+                      width: "300px",
+                      height: "300px",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => openModal(destination.foto || Merbabu)}
+                  />
+
+                  <p
+                    style={{
+                      fontSize: "50px",
+                      color: "#FFFF00",
+                      marginBottom: "100px",
+                      fontFamily: "'Belanosima', sans-serif",
+                      maxWidth: "100%", // Pastikan teks tidak menyempit terlalu kecil
+                    }}
+                  >
+                    {destination.paket}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "20px",
+                  paddingBottom: "20px",
+                }}
+              >
+                <button
+                  onClick={() =>
+                    navigate(`/Paket/OpenTrip/Gunung/merbabu/${destination.id}`)
+                  }
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    marginBottom: "10px",
+                    backgroundColor: "#FA8806",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                    fontFamily: "'Belanosima', sans-serif",
+                  }}
+                >
+                  IDR. {destination.mountaintrip?.harga_paket || "500.000"} /
+                  Jelajahi
+                </button>
+                <div
+                  style={{
+                    marginTop: "10px",
+                    borderTop: "1px solid #ccc",
+                    width: "100%",
+                  }}
+                ></div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       {/* end content trip Merbabu*/}
     </section>
   );

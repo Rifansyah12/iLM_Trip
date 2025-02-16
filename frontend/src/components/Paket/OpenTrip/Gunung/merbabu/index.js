@@ -59,12 +59,12 @@ const Merbabu = ({ destinasi }) => {
       {showTerms && (
         <div
           style={{
-            backgroundColor: "#333",
+            backgroundColor: "#fff",
             padding: "20px",
             borderRadius: "10px",
             marginBottom: "30px",
             lineHeight: "1.8",
-            color: "#fff",
+            color: "#000",
           }}
         >
           <div dangerouslySetInnerHTML={{ __html: destinasi.deskripsi }}></div>
