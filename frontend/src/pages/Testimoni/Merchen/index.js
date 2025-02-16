@@ -47,9 +47,16 @@ const Merchandise = () => {
           marginBottom: "40px",
         }}
       >
-        <h1 style={{ fontSize: "60px", margin: "0", color: "#000000" }}>
+        <h1
+          className="fw-bold text-dark text-center"
+          style={{
+            fontSize: "clamp(40px, 8vw, 80px)", // Ukuran font responsif
+            textShadow: "5px 5px 10px orange",
+          }}
+        >
           Merchandise
         </h1>
+
         <p
           style={{
             fontSize: "24px",

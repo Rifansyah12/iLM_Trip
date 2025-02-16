@@ -1,37 +1,35 @@
 import React from "react";
 import Background from "../../assets/volcano-3779159_1280.png";
-import NewImage from "../../assets/logo/Logo_trip.png"; // Gambar baru yang ditambahkan
+import NewImage from "../../assets/logo/Logo_trip.png";
 
 function Header() {
   const headerStyle = {
     position: "relative",
     width: "100%",
-    height: 671, // Tinggi gambar latar belakang
+    height: "80vh", // Gunakan vh agar tinggi fleksibel
     overflow: "hidden",
   };
 
   const textStyle = {
     color: "#FFFCFC",
-    fontSize: 50,
+    fontSize: "3vw", // Gunakan vw agar responsif di layar kecil
     fontFamily: "Beiruti",
     fontWeight: "700",
-    wordWrap: "break-word",
     position: "absolute",
-    top: 180, // Posisi vertikal teks
-    left: 50, // Sama dengan padding kiri navbar
-    paddingRight: 50, // Sama dengan padding kanan navbar
-    zIndex: 1, // Pastikan teks berada di atas gambar
-    maxWidth: "50%", // Membatasi lebar teks agar lebih rapat dengan gambar
+    top: "20%",
+    left: "5%",
+    zIndex: 1,
+    maxWidth: "50%",
   };
 
   const imageStyle = {
     width: "100%",
     height: "100%",
-    objectFit: "cover", // Pastikan gambar tidak pecah
+    objectFit: "cover",
     position: "absolute",
     top: 0,
     left: 0,
-    zIndex: 0, // Gambar berada di bawah teks
+    zIndex: 0,
   };
 
   const overlayStyle = {
@@ -40,68 +38,58 @@ function Header() {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Efek hitam transparan
-    zIndex: 0, // Overlay berada di atas gambar, tapi di bawah teks
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 0,
   };
 
   const newImageStyle = {
     position: "absolute",
-    top: 10, // Menempatkan gambar sedikit lebih rendah dari bagian atas
-    right: 10, // Menempatkan gambar di sebelah kanan dengan jarak 10px dari tepi kanan
-    width: "20%", // Memperkecil ukuran gambar menjadi 15% dari lebar elemen induk
-    height: "auto", // Biarkan tinggi gambar proporsional dengan lebar
-    zIndex: 1, // Pastikan gambar baru berada di atas gambar latar belakang
+    top: "5%",
+    right: "5%",
+    width: "15vw",
+    height: "auto",
+    zIndex: 1,
+  };
+
+  const buttonStyle = {
+    width: "12vw",
+    height: "6vh",
+    background: "linear-gradient(90deg, white 0%, #FFD18F 100%)",
+    borderRadius: "10px",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "1.5vw",
+    fontWeight: "bold",
+    fontFamily: "Poppins, sans-serif",
+    color: "#FA8806",
+    marginTop: "20px",
   };
 
   return (
     <header style={headerStyle}>
-      <img
-        className="Volcano37791591280"
-        style={imageStyle}
-        src={Background}
-        alt="Background"
-      />
-      <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
-      <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
+      <img style={imageStyle} src={Background} alt="Background" />
+      <div style={overlayStyle}></div>
+
+      <div style={textStyle}>
         “Pilih Petualangan Anda, Capai Puncaknya!”
         <p
           style={{
             color: "#ffff",
-            fontSize: 25,
+            fontSize: "1.5vw",
             fontWeight: "50",
             fontFamily: "Poppins",
-            width: "100%", // Sesuaikan lebar teks
-            margin: "30px", // Agar teks tetap di tengah secara horizontal
+            width: "100%",
             textAlign: "left",
           }}
         >
           Petualangan ini lebih dari sekedar perjalanan menuju puncak. Ini
           adalah pengalaman yang akan mengubah cara Anda merasakan dunia, penuh
-          tantangan, keindahan, dan kebanggaan yang tak terlupakan
+          tantangan, keindahan, dan kebanggaan yang tak terlupakan.
         </p>
-        <button
-          style={{
-            width: 206,
-            height: 47,
-            background: "linear-gradient(90deg, white 0%, #FFD18F 100%)",
-            borderRadius: 10,
-            border: "none", // Menghapus border default button
-            cursor: "pointer", // Menambahkan efek pointer saat hover
-            fontSize: 30, // Ukuran font opsional
-            fontWeight: "bold", // Bobot font opsional
-            fontFamily: "Poppins, sans-serif", // Font opsional
-            color: "#FA8806",
-          }}
-        >
-          Explore
-        </button>
+        <button style={buttonStyle}>Explore</button>
       </div>
-      <img
-        className="NewImage" // Kelas untuk gambar baru
-        style={newImageStyle} // Gaya untuk gambar baru
-        src={NewImage} // Sumber gambar baru
-        alt="New Image"
-      />
+
+      <img style={newImageStyle} src={NewImage} alt="New Image" />
     </header>
   );
 }

@@ -4,379 +4,247 @@ import NewImage1 from "../../assets/Gunung/Gede/gede1.jpg";
 import NewImage2 from "../../assets/Gunung/Gede/gede2.jpg";
 import NewImage3 from "../../assets/Gunung/Gede/gede3.jpg";
 import NewImage4 from "../../assets/Gunung/Gede/gede4.jpg";
-import NewImage5 from "../../assets/Gunung/Gede/gede3.jpg";
-import NewImage6 from "../../assets/Gunung/Gede/gede4.jpg";
 import PartnerImage1 from "../../assets/partner/partner1.jpg";
 import PartnerImage2 from "../../assets/partner/partner2.jpg";
 import PartnerImage3 from "../../assets/partner/partner3.PNG";
 import PartnerImage4 from "../../assets/partner/partner4.JPG";
-import CustomerImage1 from "../../assets/customer/customer1.jpg";
-import CustomerImage2 from "../../assets/customer/customer2.png";
-import CustomerImage3 from "../../assets/customer/customer3.jpg";
-import CustomerImage4 from "../../assets/customer/customer4.jpg";
-import CustomerImage5 from "../../assets/customer/customer5.jpg";
 import PageheaderImage from "../../assets/Gunung/Gede/gede.jpg";
 
 const TentangKami = () => {
   return (
-    <div
-      style={{
-        color: "#ffffff",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {/* Page Header Start */}
-      <div
-        style={{
-          width: "100%",
-          backgroundImage: `url(${PageheaderImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          padding: "80px 0",
-          textAlign: "center",
-          position: "relative",
-        }}
-      >
-        {/* Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Transparan hitam
-          }}
-        ></div>
-
-        {/* Konten Page Header */}
-        <div style={{ position: "relative", zIndex: 1, color: "white" }}>
-          <h1
-            style={{
-              fontSize: "48px",
-              marginBottom: "20px",
-            }}
-          >
-            About Us
-          </h1>
-          <nav aria-label="breadcrumb">
-            <ol
-              style={{
-                listStyle: "none",
-                display: "flex",
-                justifyContent: "center",
-                padding: 0,
-                margin: 0,
-                gap: "10px",
-              }}
-            >
+    <div style={styles.container}>
+      {/* Header */}
+      <div style={styles.header}>
+        <div style={styles.overlay}></div>
+        <div style={styles.headerContent}>
+          <h1>About Us</h1>
+          <nav>
+            <ol style={styles.breadcrumb}>
               <li>
-                <a
-                  href="#"
-                  style={{ color: "#40E0D0", textDecoration: "none" }}
-                >
-                  Home
-                </a>
+                <a href="#">Home</a>
               </li>
               <li>/</li>
               <li>
-                <a
-                  href="#"
-                  style={{ color: "#40E0D0", textDecoration: "none" }}
-                >
-                  Pages
-                </a>
+                <a href="#">Pages</a>
               </li>
               <li>/</li>
-              <li style={{ color: "white" }}>About Us</li>
+              <li>About Us</li>
             </ol>
           </nav>
         </div>
       </div>
-      {/* Page Header End */}
-      <div
-        style={{
-          color: "#ffffff",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* Bungkus konten dengan background */}
-        <div
-          style={{
-            width: "100%", // Sesuaikan lebar agar responsif
-            padding: "40px",
-            borderRadius: "10px",
-            backgroundImage: `url(${NewImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          {/* Lapisan transparan abu-abu */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // Efek transparan abu
-              borderRadius: "10px",
-            }}
-          ></div>
 
-          {/* Konten Tentang Kami */}
-          <div style={{ position: "relative", zIndex: 1 }}>
-            {/* Judul Tentang Kami */}
-            <h2
-              style={{
-                color: "white",
-                marginBottom: "50px",
-                borderBottom: "2px solid orange",
-                display: "inline-block",
-                width: "max-content", // Garis bawah sesuai panjang teks
-                padding: "8px",
-                borderRadius: "8px",
-                textAlign: "right", // Geser teks ke kanan
-                marginLeft: "40%", // Menggeser ke kanan secara otomatis
-                marginRight: "0", // Pastikan tidak ada jarak di sisi kanan
-              }}
-            >
-              ILM TRIP Organizer
-            </h2>
-
-            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              {/* Video YouTube di sebelah kiri */}
-              <div style={{ width: "40%" }}>
-                <iframe
-                  width="100%"
-                  height="315"
-                  src="https://www.youtube.com/embed/zQreoFMeyCQ"
-                  title="Il'm Trip Organizer"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-
-              {/* Konten di sebelah kanan */}
-              <div style={{ width: "50%", textAlign: "right" }}>
-                <h2
-                  style={{
-                    fontSize: "40px",
-                    textAlign: "left",
-                    color: "#40E0D0",
-                  }}
-                >
-                  Lebih dari Sekadar Pendakian – Ini adalah Perjalanan Menuju
-                  Kebanggaan dan Keindahan Sejati.
-                </h2>
-                <p
-                  style={{
-                    fontSize: "20px",
-                    textAlign: "justify",
-                  }}
-                >
-                  Kami adalah perusahaan yang berdedikasi dalam menyajikan
-                  pengalaman wisata pendakian gunung yang tak terlupakan di
-                  Indonesia. Dengan fokus pada wisata minat khusus, Il'm Trip
-                  Organizer menawarkan berbagai paket pendakian yang dirancang
-                  untuk memenuhi kebutuhan berbagai kalangan, mulai dari private
-                  trip untuk pendakian eksklusif, open trip untuk bertemu dengan
-                  pendaki lain, family trip untuk pengalaman keluarga, hingga
-                  gathering kantor yang mempererat kebersamaan. Kami menyediakan
-                  pilihan fasilitas yang variatif, mulai dari medium trip dengan
-                  kenyamanan standar, premium trip untuk pengalaman lebih
-                  lengkap, hingga luxury trip yang menghadirkan kemewahan di
-                  alam bebas. Dengan komitmen terhadap keselamatan, pelayanan
-                  berkualitas, dan pengalaman seru, kami siap mengajak Anda
-                  menaklukkan puncak-puncak tertinggi dengan penuh kebanggaan.
-                  Temukan petualangan mendaki terbaik bersama Il'm Trip
-                  Organizer dan wujudkan mimpi pendakian Anda.
-                </p>
-              </div>
-            </div>
-            {/* Gambar Berjejer */}
-            <div
-              style={{
-                display: "grid", // Menggunakan grid untuk pengaturan gambar
-                gridTemplateColumns: "repeat(8, 0fr)", // Dua kolom
-                gap: "20px", // Menambahkan jarak antar gambar
-                marginTop: "50px", // Menambahkan jarak antara gambar dan paragraf
-                marginBottom: "50px", // Menambahkan jarak antara gambar dan footer
-              }}
-            >
-              <img
-                src={NewImage1}
-                alt="Gambar 1"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "10px", // Membuat gambar memiliki sudut yang tumpul
-                }}
-              />
-              <img
-                src={NewImage2}
-                alt="Gambar 2"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "10px", // Membuat gambar memiliki sudut yang tumpul
-                }}
-              />
-              <img
-                src={NewImage3}
-                alt="Gambar 3"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "10px", // Membuat gambar memiliki sudut yang tumpul
-                }}
-              />
-              <img
-                src={NewImage4}
-                alt="Gambar 4"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "10px", // Membuat gambar memiliki sudut yang tumpul
-                }}
-              />
-              <img
-                src={NewImage5}
-                alt="Gambar 4"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "10px", // Membuat gambar memiliki sudut yang tumpul
-                }}
-              />
-              <img
-                src={NewImage6}
-                alt="Gambar 4"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  borderRadius: "10px", // Membuat gambar memiliki sudut yang tumpul
-                }}
-              />
+      {/* Tentang Kami Section */}
+      <div style={styles.content}>
+        <div style={styles.overlay}></div>
+        <div style={styles.textContainer}>
+          <h2 style={styles.sectionTitle}>ILM TRIP Organizer</h2>
+          <div style={styles.flexContainer}>
+            {/* Video */}
+            <div style={styles.videoContainer}>
+              <iframe
+                width="100%"
+                height="315"
+                src="https://www.youtube.com/embed/zQreoFMeyCQ"
+                title="Il'm Trip Organizer"
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              ></iframe>
             </div>
 
-            {/* Bagian Sponsor */}
-            <h2
-              style={{
-                color: "white",
-                marginBottom: "50px",
-                borderBottom: "2px solid orange",
-                display: "inline-block",
-                width: "max-content", // Garis bawah sesuai panjang teks
-                padding: "8px",
-                borderRadius: "8px",
-                textAlign: "right", // Geser teks ke kanan
-                marginLeft: "40%", // Menggeser ke kanan secara otomatis
-                marginRight: "0", // Pastikan tidak ada jarak di sisi kanan
-              }}
-            >
-              Partner Kami
-            </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", // Responsif
-                gap: "20px",
-                padding: "0 50px",
-                marginBottom: "50px",
-              }}
-            >
-              <img
-                src={PartnerImage1}
-                alt="Sponsor 1"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
-              <img
-                src={PartnerImage2}
-                alt="Sponsor 2"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
-              <img
-                src={PartnerImage3}
-                alt="Sponsor 3"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
-              <img
-                src={PartnerImage4}
-                alt="Sponsor 4"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
+            {/* Deskripsi */}
+            <div style={styles.textBox}>
+              <h2 style={{ ...styles.highlightText, textAlign: "center" }}>
+                Lebih dari Sekadar Pendakian – Ini adalah Perjalanan Menuju
+                Kebanggaan dan Keindahan Sejati.
+              </h2>
+              <p>
+                Kami adalah perusahaan yang berdedikasi dalam menyajikan
+                pengalaman wisata pendakian gunung yang tak terlupakan di
+                Indonesia. Dengan fokus pada wisata minat khusus, Il'm Trip
+                Organizer menawarkan berbagai paket pendakian yang dirancang
+                untuk memenuhi kebutuhan berbagai kalangan, mulai dari private
+                trip untuk pendakian eksklusif, open trip untuk bertemu dengan
+                pendaki lain, family trip untuk pengalaman keluarga, hingga
+                gathering kantor yang mempererat kebersamaan. Kami menyediakan
+                pilihan fasilitas yang variatif, mulai dari medium trip dengan
+                kenyamanan standar, premium trip untuk pengalaman lebih lengkap,
+                hingga luxury trip yang menghadirkan kemewahan di alam bebas.
+                Dengan komitmen terhadap keselamatan, pelayanan berkualitas, dan
+                pengalaman seru, kami siap mengajak Anda menaklukkan
+                puncak-puncak tertinggi dengan penuh kebanggaan. Temukan
+                petualangan mendaki terbaik bersama Il'm Trip Organizer dan
+                wujudkan mimpi pendakian Anda.
+              </p>
             </div>
+          </div>
 
-            {/* Bagian Customer */}
-            <h2
-              style={{
-                color: "white",
-                marginBottom: "50px",
-                borderBottom: "2px solid orange",
-                display: "inline-block",
-                width: "max-content", // Garis bawah sesuai panjang teks
-                padding: "8px",
-                borderRadius: "8px",
-                textAlign: "right", // Geser teks ke kanan
-                marginLeft: "40%", // Menggeser ke kanan secara otomatis
-                marginRight: "0", // Pastikan tidak ada jarak di sisi kanan
-              }}
-            >
-              Customer
-            </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", // Responsif
-                gap: "20px",
-                padding: "0 50px",
-                marginBottom: "50px",
-              }}
-            >
+          {/* Galeri Gambar */}
+          <div style={styles.imageGrid}>
+            {[NewImage1, NewImage2, NewImage3, NewImage4].map((img, idx) => (
               <img
-                src={CustomerImage1}
-                alt="Sponsor 1"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+                key={idx}
+                src={img}
+                alt={`Gambar ${idx + 1}`}
+                style={styles.image}
               />
-              <img
-                src={CustomerImage2}
-                alt="Sponsor 2"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
-              <img
-                src={CustomerImage3}
-                alt="Sponsor 3"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
-              <img
-                src={CustomerImage4}
-                alt="Sponsor 4"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
-              <img
-                src={CustomerImage5}
-                alt="Sponsor 4"
-                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-              />
-            </div>
+            ))}
+          </div>
+
+          {/* Partner Kami */}
+          <h2 style={styles.sectionTitle}>Partner Kami</h2>
+          <div style={styles.partnerGrid}>
+            {[PartnerImage1, PartnerImage2, PartnerImage3, PartnerImage4].map(
+              (img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`Partner ${idx + 1}`}
+                  style={styles.partnerImage}
+                />
+              )
+            )}
+          </div>
+
+          {/* Partner Kami */}
+          <h2 style={styles.sectionTitle}>Customer</h2>
+          <div style={styles.partnerGrid}>
+            {[PartnerImage1, PartnerImage2, PartnerImage3, PartnerImage4].map(
+              (img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`Partner ${idx + 1}`}
+                  style={styles.partnerImage}
+                />
+              )
+            )}
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+/* CSS-in-JS */
+const styles = {
+  container: {
+    color: "#fff",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  centeredTitle: {
+    fontSize: "24px",
+    color: "#40E0D0",
+    textAlign: "center",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "0 auto",
+  },
+  header: {
+    width: "100%",
+    backgroundImage: `url(${PageheaderImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    padding: "60px 20px",
+    textAlign: "center",
+    position: "relative",
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  headerContent: {
+    position: "relative",
+    zIndex: 1,
+    color: "white",
+  },
+  breadcrumb: {
+    listStyle: "none",
+    display: "flex",
+    justifyContent: "center",
+    padding: 0,
+    margin: 0,
+    gap: "10px",
+  },
+  content: {
+    width: "100%",
+    padding: "40px",
+    position: "relative",
+    backgroundImage: `url(${NewImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  },
+  textContainer: {
+    position: "relative",
+    zIndex: 1,
+  },
+  sectionTitle: {
+    color: "white",
+    marginBottom: "10%", // Tambahkan jarak bawah lebih besar
+    borderBottom: "2px solid orange",
+    display: "block", // Pastikan elemen mengambil seluruh lebar yang tersedia
+    padding: "8px",
+    borderRadius: "8px",
+    textAlign: "center",
+    width: "max-content", // Sesuaikan lebar dengan teks
+    margin: "0 auto", // Pusatkan elemen secara horizontal
+  },
+  flexContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "20px",
+    marginTop: "20px",
+  },
+  videoContainer: {
+    flex: "1 1 400px",
+    maxWidth: "600px",
+  },
+  textBox: {
+    flex: "1 1 400px",
+    textAlign: "justify",
+  },
+  highlightText: {
+    fontSize: "24px",
+    color: "#40E0D0",
+    textAlign: "left",
+  },
+  imageGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+    gap: "15px",
+    marginTop: "30px",
+  },
+  image: {
+    width: "100%",
+    height: "auto",
+    borderRadius: "10px",
+  },
+  partnerGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+    gap: "20px",
+    padding: "0 20px",
+    marginTop: "40px",
+  },
+  partnerImage: {
+    width: "100%",
+    height: "auto",
+    borderRadius: "10px",
+  },
 };
 
 export default TentangKami;

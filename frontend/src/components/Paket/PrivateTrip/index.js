@@ -9,6 +9,7 @@ const OpenTrip = ({ trip }) => {
   const [modalImage, setModalImage] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -111,12 +112,12 @@ const OpenTrip = ({ trip }) => {
           alignItems: "flex-start",
           gap: "20px",
           marginTop: "20px",
+          flexWrap: "wrap",
         }}
       >
         {trips.map((trip) => (
-          <div key={trip.id} style={{ maxWidth: "400px" }}>
+          <div key={trip.id} style={{ maxWidth: "400px", width: "100%" }}>
             <div style={{ textAlign: "left", marginTop: "20px" }}>
-              {/* Warna id 1 dan 2 berbeda yaaaaa */}
               <h2
                 style={{
                   fontSize: "36px",
@@ -131,7 +132,7 @@ const OpenTrip = ({ trip }) => {
                       ? "#FFD700"
                       : trip.id === 2
                       ? "#00FFFF"
-                      : "#FFFFFF", // Warna berbeda berdasarkan ID
+                      : "#FFFFFF",
                 }}
               >
                 {trip.nama_paket}
@@ -167,7 +168,7 @@ const OpenTrip = ({ trip }) => {
               <button
                 onClick={() => {
                   setIsClicked(true);
-                  setTimeout(() => setIsClicked(false), 200); // Efek klik sementara
+                  setTimeout(() => setIsClicked(false), 200);
                   navigate(`/Paket/PrivateTrip/Premium/${trip.id}`);
                 }}
                 onMouseEnter={() => setIsHovered(true)}
