@@ -183,7 +183,7 @@ const App = () => {
 
       {!isAdminPage && (
         <a
-          href="https://wa.me/6281234567890" // Ganti dengan nomor WhatsApp tujuan
+          href="https://wa.me/6285136907211" // Ganti dengan nomor WhatsApp tujuan
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary btn-livechat"
