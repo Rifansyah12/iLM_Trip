@@ -133,29 +133,29 @@ const DataPesertaBaru = () => {
     }
   };
   useEffect(() => {
-    fetchPeserta();
+   
   }, []);
 
-  const fetchPeserta = async () => {
-    try {
+  // const fetchPeserta = async (id) => {
+  //   try {
 
-      const response = await axios.put(
-        `http://localhost:5000/updateStatus/${id}`,
-        { status: isApproved ? "Disetujui" : "Ditolak" }
-      );
+  //     const response = await axios.put(
+  //       `http://localhost:5000/updateStatus/${id}`,
+  //       { status: isApproved ? "Disetujui" : "Ditolak" }
+  //     );
 
     
       
-      // Simpan status berdasarkan ID peserta
-      const statusMap = response.data.reduce((acc, item) => {
-        acc[item.id] = item.status === "Disetujui";
-        return acc;
-      }, {});
-      setStatus(statusMap);
-    } catch (error) {
-      console.error("Gagal mengambil data:", error);
-    }
-  };
+  //     // Simpan status berdasarkan ID peserta
+  //     const statusMap = response.data.reduce((acc, item) => {
+  //       acc[item.id] = item.status === "Disetujui";
+  //       return acc;
+  //     }, {});
+  //     setStatus(statusMap);
+  //   } catch (error) {
+  //     console.error("Gagal mengambil data:", error);
+  //   }
+  // };
 
 
   const handleApproval = async (id) => {

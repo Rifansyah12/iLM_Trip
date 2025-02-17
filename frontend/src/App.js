@@ -53,11 +53,11 @@ import DataPesertaBaru from "./components/Dashboard/Pages/DataPeserta/DataPesert
 import Schedule from "./components/Dashboard/Pages/DataPeserta/Schedule";
 import DataPeserta from "./components/Dashboard/Pages/DataPeserta/DataPeserta";
 import MerchenAdmin from "./components/Dashboard/Pages/merchen";
-<<<<<<< HEAD
+
 import BlogAdmin from "./components/Dashboard/Blog";
-=======
+
 import CreateAdmin from "./components/FormDaftarAdmin";
->>>>>>> 461bff0 (Menambahkan perubahan terbaru)
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -126,20 +126,11 @@ const App = () => {
         <Route path="/Testimoni/Merchen" element={<TestimoniHome />} />
         <Route path="/Kontak" element={<Kontak />} />
         <Route path="/Login" element={<LoginPage />} />
-<<<<<<< HEAD
-        <Route
-          path="/Paket/OpenTrip/Gunung/merbabu/:id"
-          element={<Merbabu />}
-        />
-        <Route
-          path="/Paket/PrivateTrip/Premium/:id_privatetrip"
-          element={<Premium />}
-        />
-=======
+
         <Route path="/RegisterAdmin" element={<CreateAdmin />} />
         <Route path="/Paket/OpenTrip/Gunung/merbabu/:id" element={<Merbabu />} />
         <Route path="/Paket/PrivateTrip/Premium/:id_privatetrip" element={<Premium />} />
->>>>>>> 461bff0 (Menambahkan perubahan terbaru)
+
         <Route
           path="/Paket/PrivateTrip/Premium/Destinasi"
           element={<DestinasiPremium />}

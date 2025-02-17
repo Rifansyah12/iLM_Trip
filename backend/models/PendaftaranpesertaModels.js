@@ -108,9 +108,18 @@ const PendaftaranPeserta = db.define(
     },
     id_destinasi: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: "table_destinasi",
+        key: "id",
+      },
+    },
+    
+    id_anothertrip: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "table_anothertrip",
         key: "id",
       },
     },

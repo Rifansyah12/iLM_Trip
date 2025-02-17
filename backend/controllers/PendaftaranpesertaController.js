@@ -4,7 +4,7 @@ import crypto from "crypto";
 import PendaftaranPeserta from "../models/PendaftaranpesertaModels.js";
 import Destinasi from "../models/DestinasiModels.js";
 import moment from "moment";
-
+import Anothertrip from "../models/AnothertripModels.js";
 export const createPendaftaranPeserta = async (req, res) => {
   if (!req.files || !req.files.fotoKtp)
     return res.status(400).json({ msg: "No file uploaded" });
@@ -24,8 +24,6 @@ export const createPendaftaranPeserta = async (req, res) => {
     return res.status(422).json({ msg: "File terlalu besar, maksimal 5MB" });
 
   try {
-    // Periksa apakah id_destinasi valid
-
     // Simpan file foto KTP ke folder
     file.mv(filePath, async (err) => {
       if (err) return res.status(500).json({ msg: err.message });
@@ -44,6 +42,7 @@ export const createPendaftaranPeserta = async (req, res) => {
         keterangan,
         kesehatan,
         id_destinasi,
+        id_anothertrip, // Tambahkan id_anothertrip
       } = req.body;
 
       const tanggal = moment().format("YYYY-MM-DD HH:mm:ss"); // Set default tanggal saat ini
@@ -65,7 +64,8 @@ export const createPendaftaranPeserta = async (req, res) => {
           kesehatan,
           status: "Belum Disetujui", // Status default
           fotoKtp: fileName,
-          id_destinasi,
+          id_destinasi: id_destinasi || null, // Jika kosong, set NULL
+          id_anothertrip: id_anothertrip || null, // Jika kosong, set NULL
         });
 
         res.status(201).json({ msg: "Pendaftaran berhasil ditambahkan" });
@@ -80,6 +80,7 @@ export const createPendaftaranPeserta = async (req, res) => {
   }
 };
 
+
 export const getPendaftaranPeserta = async (req, res) => {
   try {
     const pendaftaran = await PendaftaranPeserta.findAll({
@@ -88,6 +89,11 @@ export const getPendaftaranPeserta = async (req, res) => {
           model: Destinasi,
           as: "destinasi",
           attributes: ["id", "nama_gunung", "lokasi", "keterangan"], // Pilih atribut yang ingin ditampilkan
+        },
+        {
+          model: Anothertrip,
+          as: "anothertrip",
+          attributes: ["id", "nama_layanan", "lokasi", "harga", "foto"], // Pilih atribut yang ingin ditampilkan
         },
       ],
     });
