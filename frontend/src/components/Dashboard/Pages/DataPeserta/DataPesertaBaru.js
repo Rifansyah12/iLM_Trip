@@ -138,14 +138,13 @@ const DataPesertaBaru = () => {
 
   const fetchPeserta = async () => {
     try {
-<<<<<<< HEAD
+
       const response = await axios.put(
         `http://localhost:5000/updateStatus/${id}`,
         { status: isApproved ? "Disetujui" : "Ditolak" }
       );
-=======
-      const response = await axios.get("http://localhost:5000/getPendaftaranPeserta");
-      setPeserta(response.data);
+
+    
       
       // Simpan status berdasarkan ID peserta
       const statusMap = response.data.reduce((acc, item) => {
@@ -157,7 +156,7 @@ const DataPesertaBaru = () => {
       console.error("Gagal mengambil data:", error);
     }
   };
->>>>>>> 461bff0 (Menambahkan perubahan terbaru)
+
 
   const handleApproval = async (id) => {
     try {
