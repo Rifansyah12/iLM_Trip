@@ -161,6 +161,7 @@ const OpenTrip = () => {
             onClick={() => openModal(item.foto)}
           />
           <button
+           onClick={() => navigate(`/FormDaftar/${item.id}`)}
             style={{
               backgroundColor: "#FA8806",
               color: "white",

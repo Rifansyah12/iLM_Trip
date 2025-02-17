@@ -3,7 +3,7 @@ import Background1 from "../../../../assets/Trip/bg2.png";
 import Background2 from "../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 import Background3 from "../../../../assets/Gunung/Merbabu/merbabu2.jpg"; // Tambahkan gambar lain jika diperlukan
 
-function Header() {
+function Header({trip}) {
   const [currentImage, setCurrentImage] = useState(Background1); // Gambar pertama sebagai default
 
   // Gambar latar belakang yang akan diputar
@@ -101,7 +101,7 @@ function Header() {
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        TAHURA DJUANDA
+       {trip.nama_layanan.toUpperCase()}
         {/* <p
           style={{
             color: "#ffff",
@@ -129,7 +129,7 @@ function Header() {
             marginTop: "20px", // Jarak antara teks Nikmati dan Lokasi
           }}
         >
-          LOKASI: Jawa Barat, Indonesia
+          LOKASI: {trip.lokasi.toUpperCase()}
         </p>
       </div>
       {/* Rating Section */}

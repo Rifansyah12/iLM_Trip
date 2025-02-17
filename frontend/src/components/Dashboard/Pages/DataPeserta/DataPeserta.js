@@ -15,6 +15,22 @@ import vectorPrice from "../../../../assets/icons/Paket.png"; // Ikon vektor har
 const DataPeserta = () => {
   const [data, setData] = useState([]);
   const [pesertaData, setPesertaData] = useState([]);
+  const [serviceCounts, setServiceCounts] = useState({});
+
+  useEffect(() => {
+    // Fetch data dari backend
+    fetch("http://localhost:5000/getDestinasi")
+      .then((response) => response.json())
+      .then((data) => {
+        const counts = {};
+        data.forEach((item) => {
+          const serviceName = item.mountaintrip?.nama_layanan || "Layanan Tidak Diketahui";
+          counts[serviceName] = (counts[serviceName] || 0) + 1;
+        });
+        setServiceCounts(counts);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
   // Data peserta per bulan
   const pesertaPerBulan = [
@@ -189,63 +205,63 @@ const DataPeserta = () => {
 
         {/* Persentasi */}
         <section className="content">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-lg-3 col-6">
-                <div className="small-box bg-info">
-                  <div className="inner">
-                    <h3>
-                      53<sup style={{ fontSize: 20 }}>%</sup>
-                    </h3>
-                    <p>PrivateTrip Orders</p>
-                  </div>
-                  <div className="icon">
-                    <i className="ion ion-bag" />
-                  </div>
-                </div>
+      <div className="container-fluid">
+        <div className="row">
+          {/* Private Trip */}
+          <div className="col-lg-3 col-6">
+            <div className="small-box bg-info">
+              <div className="inner">
+                <h3>{serviceCounts["Private Trip"] || 0}</h3>
+                <p>Private Trip Orders</p>
               </div>
-              <div className="col-lg-3 col-6">
-                <div className="small-box bg-success">
-                  <div className="inner">
-                    <h3>
-                      53<sup style={{ fontSize: 20 }}>%</sup>
-                    </h3>
-                    <p>FamilyTrip Orders</p>
-                  </div>
-                  <div className="icon">
-                    <i className="ion ion-stats-bars" />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-6">
-                <div className="small-box bg-warning">
-                  <div className="inner">
-                    <h3>
-                      53<sup style={{ fontSize: 20 }}>%</sup>
-                    </h3>
-                    <p>OpenTrip Orders</p>
-                  </div>
-                  <div className="icon">
-                    <i className="ion ion-person-add" />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-6">
-                <div className="small-box bg-danger">
-                  <div className="inner">
-                    <h3>
-                      53<sup style={{ fontSize: 20 }}>%</sup>
-                    </h3>
-                    <p>Gathering Kantor Orders</p>
-                  </div>
-                  <div className="icon">
-                    <i className="ion ion-pie-graph" />
-                  </div>
-                </div>
+              <div className="icon">
+                <i className="ion ion-bag" />
               </div>
             </div>
           </div>
-        </section>
+
+          {/* Family Trip */}
+          <div className="col-lg-3 col-6">
+            <div className="small-box bg-success">
+              <div className="inner">
+                <h3>{serviceCounts["Familly trip"] || 0}</h3>
+                <p>Family Trip Orders</p>
+              </div>
+              <div className="icon">
+                <i className="ion ion-stats-bars" />
+              </div>
+            </div>
+          </div>
+
+          {/* Open Trip */}
+          <div className="col-lg-3 col-6">
+            <div className="small-box bg-warning">
+              <div className="inner">
+                <h3>{serviceCounts["Open Trip"] || 0}</h3>
+                <p>Open Trip Orders</p>
+              </div>
+              <div className="icon">
+                <i className="ion ion-person-add" />
+              </div>
+            </div>
+          </div>
+
+          {/* Gathering Kantor */}
+          <div className="col-lg-3 col-6">
+            <div className="small-box bg-danger">
+              <div className="inner">
+                <h3>{serviceCounts["Gathering Kantor"] || 0}</h3>
+                <p>Gathering Kantor Orders</p>
+              </div>
+              <div className="icon">
+                <i className="ion ion-pie-graph" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+       
 
         {/* Tabel Data Peserta */}
         <section className="content">

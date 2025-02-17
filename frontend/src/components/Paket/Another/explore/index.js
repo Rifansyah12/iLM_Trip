@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState} from "react";
+import { useNavigate} from "react-router-dom";
+
 // Import semua gambar yang digunakan
 import SampleImage1 from "../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 import SampleImage2 from "../../../../assets/Gunung/Merbabu/merbabu2.jpg";
@@ -8,11 +9,14 @@ import SampleImage4 from "../../../../assets/Gunung/Merbabu/merbabu4.JPG";
 import SampleImage5 from "../../../../assets/Gunung/Merbabu/merbabu5.JPG";
 import SampleImage6 from "../../../../assets/Gunung/Merbabu/merbabu6.JPG";
 
-const Explore = () => {
+const Explore = ({trip}) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
   const [showDetails, setShowDetails] = useState(false);
+
+
+
 
   // Fungsi untuk membuka modal
   const openModal = (imageSrc) => {
@@ -42,8 +46,8 @@ const Explore = () => {
       }}
     >
       <h2>
-        EXPLOR DAN PENGENALAN TUMBUHAN TAHURA DJUANDA <br />
-        PAKET MEDIUM TRIP (IDR 3499.999/pax)
+       <br />
+        PAKET MEDIUM TRIP (IDR {trip.harga})
       </h2>
       <h2>Minimal Peserta 10 Orang</h2>
       <br />
@@ -68,7 +72,8 @@ const Explore = () => {
             marginBottom: "20px",
           }}
         >
-          TAHURA DJUANDA
+         {trip?.nama_layanan?.toUpperCase() || "Loading..."}
+
         </h1>
         <p
           style={{
@@ -79,12 +84,7 @@ const Explore = () => {
             marginBottom: "20px",
           }}
         >
-          Taman Hutan Raya (TAHURA) Ir. H. Djuanda merupakan salah satu kawasan
-          konservasi yang terletak di Bandung, Jawa Barat. Kawasan ini
-          menawarkan kombinasi antara keindahan alam, sejarah, dan
-          keanekaragaman hayati yang memukau. Dengan luas lebih dari 590
-          hektare, TAHURA Djuanda mencakup berbagai ekosistem hutan dan
-          menyajikan udara segar serta suasana yang tenang.
+          {trip.deskripsi_layanan}
         </p>
         <p
           style={{
@@ -95,14 +95,7 @@ const Explore = () => {
             marginBottom: "20px",
           }}
         >
-          Selain itu, TAHURA Djuanda juga memiliki beberapa objek wisata
-          menarik, seperti
-          <strong>Curug Omas</strong>, <strong>Goa Jepang</strong>,{" "}
-          <strong>Goa Belanda</strong>, dan <strong>Tebing Keraton</strong>.
-          Tempat ini sering menjadi tujuan wisata keluarga, penggiat alam, dan
-          pelajar yang ingin mempelajari ekosistem hutan tropis. Dengan nilai
-          sejarah dan keindahan alamnya, TAHURA Djuanda merupakan salah satu
-          destinasi unggulan untuk melepas penat dari kesibukan kota.
+         {trip.keterangan}
         </p>
         <p
           style={{
@@ -112,7 +105,7 @@ const Explore = () => {
             textAlign: "justify",
           }}
         >
-          Bagi Anda yang ingin mengunjungi TAHURA Djuanda, tersedia fasilitas
+          Bagi Anda yang ingin mengunjungi {trip.nama_layanan}, tersedia fasilitas
           seperti jalur trekking, area parkir, tempat makan, dan pusat
           informasi. Dengan keindahan alamnya yang asri, tempat ini tidak hanya
           memberikan pengalaman rekreasi, tetapi juga kesempatan untuk belajar
@@ -324,7 +317,7 @@ const Explore = () => {
         </button>
 
         <button
-          onClick={() => navigate("/booking")} // Navigasi ke halaman booking
+           onClick={() => navigate(`/FormDaftar/${trip.id}`)} // Navigasi ke halaman booking
           style={{
             padding: "15px 30px",
             fontSize: "18px",

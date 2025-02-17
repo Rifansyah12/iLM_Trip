@@ -58,6 +58,11 @@ const inputStyle = {
   outline: "none",
   marginRight: "10px",
 };
+const selectStyle = {
+  ...inputStyle,
+  color: "black", // Warna teks hitam untuk select
+  backgroundColor: "white", // Agar lebih kontras dengan teks hitam
+};
 
 const fileInputStyle = {
   ...inputStyle,
@@ -76,85 +81,88 @@ const submitButtonStyle = {
 };
 
 const MultiStepForm = () => {
+ 
 
   
   const [formData, setFormData] = useState({
     nama_lengkap: "",
-    email : "",
-    alamat_lengkapi: "",
-    domisili: "",
-    nomer_telepon: "",
-    nomertelp_darurat: "",
     pekerjaan: "",
-    fasilitas: "",
-    meetingPoint: "",
     keterangan: "",
-    fotoKtp: null,
-
+    email: "",
+    alamat_lengkapi: "",
+    tanggal: "",
+    domisili: "",
+    paket: "",
+    nomer_telepon: "",
+    fasilitas: "",
+    nomertelp_darurat: "",
+    meetingPoint: "",
+    kesehatan: "",
+    id_destinasi: "",
+    id_anothertrip: "",
+    setuju: false,
   });
-
+  const [fotoKtp, setFotoKtp] = useState(null);
   const [message, setMessage] = useState("");
   const [destinasiList, setDestinasiList] = useState([]);
+  const [anotherTripList, setAnotherTripList] = useState([]);
 
   useEffect(() => {
-    // Ambil data destinasi dari backend
-    axios
-      .get("http://localhost:5000/getDestinasi")
-      .then((response) => {
+    const fetchDestinasi = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/getDestinasi");
         setDestinasiList(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching destinasi:", error);
-      });
-  }, [])
+      } catch (error) {
+        console.error("Error fetching destinasi", error);
+      }
+    };
 
-  const handleChange = (e)=>{
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const fetchAnotherTrip = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/getAnothertrip");
+        setAnotherTripList(response.data);
+      } catch (error) {
+        console.error("Error fetching another trip", error);
+      }
+    };
 
-  }
+    fetchDestinasi();
+    fetchAnotherTrip();
+  }, []);
 
-  
- 
-
-
+  const handleChange = (e) => {
+    const { name, type, checked, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, fotoKtp: e.target.files[0] });
+    setFotoKtp(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
 
-    for (const key in formData) {
+    Object.keys(formData).forEach((key) => {
       formDataToSend.append(key, formData[key]);
+    });
+
+    if (fotoKtp) {
+      formDataToSend.append("fotoKtp", fotoKtp);
     }
 
     try {
-      const res = await axios.post(
-        `http://localhost:5000/createPendaftaran`,
-        formDataToSend,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-
-      setMessage(res.data.msg);
-      setFormData({
-        nama_lengkap: "",
-        email: "",
-        alamat_lengkapi: "",
-        domisili: "",
-        nomer_telepon: "",
-        nomertelp_darurat: "",
-        pekerjaan: "",
-        paket: "",
-        fasilitas: "",
-        meetingPoint: "",
-        keterangan: "",
-        kesehatan: "",
-        fotoKtp: null,
+      const response = await axios.post("http://localhost:5000/createPendaftaran", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
+      setMessage(response.data.msg);
     } catch (error) {
-      setMessage(error.response?.data?.msg || "Terjadi kesalahan.");
+      setMessage(error.response?.data?.msg || "Terjadi kesalahan server");
     }
   };
 
@@ -225,15 +233,7 @@ const MultiStepForm = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
-             <label>Pilih Gunung:</label>
-          <select name="id_destinasi" value={formData.id_destinasi} onChange={handleChange}>
-            <option value="">Pilih Gunung</option>
-            {destinasiList.map((destinasi) => (
-              <option key={destinasi.id} value={destinasi.id}>
-                {destinasi.nama_gunung} 
-              </option>
-            ))}
-          </select>
+            
               <label style={labelStyle}>Foto KTP:</label>
               <input
                 type="file"
@@ -330,6 +330,34 @@ const MultiStepForm = () => {
                 value={formData.kesehatan}
                 onChange={handleChange}
               />
+
+
+             
+           
+            </div>
+
+
+            <div style={rowStyle}>
+
+            <label style={labelStyle}>Destinasi:</label>
+        <select name="id_destinasi" value={formData.id_destinasi} onChange={handleChange} style={selectStyle}>
+          <option value="">Pilih Destinasi</option>
+          {destinasiList.map((destinasi) => (
+            <option key={destinasi.id} value={destinasi.id}>
+              {destinasi.nama_gunung}
+            </option>
+          ))}
+        </select>
+
+        <label style={labelStyle}>Another Trip:</label>
+        <select name="id_anothertrip" value={formData.id_anothertrip} onChange={handleChange} style={selectStyle}>
+          <option value="">Pilih Anothertrip</option>
+          {anotherTripList.map((trip) => (
+            <option key={trip.id} value={trip.id}>
+              {trip.nama_layanan}
+            </option>
+          ))}
+        </select>
             </div>
 
             {/* Checkbox & Tombol Kirim */}

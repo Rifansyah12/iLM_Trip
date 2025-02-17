@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // Import semua gambar yang digunakan
 import SampleImage1 from "../../../../assets/Documentasi/OpenTrip/DO1.jpg";
@@ -10,6 +10,16 @@ const OpenTrip = () => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
+  const [trips, setTrips] = useState([]);
+
+  useEffect(() => {
+    // Fetch data dari backend
+    fetch("http://localhost:5000/getAnothertrip")
+      .then((response) => response.json())
+      .then((data) => setTrips(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
+
 
   // Fungsi untuk membuka modal
   const openModal = (imageSrc) => {
@@ -110,23 +120,29 @@ const OpenTrip = () => {
       >
         {/* content trip Premium */}
         <div
-          style={{
-            maxWidth: "400px", // Menentukan lebar maksimum konten
-          }}
-        >
+      style={{
+        display: "flex", // Menampilkan secara berdampingan
+        justifyContent: "center", // Memusatkan konten secara horizontal
+        alignItems: "flex-start", // Menyelaraskan ke atas
+        gap: "20px", // Jarak antara Premium dan Luxury
+        marginTop: "20px", // Jarak dari elemen sebelumnya
+      }}
+    >
+      {trips.map((trip) => (
+        <div key={trip.id} style={{ maxWidth: "400px" }}>
+          {/* Gambar */}
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: "0px",
             }}
           >
             <img
-              src={Merbabu}
-              alt="Gunung Merbabu"
+              src={`http://localhost:5000/images/anothertrip/${trip.foto}`}
+              alt={trip.nama_layanan}
               style={{
-                width: "300px", // Perkecil lebar gambar
+                width: "300px",
                 height: "300px",
                 borderRadius: "10px",
                 objectFit: "cover",
@@ -134,6 +150,8 @@ const OpenTrip = () => {
               }}
             />
           </div>
+
+          {/* Deskripsi Layanan */}
           <div style={{ textAlign: "center", marginTop: "20px" }}>
             <p
               style={{
@@ -142,13 +160,14 @@ const OpenTrip = () => {
                 paddingBottom: "5px",
                 width: "fit-content",
                 fontFamily: "Times New Roman, serif",
-                color: "#FFD700",
               }}
             >
-              EXPLOR DAN PENGENALAN <br />
-              TUMBUHAN TAHURA DJUANDA
+              {trip.nama_layanan.toUpperCase()} <br />
+              {trip.keterangan_singkat || "Jelajahi petualangan menarik!"}
             </p>
           </div>
+
+          {/* Tombol Jelajahi */}
           <div
             style={{
               textAlign: "center",
@@ -157,7 +176,11 @@ const OpenTrip = () => {
             }}
           >
             <button
-              onClick={() => navigate("/Paket/Another/explore")}
+              onClick={() =>
+                navigate(
+                  `/Paket/Another/explore/${trip.id}`
+                )
+              }
               style={{
                 fontSize: "20px",
                 fontWeight: "bold",
@@ -171,7 +194,7 @@ const OpenTrip = () => {
                 fontFamily: "'Belanosima', sans-serif",
               }}
             >
-              IDR 3499.999 / Jelajahi
+              IDR {trip.harga.toLocaleString()} / Jelajahi
             </button>
             <div
               style={{
@@ -182,84 +205,12 @@ const OpenTrip = () => {
             ></div>
           </div>
         </div>
+      ))}
+    </div>
+      
         {/* end content trip Premium */}
 
-        {/* content trip Luxury */}
-        <div
-          style={{
-            maxWidth: "400px", // Menentukan lebar maksimum konten
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "0px",
-            }}
-          >
-            <img
-              src={Merbabu}
-              alt="Gunung Merbabu"
-              style={{
-                width: "300px", // Perkecil lebar gambar
-                height: "300px",
-                borderRadius: "10px",
-                objectFit: "cover",
-                marginTop: "10px",
-              }}
-            />
-          </div>
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <h2
-              style={{
-                fontSize: "20px",
-                marginBottom: "10px",
-                display: "inline-block",
-                paddingBottom: "5px",
-                width: "fit-content",
-                fontFamily: "Times New Roman, serif",
-                color: "#BDC3C7",
-              }}
-            >
-              FUN CLIMBING CITATAH <br />
-              (EDUKASI BASIC CLIMBING & PRAKTEK)
-            </h2>
-          </div>
-          <div
-            style={{
-              textAlign: "center",
-              marginTop: "20px",
-              paddingBottom: "20px",
-            }}
-          >
-            <button
-              onClick={() => navigate("/Paket/Another/climbing")}
-              style={{
-                fontSize: "20px",
-                fontWeight: "bold",
-                marginBottom: "10px",
-                backgroundColor: "#FA8806",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                cursor: "pointer",
-                fontFamily: "'Belanosima', sans-serif",
-              }}
-            >
-              IDR. xxxxxx / Jelajahi
-            </button>
-            <div
-              style={{
-                marginTop: "10px",
-                borderTop: "1px solid #ccc",
-                width: "100%",
-              }}
-            ></div>
-          </div>
-        </div>
-        {/* end content Luxury */}
+       
       </div>
 
       {/* Tombol Navigasi */}

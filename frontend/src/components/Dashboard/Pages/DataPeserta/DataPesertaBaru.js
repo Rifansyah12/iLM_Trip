@@ -8,6 +8,8 @@ const DataPesertaBaru = () => {
   const [selectedData, setSelectedData] = useState(null);
   const [status, setStatus] = useState({}); // Status peserta
   const [peserta, setPeserta] = useState([]);
+  const [peserta2, setPeserta2] = useState([]);
+  
 
   const [formData, setFormData] = useState({
     nama_lengkap: "",
@@ -130,36 +132,47 @@ const DataPesertaBaru = () => {
       console.error("Gagal memperbarui data:", error);
     }
   };
+  useEffect(() => {
+    fetchPeserta();
+  }, []);
 
-  // Fungsi untuk handle approval atau penolakan peserta
-  const handleApproval = async (id, isApproved) => {
+  const fetchPeserta = async () => {
     try {
+<<<<<<< HEAD
       const response = await axios.put(
         `http://localhost:5000/updateStatus/${id}`,
         { status: isApproved ? "Disetujui" : "Ditolak" }
       );
+=======
+      const response = await axios.get("http://localhost:5000/getPendaftaranPeserta");
+      setPeserta(response.data);
+      
+      // Simpan status berdasarkan ID peserta
+      const statusMap = response.data.reduce((acc, item) => {
+        acc[item.id] = item.status === "Disetujui";
+        return acc;
+      }, {});
+      setStatus(statusMap);
+    } catch (error) {
+      console.error("Gagal mengambil data:", error);
+    }
+  };
+>>>>>>> 461bff0 (Menambahkan perubahan terbaru)
 
-      console.log("Response backend:", response.data);
+  const handleApproval = async (id) => {
+    try {
+      await axios.put(`http://localhost:5000/updateStatus/${id}`, {
+        status: "Disetujui",
+      });
 
-      // Perbarui status di state
-      setStatus((prev) => ({
-        ...prev,
-        [id]: isApproved ? "Disetujui" : "Ditolak",
+      setStatus((prevStatus) => ({
+        ...prevStatus,
+        [id]: true,
       }));
 
-      // Hapus peserta dari state jika disetujui
-      if (isApproved) {
-        setPeserta((prevPeserta) =>
-          prevPeserta.filter((peserta) => peserta.id !== id)
-        );
-      }
-
-      alert(`Peserta ${isApproved ? "disetujui" : "ditolak"}`);
+      alert("Status berhasil diperbarui!");
     } catch (error) {
-      console.error("Gagal memperbarui status:", error.response);
-      alert(
-        "Terjadi kesalahan: " + JSON.stringify(error.response?.data, null, 2)
-      );
+      console.error("Gagal memperbarui status:", error);
     }
   };
 
@@ -208,6 +221,7 @@ const DataPesertaBaru = () => {
                   <th>Alamat</th>
                   <th>No. Telepon</th>
                   <th>Paket</th>
+                  <th>Destinasi</th>
                   <th>Status</th>
                   <th>Opsi</th>
                 </tr>
@@ -223,6 +237,8 @@ const DataPesertaBaru = () => {
                       <td>{item.alamat_lengkapi}</td>
                       <td>{item.nomer_telepon}</td>
                       <td>{item.paket}</td>
+                      <td>{item.destinasi?.nama_gunung || item.anothertrip?.nama_layanan}</td>
+
                       <td
                         style={{
                           color: status[item.id] ? "green" : "red",
@@ -234,9 +250,9 @@ const DataPesertaBaru = () => {
                       <td>
                         <button
                           className="btn btn-success btn-sm"
-                          onClick={() => handleApproval(item.id, true)}
+                         onClick={()=> handleApproval(item.id)} disabled={status[item.id]}
                         >
-                          Setujui
+                         {status[item.id] ? "Disetujui" : "Belum Disetujui"}
                         </button>
                         <button
                           className="btn btn-danger btn-sm ml-2"

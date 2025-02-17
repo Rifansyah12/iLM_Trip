@@ -189,7 +189,7 @@ const Merbabu = ({ destinasi }) => {
         </button>
 
         <button
-          onClick={() => navigate(`/FormDaftar`)} // Navigasi ke halaman booking
+          onClick={() => navigate(`/FormDaftar/${destinasi.id}`)} // Navigasi ke halaman booking
           style={{
             padding: "15px 30px",
             fontSize: "18px",

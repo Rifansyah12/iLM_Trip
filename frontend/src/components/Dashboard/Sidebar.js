@@ -10,6 +10,20 @@ const Sidebar = () => {
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    // Tampilkan alert sebelum logout
+    alert("Anda akan logout dalam waktu 2 detik...");
+
+    // Tunggu 2 detik sebelum logout
+    setTimeout(() => {
+      // Hapus token dari localStorage
+      localStorage.removeItem("token");
+
+      // Redirect ke halaman login
+      navigate("/");
+    }, 2000);
+  };
+
   useEffect(() => {
     const storeAdmin = localStorage.getItem("admin");
     if (storeAdmin) {
@@ -204,13 +218,12 @@ const Sidebar = () => {
 
             {/* Logout */}
             <li className="nav-item">
-              <Link
-                to="/logout"
-                className="nav-link"
-                style={{ textAlign: "center", width: "100%" }}
-              >
-                <p>Log Out</p>
-              </Link>
+            <li className="nav-item">
+        <button className="nav-link text-danger" onClick={handleLogout}>
+          <i className="fas fa-sign-out-alt nav-icon"></i>
+          <p>Logout</p>
+        </button>
+      </li>
             </li>
           </ul>
         </nav>
