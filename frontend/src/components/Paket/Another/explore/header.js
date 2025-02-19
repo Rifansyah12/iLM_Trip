@@ -96,7 +96,7 @@ function Header({trip}) {
       <img
         className="Volcano37791591280"
         style={imageStyle}
-        src={currentImage} // Menggunakan gambar yang disimpan dalam state
+        src={`http://localhost:5000/images/anothertrip/${trip.foto}`} // Menggunakan gambar yang disimpan dalam state
         alt="Background"
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}

@@ -47,6 +47,25 @@ export const getAnothertrip = async(req, res)=>{
 
 }
 
+export const getAnothertripById = async (req, res) => {
+  try {
+    const response = await Anothertrip.findOne({
+      where: { id: req.params.id },
+      attributes: ['id', 'nama_layanan', 'harga', 'foto', 'keterangan_layanan', 'deskripsi_layanan', 'lokasi', 'keterangan_singkat'],
+    });
+
+    if (!response) {
+      return res.status(404).json({ message: "Data tidak ditemukan" });
+    }
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: "Terjadi kesalahan pada server" });
+  }
+};
+
+
 export const updateAnothertrip = async (req, res) => {
   try {
     const anotherTrip = await Anothertrip.findOne({

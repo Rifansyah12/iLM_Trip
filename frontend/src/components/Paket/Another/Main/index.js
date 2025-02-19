@@ -178,7 +178,7 @@ const OpenTrip = () => {
             <button
               onClick={() =>
                 navigate(
-                  `/FormDaftar/${trip.id}`
+                  `/Paket/Another/explore/${trip.id}`
                 )
               }
               style={{
