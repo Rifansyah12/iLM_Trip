@@ -3,7 +3,7 @@ import Background1 from "../../../../assets/Trip/bg2.png";
 import Background2 from "../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 import Background3 from "../../../../assets/Gunung/Merbabu/merbabu2.jpg"; // Tambahkan gambar lain jika diperlukan
 
-function Header({trip}) {
+function Header({ trip }) {
   const [currentImage, setCurrentImage] = useState(Background1); // Gambar pertama sebagai default
 
   // Gambar latar belakang yang akan diputar
@@ -96,12 +96,12 @@ function Header({trip}) {
       <img
         className="Volcano37791591280"
         style={imageStyle}
-        src={currentImage} // Menggunakan gambar yang disimpan dalam state
+        src={`http://localhost:5000/images/anothertrip/${trip.foto}`} // Menggunakan gambar yang disimpan dalam state
         alt="Background"
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-       {trip.nama_layanan.toUpperCase()}
+        {trip.nama_layanan.toUpperCase()}
         {/* <p
           style={{
             color: "#ffff",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Untuk melakukan request ke API
-import SummernoteLite from "react-summernote-lite";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import { useParams } from "react-router-dom";
 
@@ -12,6 +13,8 @@ const TablePrivate = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
+  const [showFullKeterangan, setShowFullKeterangan] = useState(false);
+  const [showFullDeskripsi, setShowFullDeskripsi] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
 
@@ -22,6 +25,7 @@ const TablePrivate = () => {
     harga: "",
     foto: null,
     keterangan: "",
+    deskripsi: "",
   });
   const [file, setFile] = useState(null);
 
@@ -114,6 +118,7 @@ const TablePrivate = () => {
     formData.append("paket", newDestinasi.paket);
     formData.append("harga", newDestinasi.harga);
     formData.append("keterangan", newDestinasi.keterangan);
+    formData.append("deskripsi", newDestinasi.deskripsi);
     formData.append("foto", file);
 
     if (!selectedTrip) {
@@ -246,30 +251,68 @@ const TablePrivate = () => {
                       </div>
 
                       <div className="form-group">
-                        <label>Keterangan</label>
-                        <SummernoteLite
+                        <label>Deskripsi</label>
+                        <ReactQuill
                           value={newDestinasi.keterangan}
-                          options={{
-                            height: 200, // Menentukan tinggi editor
-                            toolbar: [
-                              [
-                                "style",
-                                ["bold", "italic", "underline", "clear"],
-                              ],
-                              [
-                                "font",
-                                ["strikethrough", "superscript", "subscript"],
-                              ],
-                              ["para", ["ul", "ol", "paragraph"]],
-                              ["insert", ["link", "picture", "video"]],
-                            ],
-                          }}
                           onChange={(value) =>
                             setNewDestinasi({
                               ...newDestinasi,
                               keterangan: value,
                             })
-                          } // Update state saat konten berubah
+                          }
+                          modules={{
+                            toolbar: [
+                              ["bold", "italic", "underline", "strike"], // Gaya teks
+                              [{ script: "sub" }, { script: "super" }], // Superscript/Subscript
+                              [{ list: "ordered" }, { list: "bullet" }], // List
+                              ["link", "image", "video"], // Media
+                            ],
+                          }}
+                          formats={[
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strike",
+                            "script",
+                            "list",
+                            "bullet",
+                            "link",
+                            "image",
+                            "video",
+                          ]}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Keterangan</label>
+                        <ReactQuill
+                          value={newDestinasi.deskripsi}
+                          onChange={(value) =>
+                            setNewDestinasi({
+                              ...newDestinasi,
+                              deskripsi: value,
+                            })
+                          }
+                          modules={{
+                            toolbar: [
+                              ["bold", "italic", "underline", "strike"], // Gaya teks
+                              [{ script: "sub" }, { script: "super" }], // Superscript/Subscript
+                              [{ list: "ordered" }, { list: "bullet" }], // List
+                              ["link", "image", "video"], // Media
+                            ],
+                          }}
+                          formats={[
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strike",
+                            "script",
+                            "list",
+                            "bullet",
+                            "link",
+                            "image",
+                            "video",
+                          ]}
                         />
                       </div>
 
@@ -341,57 +384,120 @@ const TablePrivate = () => {
                 <table className="table table-bordered">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Judul</th>
+                      <th>No</th>
                       <th>Nama Gunung</th>
                       <th>Lokasi</th>
                       <th>Paket</th>
                       <th>Harga</th>
-                      <th>Foto</th>
+                      <th>Deskripsi</th>
                       <th>Keterangan</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {currentData.map((item, index) => (
-                      <tr key={item.id}>
-                        <td>{indexOfFirstData + index + 1}.</td>
-                        <td>
-                          Pendakian di{" "}
-                          {item.mountaintrip?.nama_layanan ||
-                            "Nama tidak tersedia"}
-                        </td>
-                        {/* <td>
-                          {item.mountaintrip?.nama_layanan ||
-                            "Nama tidak tersedia"}
-                        </td> */}
-                        <td>{item.nama_gunung}</td>
-                        <td>{item.lokasi}</td>
-                        <td>{item.paket}</td>
-                        <td>{item.harga}</td>
-                        <td>
-                          {item.foto ? (
-                            <img
-                              src={`http://localhost:5000/images/Destinasi/${item.foto}`}
-                              alt="Foto"
-                              style={{ width: 50, height: 50 }}
-                            />
-                          ) : (
-                            "Tidak ada foto"
-                          )}
-                        </td>
-                        <td>{item.keterangan}</td>
-                        <td>
-                          {/* Tombol Hapus */}
-                          <button
-                            className="btn btn-danger"
-                            onClick={() => handleDelete(item.id)}
-                          >
-                            Hapus
-                          </button>
+                    {Array.isArray(destinasi) && destinasi.length > 0 ? (
+                      destinasi.map((item, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item.nama_gunung}</td>
+                          <td>{item.lokasi}</td>
+                          <td>{item.paket}</td>
+                          <td>{item.harga}</td>
+
+                          <td>
+                            {showFullKeterangan ? (
+                              <>
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: item.keterangan,
+                                  }}
+                                />{" "}
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setShowFullKeterangan(false);
+                                  }}
+                                >
+                                  Sembunyikan
+                                </a>
+                              </>
+                            ) : (
+                              <>
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html:
+                                      item.keterangan.slice(0, 100) + "...",
+                                  }}
+                                />{" "}
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setShowFullKeterangan(true);
+                                  }}
+                                >
+                                  Lihat Detail
+                                </a>
+                              </>
+                            )}
+                          </td>
+                          <td>
+                            {showFullDeskripsi ? (
+                              <>
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: item.deskripsi,
+                                  }}
+                                />{" "}
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setShowFullDeskripsi(false);
+                                  }}
+                                >
+                                  Sembunyikan
+                                </a>
+                              </>
+                            ) : (
+                              <>
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html:
+                                      item.deskripsi.slice(0, 100) + "...",
+                                  }}
+                                />{" "}
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setShowFullDeskripsi(true);
+                                  }}
+                                >
+                                  Lihat Detail
+                                </a>
+                              </>
+                            )}
+                          </td>
+
+                          <td>
+                            <button
+                              className="btn btn-danger"
+                              onClick={() => handleDelete(item.id)}
+                            >
+                              Hapus
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="7" className="text-center">
+                          <strong>Data belum tersedia</strong>
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               )}

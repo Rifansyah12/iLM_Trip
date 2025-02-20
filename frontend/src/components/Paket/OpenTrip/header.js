@@ -1,94 +1,99 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Background1 from "../../../assets/Trip/bg2.png";
 import Background2 from "../../../assets/Gunung/Merbabu/merbabu1.jpg";
-import Background3 from "../../../assets/Gunung/Merbabu/merbabu2.jpg"; // Tambahkan gambar lain jika diperlukan
+import Background3 from "../../../assets/Gunung/Merbabu/merbabu2.jpg";
 
 function Header() {
-  const [currentImage, setCurrentImage] = useState(Background1); // Gambar pertama sebagai default
+  const [currentImage, setCurrentImage] = useState(Background1);
+  const location = useLocation();
 
-  // Gambar latar belakang yang akan diputar
+  // Mapping judul berdasarkan URL
+  const getTitleFromPath = (path) => {
+    if (path.includes("/Paket/OpenTrip/2")) return "Open Trip";
+    if (path.includes("/Paket/OpenTrip/3")) return "Family Trip";
+    if (path.includes("/Paket/OpenTrip/4")) return "Gathering Kantor";
+    return "Open Trip"; // Default jika tidak cocok
+  };
+
+  const [title, setTitle] = useState(getTitleFromPath(location.pathname));
+
+  useEffect(() => {
+    setTitle(getTitleFromPath(location.pathname));
+  }, [location.pathname]);
+
   const backgroundImages = [Background1, Background2, Background3];
 
   useEffect(() => {
-    // Mengganti gambar latar belakang setiap 3 detik (3000ms)
     const interval = setInterval(() => {
       setCurrentImage((prevImage) => {
         const currentIndex = backgroundImages.indexOf(prevImage);
         const nextIndex = (currentIndex + 1) % backgroundImages.length;
         return backgroundImages[nextIndex];
       });
-    }, 3000); // Ganti gambar setiap 3 detik
+    }, 3000);
 
-    return () => clearInterval(interval); // Bersihkan interval ketika komponen di-unmount
+    return () => clearInterval(interval);
   }, []);
 
-  const headerStyle = {
-    position: "relative",
-    width: "100%",
-    height: 400, // Tinggi gambar latar belakang
-    overflow: "hidden",
-  };
-
-  const textStyle = {
-    color: "#FFFCFC",
-    fontSize: 70,
-    fontFamily: "Beiruti",
-    fontWeight: "700",
-    wordWrap: "break-word",
-    position: "absolute",
-    top: 50, // Posisi vertikal teks
-    left: 50, // Sama dengan padding kiri navbar
-    paddingRight: 50, // Sama dengan padding kanan navbar
-    zIndex: 1, // Pastikan teks berada di atas gambar
-    maxWidth: "50%", // Membatasi lebar teks agar lebih rapat dengan gambar
-  };
-
-  const imageStyle = {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover", // Pastikan gambar tidak pecah
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: 0, // Gambar berada di bawah teks
-  };
-
-  const overlayStyle = {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Menambahkan lapisan hitam transparan
-    zIndex: 0, // Overlay berada di atas gambar, tapi di bawah teks
-  };
-
   return (
-    <header style={headerStyle}>
+    <header
+      style={{
+        position: "relative",
+        width: "100%",
+        height: 400,
+        overflow: "hidden",
+      }}
+    >
       <img
-        className="Volcano37791591280"
-        style={imageStyle}
-        src={currentImage} // Menggunakan gambar yang disimpan dalam state
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+        src={currentImage}
         alt="Background"
       />
-      <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
-      <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        OpenTrip
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+        }}
+      ></div>
+      <div
+        style={{
+          color: "#FFFCFC",
+          fontSize: 70,
+          fontFamily: "Beiruti",
+          fontWeight: "700",
+          position: "absolute",
+          top: 50,
+          left: 50,
+          zIndex: 1,
+          maxWidth: "50%",
+        }}
+      >
+        {title}
         <p
           style={{
             color: "#ffff",
             fontSize: 30,
             fontWeight: "50",
             fontFamily: "Poppins",
-            width: "150%", // Sesuaikan lebar teks
-            margin: "20px", // Agar teks tetap di tengah secara horizontal
-            left: 50,
+            width: "150%",
+            margin: "20px",
             textAlign: "left",
           }}
         >
-          Nikmati open trip penuh petualangan yang membawa Anda pada pengalaman
-          seru, layanan berkualitas, dan cerita-cerita baru yang tak akan
-          terlupakan.
+          Nikmati perjalanan penuh petualangan yang membawa Anda pada pengalaman
+          seru, layanan berkualitas, dan cerita baru yang tak akan terlupakan.
         </p>
       </div>
     </header>

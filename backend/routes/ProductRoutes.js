@@ -4,20 +4,17 @@ import {
   getProduct,
   updateProduct,
   deleteProduct,
-} from "../controllers/productController.js";
+} from "../controllers/ProductController.js";
 
 const router = express.Router();
 
-// ✅ Route untuk mendapatkan semua produk
-router.get("/product", getProduct);
-
-// ✅ Route untuk menambahkan produk baru (dengan upload file)
-router.post("/product", createProduct);
+router.get("/getProduct", getProduct);
+router.post("/createProduct", createProduct);
 
 // ✅ Route untuk mengupdate produk berdasarkan ID
-router.put("/product/:id", updateProduct);
+router.put("/updateProduct/:id", updateProduct);
 
 // ✅ Route untuk menghapus produk berdasarkan ID
-router.delete("/product/:id", deleteProduct);
+router.delete("/deleteProduct/:id", deleteProduct);
 
 export default router;

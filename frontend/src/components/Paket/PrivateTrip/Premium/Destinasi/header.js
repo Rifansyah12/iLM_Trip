@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom"; // Impor useNavigate dan useParams
+import axios from "axios"; // Impor axios
 import Background1 from "../../../../../assets/Trip/bg2.png";
 import Background2 from "../../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 import Background3 from "../../../../../assets/Gunung/Merbabu/merbabu2.jpg"; // Tambahkan gambar lain jika diperlukan
@@ -9,18 +11,27 @@ function Header() {
   // Gambar latar belakang yang akan diputar
   const backgroundImages = [Background1, Background2, Background3];
 
-  useEffect(() => {
-    // Mengganti gambar latar belakang setiap 3 detik (3000ms)
-    const interval = setInterval(() => {
-      setCurrentImage((prevImage) => {
-        const currentIndex = backgroundImages.indexOf(prevImage);
-        const nextIndex = (currentIndex + 1) % backgroundImages.length;
-        return backgroundImages[nextIndex];
-      });
-    }, 3000); // Ganti gambar setiap 3 detik
+  const navigate = useNavigate(); // Gunakan useNavigate
+  const { id_privatetrip } = useParams(); // Gunakan useParams
+  const [item, setDestinasi] = useState([]);
 
-    return () => clearInterval(interval); // Bersihkan interval ketika komponen di-unmount
-  }, []);
+  useEffect(() => {
+    const fetchDestinasiByIdPrivate = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/getDestinasiByIdPrivate/${id_privatetrip}`
+        );
+        setDestinasi(response.data || []);
+      } catch (error) {
+        console.error("Error fetching destinasi:", error);
+        setDestinasi([]);
+      }
+    };
+
+    if (id_privatetrip) {
+      fetchDestinasiByIdPrivate();
+    }
+  }, [id_privatetrip]);
 
   const headerStyle = {
     position: "relative",
@@ -101,7 +112,9 @@ function Header() {
       />
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
-        Gunung Gede
+        {/* Gantikan 'Gunung Gede' dengan nama destinasi yang didapatkan dari backend */}
+        {item.nama_gunung || "Gunung Gede"}
+
         <p
           style={{
             color: "#FFA500",
@@ -115,8 +128,10 @@ function Header() {
             fontStyle: "italic",
           }}
         >
-          Premium
+          {/* Gantikan 'Premium' dengan jenis trip yang didapatkan dari backend */}
+          {item.id_privatetrip || "Premium"}
         </p>
+
         <p
           style={{
             color: "#FFFFFF",
@@ -127,7 +142,8 @@ function Header() {
             marginTop: "20px", // Jarak antara teks Nikmati dan Lokasi
           }}
         >
-          LOKASI: Jawa Tengah, Indonesia
+          {/* Gantikan lokasi dengan data lokasi yang didapatkan dari backend */}
+          {`LOKASI: ${item.lokasi || "Jawa Tengah, Indonesia"}`}
         </p>
       </div>
       {/* Rating Section */}

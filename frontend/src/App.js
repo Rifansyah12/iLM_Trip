@@ -128,13 +128,20 @@ const App = () => {
         <Route path="/Login" element={<LoginPage />} />
 
         <Route path="/RegisterAdmin" element={<CreateAdmin />} />
-        <Route path="/Paket/OpenTrip/Gunung/merbabu/:id" element={<Merbabu />} />
-        <Route path="/Paket/PrivateTrip/Premium/:id_privatetrip" element={<Premium />} />
+        <Route
+          path="/Paket/OpenTrip/Gunung/merbabu/:id"
+          element={<Merbabu />}
+        />
+        <Route
+          path="/Paket/PrivateTrip/Premium/:id_privatetrip"
+          element={<Premium />}
+        />
 
         <Route
-          path="/Paket/PrivateTrip/Premium/Destinasi"
+          path="/Paket/PrivateTrip/Premium/Destinasi/:id"
           element={<DestinasiPremium />}
         />
+
         <Route
           path="/Paket/PrivateTrip/Luxury/Destinasi"
           element={<DestinasiLuxury />}

@@ -11,7 +11,9 @@ const Explore = () => {
   useEffect(() => {
     const fetchTrip = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/getAnothertripById/${id}`);
+        const response = await axios.get(
+          `http://localhost:5000/getAnothertripById/${id}`
+        );
         setTrip(response.data);
       } catch (error) {
         console.error("Error fetching trip data:", error);
@@ -25,8 +27,6 @@ const Explore = () => {
 
   if (loading) return <p>Loading...</p>;
   if (!trip) return <p>Data tidak ditemukan.</p>;
-
-
 
   return (
     <div>

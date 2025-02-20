@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AnotherAdmin = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
-
+  const [showFullKeterangan, setShowFullKeterangan] = useState(false);
+  const [showFullDeskripsi, setShowFullDeskripsi] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [newProduct, setNewProduct] = useState({
     nama_layanan: "",
@@ -27,23 +30,38 @@ const AnotherAdmin = () => {
     setCurrentPage(pageNumber);
   };
 
+  const stripHTML = (html) => {
+    return html.replace(/<[^>]+>/g, "").trim();
+  };
+
   const handleAddProduct = async () => {
     try {
+      console.log("Data sebelum dikirim:", newProduct);
+
       const formData = new FormData();
       formData.append("nama_layanan", newProduct.nama_layanan);
       formData.append("keterangan_singkat", newProduct.keterangan_singkat);
-      formData.append("keterangan_layanan", newProduct.keterangan_layanan);
+      formData.append("keterangan_layanan", newProduct.keterangan_layanan); // Cek apakah masih dalam format HTML
       formData.append("deskripsi_layanan", newProduct.deskripsi_layanan);
       formData.append("lokasi", newProduct.lokasi);
       formData.append("harga", newProduct.harga);
+
       if (newProduct.foto) {
         formData.append("foto", newProduct.foto);
+      }
+
+      // Debugging: Lihat isi FormData sebelum dikirim
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
       }
 
       const response = await axios.post(
         "http://localhost:5000/createAnothertrip",
         formData
       );
+
+      console.log("Response dari server:", response.data);
+
       setData([...data, response.data]);
       setShowModal(false);
       setNewProduct({
@@ -74,11 +92,6 @@ const AnotherAdmin = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
-
-  const handleEditProduct = async (id) => {
-    // Implement the edit functionality using PUT request
-    console.log("Edit product", id);
   };
 
   const handleDeleteProduct = async (id) => {
@@ -133,6 +146,9 @@ const AnotherAdmin = () => {
                     <th style={{ width: 10 }}>No</th>
                     <th>Nama Layanan</th>
                     <th>Keterangan Singkat</th>
+                    <th>Keterangan Layanan</th>
+                    <th>Deskripsi Layanan</th>
+                    <th>Lokasi</th>
                     <th>Harga</th>
                     <th>Foto</th>
                     <th style={{ width: 100 }}>Aksi</th>
@@ -144,6 +160,84 @@ const AnotherAdmin = () => {
                       <td>{indexOfFirstData + index + 1}.</td>
                       <td>{item.nama_layanan}</td>
                       <td>{item.keterangan_singkat}</td>
+                      <td>
+                        {showFullKeterangan ? (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: item.keterangan_layanan,
+                              }}
+                            />{" "}
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowFullKeterangan(false);
+                              }}
+                            >
+                              Sembunyikan
+                            </a>
+                          </>
+                        ) : (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  item.keterangan_layanan.slice(0, 100) + "...",
+                              }}
+                            />{" "}
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowFullKeterangan(true);
+                              }}
+                            >
+                              Lihat Detail
+                            </a>
+                          </>
+                        )}
+                      </td>
+
+                      <td>
+                        {showFullDeskripsi ? (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: item.deskripsi_layanan,
+                              }}
+                            />{" "}
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowFullDeskripsi(false);
+                              }}
+                            >
+                              Sembunyikan
+                            </a>
+                          </>
+                        ) : (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  item.deskripsi_layanan.slice(0, 100) + "...",
+                              }}
+                            />{" "}
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowFullDeskripsi(true);
+                              }}
+                            >
+                              Lihat Detail
+                            </a>
+                          </>
+                        )}
+                      </td>
+                      <td>{item.lokasi}</td>
                       <td>{item.harga}</td>
                       <td>
                         {item.foto ? (
@@ -248,32 +342,68 @@ const AnotherAdmin = () => {
 
                     <div className="form-group">
                       <label>Keterangan Layanan</label>
-                      <input
-                        type="text"
-                        className="form-control"
+                      <ReactQuill
                         value={newProduct.keterangan_layanan}
-                        onChange={(e) =>
+                        onChange={(content) => {
                           setNewProduct({
                             ...newProduct,
-                            keterangan_layanan: e.target.value,
-                          })
-                        }
+                            keterangan_layanan: content, // Pastikan ReactQuill menyimpan HTML
+                          });
+                        }}
+                        modules={{
+                          toolbar: [
+                            [{ header: "1" }, { header: "2" }, { font: [] }],
+                            [{ list: "ordered" }, { list: "bullet" }],
+                            ["bold", "italic", "underline"],
+                            ["link", "image"],
+                            ["clean"],
+                          ],
+                        }}
+                        formats={[
+                          "header",
+                          "font",
+                          "bold",
+                          "italic",
+                          "underline",
+                          "list",
+                          "bullet",
+                          "link",
+                          "image",
+                        ]}
                       />
                     </div>
 
                     <div className="form-group">
                       <label>Deskripsi Layanan</label>
-                      <textarea
-                        className="form-control"
-                        rows="3"
+                      <ReactQuill
                         value={newProduct.deskripsi_layanan}
-                        onChange={(e) =>
+                        onChange={(content) => {
                           setNewProduct({
                             ...newProduct,
-                            deskripsi_layanan: e.target.value,
-                          })
-                        }
-                      ></textarea>
+                            deskripsi_layanan: content, // Pastikan ReactQuill menyimpan HTML
+                          });
+                        }}
+                        modules={{
+                          toolbar: [
+                            [{ header: "1" }, { header: "2" }, { font: [] }],
+                            [{ list: "ordered" }, { list: "bullet" }],
+                            ["bold", "italic", "underline"],
+                            ["link", "image"],
+                            ["clean"],
+                          ],
+                        }}
+                        formats={[
+                          "header",
+                          "font",
+                          "bold",
+                          "italic",
+                          "underline",
+                          "list",
+                          "bullet",
+                          "link",
+                          "image",
+                        ]}
+                      />
                     </div>
 
                     <div className="form-group">

@@ -1,5 +1,5 @@
-import React, { useState} from "react";
-import { useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Import semua gambar yang digunakan
 import SampleImage1 from "../../../../assets/Gunung/Merbabu/merbabu1.jpg";
@@ -9,14 +9,13 @@ import SampleImage4 from "../../../../assets/Gunung/Merbabu/merbabu4.JPG";
 import SampleImage5 from "../../../../assets/Gunung/Merbabu/merbabu5.JPG";
 import SampleImage6 from "../../../../assets/Gunung/Merbabu/merbabu6.JPG";
 
-const Explore = ({trip}) => {
+const Explore = ({ trip }) => {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false); // State untuk modal
   const [modalImage, setModalImage] = useState(""); // State untuk gambar yang ditampilkan di modal
   const [showDetails, setShowDetails] = useState(false);
-
-
-
+  const [showFullText, setShowFullText] = useState(false);
+  const maxLength = 150; // Batasi teks awal
 
   // Fungsi untuk membuka modal
   const openModal = (imageSrc) => {
@@ -34,6 +33,37 @@ const Explore = ({trip}) => {
     setShowDetails((prevState) => !prevState);
   };
 
+  const styles = {
+    quillContent: {
+      fontSize: "1.2rem",
+      lineHeight: "1.8",
+      color: "#ffffff",
+      textAlign: "justify",
+      backgroundColor: "#444",
+      padding: "15px",
+      borderRadius: "5px",
+    },
+    quillContentH1: {
+      fontSize: "2rem",
+      fontWeight: "bold",
+    },
+    quillContentH2: {
+      fontSize: "1.8rem",
+      fontWeight: "bold",
+    },
+    quillContentBold: {
+      fontWeight: "bold",
+    },
+    quillContentList: {
+      marginLeft: "20px",
+      listStyleType: "disc",
+    },
+    quillContentOrderedList: {
+      marginLeft: "20px",
+      listStyleType: "decimal",
+    },
+  };
+
   return (
     <section
       style={{
@@ -46,10 +76,9 @@ const Explore = ({trip}) => {
       }}
     >
       <h2>
-       <br />
+        <br />
         PAKET MEDIUM TRIP (IDR {trip.harga})
       </h2>
-      <h2>Minimal Peserta 10 Orang</h2>
       <br />
       <div
         style={{
@@ -72,9 +101,9 @@ const Explore = ({trip}) => {
             marginBottom: "20px",
           }}
         >
-         {trip?.nama_layanan?.toUpperCase() || "Loading..."}
-
+          {trip?.nama_layanan?.toUpperCase() || "Loading..."}
         </h1>
+
         <p
           style={{
             fontSize: "1.2rem",
@@ -82,35 +111,29 @@ const Explore = ({trip}) => {
             color: "#34495e",
             textAlign: "justify",
             marginBottom: "20px",
+            whiteSpace: "pre-line", // Menampilkan teks dengan format baris baru
           }}
         >
-          {trip.deskripsi_layanan}
+          {showFullText
+            ? trip.deskripsi_layanan.replace(/<\/?[^>]+(>|$)/g, "") // Menghapus tag HTML jika ada
+            : trip.deskripsi_layanan
+                .substring(0, maxLength)
+                .replace(/<\/?[^>]+(>|$)/g, "") + "..."}
         </p>
-        <p
+
+        <button
+          onClick={() => setShowFullText(!showFullText)}
           style={{
-            fontSize: "1.2rem",
-            lineHeight: "1.8",
-            color: "#34495e",
-            textAlign: "justify",
-            marginBottom: "20px",
+            backgroundColor: "#3498db",
+            color: "white",
+            padding: "10px 15px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
           }}
         >
-         {trip.keterangan}
-        </p>
-        <p
-          style={{
-            fontSize: "1.2rem",
-            lineHeight: "1.8",
-            color: "#34495e",
-            textAlign: "justify",
-          }}
-        >
-          Bagi Anda yang ingin mengunjungi {trip.nama_layanan}, tersedia fasilitas
-          seperti jalur trekking, area parkir, tempat makan, dan pusat
-          informasi. Dengan keindahan alamnya yang asri, tempat ini tidak hanya
-          memberikan pengalaman rekreasi, tetapi juga kesempatan untuk belajar
-          dan menikmati kekayaan alam Indonesia.
-        </p>
+          {showFullText ? "Tampilkan Lebih Sedikit" : "Lihat Selengkapnya"}
+        </button>
       </div>
       <br />
 
@@ -133,167 +156,12 @@ const Explore = ({trip}) => {
               gap: "20px",
             }}
           >
-            {/* MEETING POINT */}
             <div style={{ flex: "1" }}>
-              <h2 style={{ color: "#FA8806" }}>MEETING POINT :</h2>
-              <p>BANDUNG – JAKARTA – BASECAMP</p>
-            </div>
-
-            {/* FLEX CONTAINER FOR REMAINING CONTENT */}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-                gap: "20px",
-              }}
-            >
-              {/* HARGA SUDAH TERMASUK */}
-              <div style={{ flex: "1" }}>
-                <h2 style={{ color: "#FA8806" }}>HARGA SUDAH TERMASUK :</h2>
-                <ul>
-                  <li>✓ Transportasi Hiace / Elf long PP</li>
-                  <li>✓ BBM, parkir, Tol, Tips Driver</li>
-                  <li>✓ Tiket Masuk 2H1M TNGP</li>
-                  <li>✓ Homestay BC</li>
-                  <li>✓ Kebersihan BC</li>
-                  <li>✓ Tenda kap 4-5 (diisi max 4 orang)</li>
-                  <li>✓ Tenda Toilet Portable</li>
-                  <li>✓ Matras Alumunium Foil (untuk alas tenda)</li>
-                  <li>✓ Perlengkapan Makan & Minum</li>
-                  <li>✓ Welcome Drink Teh/Kopi</li>
-                  <li>✓ Cooking Set</li>
-                  <li>✓ Kompor Portable + Gas</li>
-                  <li>✓ Makan 3x di gunung</li>
-                  <li>✓ Cheff Gunung</li>
-                  <li>✓ Puding/Nutrijel</li>
-                  <li>✓ Buah-buahan (semangka / melon) di area camp</li>
-                  <li>✓ Logistik</li>
-                  <li>✓ HT</li>
-                  <li>✓ Guide Profesional</li>
-                  <li>✓ Sweeper</li>
-                  <li>✓ Porter Tenda</li>
-                  <li>✓ Porter Logistik</li>
-                  <li>✓ Porter Makan & Minum</li>
-                  <li>✓ Porter barang (Alat makan+ minum)</li>
-                  <li>✓ P3K Standar</li>
-                  <li>✓ Sejadah solat</li>
-                  <li>✓ Teman & Keluarga baru</li>
-                </ul>
-              </div>
-
-              {/* TIDAK TERMASUK */}
-              <div style={{ flex: "1" }}>
-                <h2 style={{ color: "#FA8806" }}>TIDAK TERMASUK :</h2>
-                <ul>
-                  <li>× Transportasi Menuju Meeting Point</li>
-                  <li>× Cemilan & Air pribadi</li>
-                  <li>× Perlengkapan Pribadi</li>
-                  <li>× Porter Pribadi</li>
-                  <li>× Surat Sehat</li>
-                  <li>× Asuransi Pribadi</li>
-                  <li>× Biaya Evakuasi</li>
-                  <li>× Ojeg</li>
-                  <li>× Tips Crew Sukarela</li>
-                  <li>× Dan yang tidak disebutkan di paket</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        )}
-        {showDetails && (
-          <div>
-            <h2 style={{ color: "#FA8806", marginTop: "20px" }}>
-              ITINERARY TRIP
-            </h2>
-            <p>
-              <b>MEETING POINT PESERTA:</b>
-            </p>
-            <p>
-              Mepo Bandung: Jumat, 18:00 - 19:00 WIB <br />
-              Mepo Jakarta: Jumat, 22:00 – 22:30 WIB <br />
-              Mepo Basecamp: Sabtu, 06:00 <br />
-              <b>NOTED:</b> JIKA PESERTA HANYA MEETING POINT BANDUNG MAKA, JAM
-              JEMPUTAN MEETING POINT BANDUNG MENYESUAIKAN MENJADI JAM 20:00 –
-              21:00
-            </p>
-
-            <p>
-              <b>(HARI KE 1)</b>
-              <br />
-              18:00 - 19:00 = Penjemputan Mepo Bandung
-              <br />
-              19:00 - 22:00 = Penjemputan Mepo Jakarta dan Melanjutkan
-              Perjalanan ke Gunung Gede
-            </p>
-
-            <p>
-              <b>(HARI KE 2)</b>
-              <br />
-              03:00 - 07:00 = Tiba di basecamp, istirahat dan prepare
-              <br />
-              07:00 - 07:30 = Briefing dan berdoa bersama
-              <br />
-              08:00 - 12:00 = Mulai perjalanan
-              <br />
-              12:00 - 12:30 = ISHOMA Makan ke 1<br />
-              13:00 - 14:00 = Tiba di tempat Camp Alun-Alun Surya Kencana
-              <br />
-              18:00 - 20:00 = ISHOMA Makan ke 2 Malam
-              <br />
-              20:00 - = Istirahat
-            </p>
-
-            <p>
-              <b>(HARI KE 3)</b>
-              <br />
-              03:30 - 04:00 = Bangun, Sarapan, Prepare Summits
-              <br />
-              05:00 - 06:00 = Summits Puncak Gede
-              <br />
-              06:00 - 07:00 = Enjoy Puncak, Enjoy Sunrise, foto bersama
-              <br />
-              07:00 - 07:30 = Turun dari Puncak ke tempat camp
-              <br />
-              08:00 - 08:30 = Makan ke 3 Pagi, Prepare Turun
-              <br />
-              09:00 - 12:00 = Turun menuju Basecamp
-              <br />
-              12:00 - 13:30 = ISHOMA, bersih-bersih, prepare pulang
-              <br />
-              13:30 - 17:00 = Perjalanan pulang ke mepo (Jakarta bila ada)
-              <br />
-              17:00 - 21:00 = Perjalanan ke mepo Bandung
-              <br />
-              22:00 - = Trip selesai dan pulang ke rumah masing-masing dengan
-              selamat
-            </p>
-
-            <div>
-              <h2 style={{ color: "#FA8806", marginTop: "20px" }}>CATATAN:</h2>
-              <ul>
-                <li>
-                  Sewaktu-waktu dapat berubah-ubah tergantung fisik dan kondisi
-                  di lapangan, diharapkan peserta berkoordinasi dengan crew
-                  apabila terjadi sakit atau cedera.
-                </li>
-                <li>
-                  Seluruh peserta harus mengikuti arahan SOP pendakian yang ada
-                  di taman nasional maupun SOP Il'm Trip Organizer, peserta
-                  harus saling membantu, kompak, komunikasi, dan menjaga
-                  kebersamaan satu sama lain.
-                </li>
-                <li>
-                  Peserta WAJIB membawa air minum pribadi minimal 2-3 botol
-                  (ukuran 1.5L) dengan perhitungan: 1 botol untuk naik, 1 botol
-                  saat di camp/summits, dan 1 botol saat turun pendakian.
-                </li>
-                <li>Terdapat warung-warung di track pendakian.</li>
-                <li>
-                  Sampah cemilan dan air minum kemasan pribadi, harap dibawa
-                  turun kembali oleh masing-masing peserta.
-                </li>
-              </ul>
+              <h2 style={{ color: "#FA8806" }}>Keterangan Layanan</h2>
+              <div
+                className="ql-editor"
+                dangerouslySetInnerHTML={{ __html: trip.keterangan_layanan }}
+              />
             </div>
           </div>
         )}
@@ -317,7 +185,7 @@ const Explore = ({trip}) => {
         </button>
 
         <button
-           onClick={() => navigate(`/FormDaftar/${trip.id}`)} // Navigasi ke halaman booking
+          onClick={() => navigate(`/FormDaftar/${trip.id}`)} // Navigasi ke halaman booking
           style={{
             padding: "15px 30px",
             fontSize: "18px",

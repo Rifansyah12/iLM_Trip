@@ -6,7 +6,6 @@ const { DataTypes } = Sequelize;
 const Anothertrip = db.define(
   "table_anothertrip",
   {
-   
     nama_layanan: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -15,7 +14,7 @@ const Anothertrip = db.define(
         len: [3, 100], // Nama gunung minimal 3 karakter dan maksimal 100
       },
     },
-    keterangan_singkat:{
+    keterangan_singkat: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -28,14 +27,14 @@ const Anothertrip = db.define(
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [3, 100], // Nama gunung minimal 3 karakter dan maksimal 100
+        len: [3, 5000],
       },
     },
     deskripsi_layanan: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: true,
       },
     },
     lokasi: {
@@ -47,8 +46,6 @@ const Anothertrip = db.define(
       },
     },
 
-    
-    
     harga: {
       type: DataTypes.FLOAT, // Menggunakan FLOAT untuk harga
       allowNull: false,
@@ -65,7 +62,6 @@ const Anothertrip = db.define(
         len: [0, 255], // Panjang maksimal path atau URL adalah 255 karakter
       },
     },
-   
   },
   {
     freezeTableName: true, // Menjaga nama tabel tetap 'table_des'

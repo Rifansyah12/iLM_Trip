@@ -14,6 +14,9 @@ const TableOpen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
+  const [showFullKeterangan, setShowFullKeterangan] = useState(false);
+  const [showFullDeskripsi, setShowFullDeskripsi] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
 
@@ -228,8 +231,8 @@ const TableOpen = () => {
                   <th>Paket</th>
                   <th>Harga</th>
                   <th>Foto</th>
-                  <th>Keterangan Gunung </th>
                   <th>deskripsi</th>
+                  <th>Keterangan Layanan </th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -254,12 +257,95 @@ const TableOpen = () => {
                           "Tidak ada foto"
                         )}
                       </td>
-                      <td>{destinasi.keterangan}</td>
-                      <td
-                        dangerouslySetInnerHTML={{
-                          __html: destinasi.deskripsi,
-                        }}
-                      ></td>
+                      <td>
+                        {showFullKeterangan ? (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  destinasi.keterangan ||
+                                  "Tidak ada keterangan",
+                              }}
+                            />{" "}
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowFullKeterangan(false);
+                              }}
+                            >
+                              Sembunyikan
+                            </a>
+                          </>
+                        ) : (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: destinasi.keterangan
+                                  ? destinasi.keterangan.slice(0, 100) + "..."
+                                  : "Tidak ada keterangan",
+                              }}
+                            />{" "}
+                            {destinasi.keterangan &&
+                              destinasi.keterangan.length > 100 && (
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setShowFullKeterangan(true);
+                                  }}
+                                >
+                                  Lihat Detail
+                                </a>
+                              )}
+                          </>
+                        )}
+                      </td>
+
+                      <td>
+                        {showFullDeskripsi ? (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  destinasi.deskripsi || "Tidak ada deskripsi",
+                              }}
+                            />{" "}
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowFullDeskripsi(false);
+                              }}
+                            >
+                              Sembunyikan
+                            </a>
+                          </>
+                        ) : (
+                          <>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: destinasi.deskripsi
+                                  ? destinasi.deskripsi.slice(0, 100) + "..."
+                                  : "Tidak ada deskripsi",
+                              }}
+                            />{" "}
+                            {destinasi.deskripsi &&
+                              destinasi.deskripsi.length > 100 && (
+                                <a
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setShowFullDeskripsi(true);
+                                  }}
+                                >
+                                  Lihat Detail
+                                </a>
+                              )}
+                          </>
+                        )}
+                      </td>
+
                       <td>
                         {destinasi.id !== id_layanan ? (
                           <button
@@ -358,17 +444,29 @@ const TableOpen = () => {
                       </div>
 
                       <div className="form-group">
-                        <label>Keterangan Gunung</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="keterangan"
-                          onChange={handleInputChange}
+                        <label>Deskripsi</label>
+                        <ReactQuill
+                          value={newDestinasi.keterangan}
+                          onChange={(content) => {
+                            setNewDestinasi({
+                              ...newDestinasi,
+                              keterangan: content,
+                            });
+                          }}
+                          modules={{
+                            toolbar: [
+                              [{ header: "1" }, { header: "2" }, { font: [] }],
+                              [{ list: "ordered" }, { list: "bullet" }],
+                              ["bold", "italic", "underline"],
+                              ["link", "image"],
+                              ["clean"],
+                            ],
+                          }}
                         />
                       </div>
 
                       <div className="form-group">
-                        <label>Deskripsi</label>
+                        <label>keterangan Layanan</label>
                         <ReactQuill
                           value={newDestinasi.deskripsi}
                           onChange={(content) => {

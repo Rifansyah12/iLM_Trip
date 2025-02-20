@@ -1,13 +1,23 @@
 import React from "react";
 import NewImage from "../../assets/foto_crew/BgAbout.jpg";
 import NewImage1 from "../../assets/Gunung/Gede/gede1.jpg";
-import NewImage2 from "../../assets/Gunung/Gede/gede2.jpg";
-import NewImage3 from "../../assets/Gunung/Gede/gede3.jpg";
-import NewImage4 from "../../assets/Gunung/Gede/gede4.jpg";
+import NewImage2 from "../../assets/Gunung/Sumbing/sumbing1.jpg";
+import NewImage3 from "../../assets/Gunung/Sumbing/sumbing2.jpg";
+import NewImage4 from "../../assets/Gunung/Sumbing/sumbing3.jpg";
+import NewImage5 from "../../assets/Gunung/Sumbing/sumbing4.JPG";
+import NewImage6 from "../../assets/Gunung/Sindoro/sindoro2.jpg";
+import NewImage7 from "../../assets/Gunung/Sindoro/sindoro3.jpg";
+import NewImage8 from "../../assets/Gunung/Sindoro/sindoro4.jpg";
+
 import PartnerImage1 from "../../assets/partner/partner1.jpg";
 import PartnerImage2 from "../../assets/partner/partner2.jpg";
 import PartnerImage3 from "../../assets/partner/partner3.PNG";
 import PartnerImage4 from "../../assets/partner/partner4.JPG";
+import CustomerImage1 from "../../assets/customer/customer1.jpg";
+import CustomerImage2 from "../../assets/customer/customer2.png";
+import CustomerImage3 from "../../assets/customer/customer3.jpg";
+import CustomerImage4 from "../../assets/customer/customer4.jpg";
+import CustomerImage5 from "../../assets/customer/customer5.jpg";
 import PageheaderImage from "../../assets/Gunung/Gede/gede.jpg";
 
 const TentangKami = () => {
@@ -82,7 +92,16 @@ const TentangKami = () => {
 
           {/* Galeri Gambar */}
           <div style={styles.imageGrid}>
-            {[NewImage1, NewImage2, NewImage3, NewImage4].map((img, idx) => (
+            {[
+              NewImage1,
+              NewImage2,
+              NewImage3,
+              NewImage4,
+              NewImage5,
+              NewImage6,
+              NewImage7,
+              NewImage8,
+            ].map((img, idx) => (
               <img
                 key={idx}
                 src={img}
@@ -107,19 +126,23 @@ const TentangKami = () => {
             )}
           </div>
 
-          {/* Partner Kami */}
+          {/* customer Kami */}
           <h2 style={styles.sectionTitle}>Customer</h2>
           <div style={styles.partnerGrid}>
-            {[PartnerImage1, PartnerImage2, PartnerImage3, PartnerImage4].map(
-              (img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`Partner ${idx + 1}`}
-                  style={styles.partnerImage}
-                />
-              )
-            )}
+            {[
+              CustomerImage1,
+              CustomerImage2,
+              CustomerImage3,
+              CustomerImage4,
+              CustomerImage5,
+            ].map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt={`Partner ${idx + 1}`}
+                style={styles.partnerImage}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -229,7 +252,7 @@ const styles = {
     marginTop: "30px",
   },
   image: {
-    width: "100%",
+    width: "80%",
     height: "auto",
     borderRadius: "10px",
   },

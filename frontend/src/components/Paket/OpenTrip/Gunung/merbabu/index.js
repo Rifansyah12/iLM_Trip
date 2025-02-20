@@ -42,7 +42,7 @@ const Merbabu = ({ destinasi }) => {
         PAKET {destinasi.paket} (IDR {destinasi.harga}/pax){" "}
         {destinasi.nama_gunung}
       </h2>
-      <p>{destinasi.keterangan}</p>
+      <div dangerouslySetInnerHTML={{ __html: destinasi.keterangan }}></div>
       <div
         style={{
           display: "flex",

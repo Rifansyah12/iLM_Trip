@@ -20,7 +20,6 @@ const OpenTrip = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-
   // Fungsi untuk membuka modal
   const openModal = (imageSrc) => {
     setModalImage(imageSrc);
@@ -120,97 +119,91 @@ const OpenTrip = () => {
       >
         {/* content trip Premium */}
         <div
-      style={{
-        display: "flex", // Menampilkan secara berdampingan
-        justifyContent: "center", // Memusatkan konten secara horizontal
-        alignItems: "flex-start", // Menyelaraskan ke atas
-        gap: "20px", // Jarak antara Premium dan Luxury
-        marginTop: "20px", // Jarak dari elemen sebelumnya
-      }}
-    >
-      {trips.map((trip) => (
-        <div key={trip.id} style={{ maxWidth: "400px" }}>
-          {/* Gambar */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src={`http://localhost:5000/images/anothertrip/${trip.foto}`}
-              alt={trip.nama_layanan}
-              style={{
-                width: "300px",
-                height: "300px",
-                borderRadius: "10px",
-                objectFit: "cover",
-                marginTop: "10px",
-              }}
-            />
-          </div>
+          style={{
+            display: "flex", // Menampilkan secara berdampingan
+            justifyContent: "center", // Memusatkan konten secara horizontal
+            alignItems: "flex-start", // Menyelaraskan ke atas
+            gap: "20px", // Jarak antara Premium dan Luxury
+            marginTop: "20px", // Jarak dari elemen sebelumnya
+          }}
+        >
+          {trips.map((trip) => (
+            <div key={trip.id} style={{ maxWidth: "400px" }}>
+              {/* Gambar */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={`http://localhost:5000/images/anothertrip/${trip.foto}`}
+                  alt={trip.nama_layanan}
+                  style={{
+                    width: "300px",
+                    height: "300px",
+                    borderRadius: "10px",
+                    objectFit: "cover",
+                    marginTop: "10px",
+                  }}
+                />
+              </div>
 
-          {/* Deskripsi Layanan */}
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <p
-              style={{
-                fontSize: "20px",
-                marginBottom: "10px",
-                paddingBottom: "5px",
-                width: "fit-content",
-                fontFamily: "Times New Roman, serif",
-              }}
-            >
-              {trip.nama_layanan.toUpperCase()} <br />
-              {trip.keterangan_singkat || "Jelajahi petualangan menarik!"}
-            </p>
-          </div>
+              {/* Deskripsi Layanan */}
+              <div style={{ textAlign: "center", marginTop: "20px" }}>
+                <p
+                  style={{
+                    fontSize: "20px",
+                    marginBottom: "10px",
+                    paddingBottom: "5px",
+                    width: "fit-content",
+                    fontFamily: "Times New Roman, serif",
+                  }}
+                >
+                  {trip.nama_layanan.toUpperCase()} <br />
+                  {trip.keterangan_singkat || "Jelajahi petualangan menarik!"}
+                </p>
+              </div>
 
-          {/* Tombol Jelajahi */}
-          <div
-            style={{
-              textAlign: "center",
-              marginTop: "20px",
-              paddingBottom: "20px",
-            }}
-          >
-            <button
-              onClick={() =>
-                navigate(
-                  `/FormDaftar/${trip.id}`
-                )
-              }
-              style={{
-                fontSize: "20px",
-                fontWeight: "bold",
-                marginBottom: "10px",
-                backgroundColor: "#FA8806",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                cursor: "pointer",
-                fontFamily: "'Belanosima', sans-serif",
-              }}
-            >
-              IDR {trip.harga.toLocaleString()} / Jelajahi
-            </button>
-            <div
-              style={{
-                marginTop: "10px",
-                borderTop: "1px solid #ccc",
-                width: "100%",
-              }}
-            ></div>
-          </div>
+              {/* Tombol Jelajahi */}
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "20px",
+                  paddingBottom: "20px",
+                }}
+              >
+                <button
+                  onClick={() => navigate(`/Paket/Another/explore/${trip.id}`)}
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    marginBottom: "10px",
+                    backgroundColor: "#FA8806",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                    fontFamily: "'Belanosima', sans-serif",
+                  }}
+                >
+                  IDR {trip.harga.toLocaleString()} / Jelajahi
+                </button>
+                <div
+                  style={{
+                    marginTop: "10px",
+                    borderTop: "1px solid #ccc",
+                    width: "100%",
+                  }}
+                ></div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-      
-        {/* end content trip Premium */}
 
-       
+        {/* end content trip Premium */}
       </div>
 
       {/* Tombol Navigasi */}

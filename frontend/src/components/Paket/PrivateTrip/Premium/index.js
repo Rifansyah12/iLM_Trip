@@ -5,7 +5,7 @@ import axios from "axios";
 
 import Merbabu from "../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 
-const OpenTrip = () => {
+const PrivateTrip = () => {
   const navigate = useNavigate();
   const { id_privatetrip } = useParams();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -15,7 +15,9 @@ const OpenTrip = () => {
   useEffect(() => {
     const fetchDestinasiByIdPrivate = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/getDestinasiByIdPrivate/${id_privatetrip}`);
+        const response = await axios.get(
+          `http://localhost:5000/getDestinasiByIdPrivate/${id_privatetrip}`
+        );
         setDestinasi(response.data || []);
       } catch (error) {
         console.error("Error fetching destinasi:", error);
@@ -58,7 +60,7 @@ const OpenTrip = () => {
           fontFamily: "'Belanosima', sans-serif",
         }}
       >
-        Temukan Destinasi Impian Anda
+        Temukan Destinasi Impian Anda Premium
       </h1>
 
       {/* Kolom Pencarian */}
@@ -114,76 +116,91 @@ const OpenTrip = () => {
       </h1>
 
       <div
-  style={{
-    display: "flex",
-    justifyContent: "center", // Pusatkan kontennya
-    alignItems: "flex-start",
-    margin: "20px auto",
-    maxWidth: "1600px",
-  }}
->
-  {/* Content trip Merbabu */}
-  {destinasi.length > 0 ? (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: destinasi.length > 5 ? "repeat(2, 1fr)" : "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: "20px",
-        maxWidth: "1200px",
-        justifyContent: "center",
-        alignItems: "start",
-      }}
-    >
-      {destinasi.map((item) => (
-        <div
-          key={item.id}
-          style={{
-            textAlign: "center",
-            padding: "10px",
-            border: "1px solid #ccc",
-            borderRadius: "10px",
-            backgroundColor: "#333",
-          }}
-        >
-          <h2 style={{ fontSize: "24px", fontFamily: "'Belanosima', sans-serif" }}>
-            {item.nama_gunung}
-          </h2>
-          <p style={{ fontSize: "18px", color: "#ccc" }}>{item.lokasi}</p>
-          <img
-            src={`http://localhost:5000/images/Destinasi/${item.foto}`}
-            alt={item.nama_gunung}
+        style={{
+          display: "flex",
+          justifyContent: "center", // Pusatkan kontennya
+          alignItems: "flex-start",
+          margin: "20px auto",
+          maxWidth: "1600px",
+        }}
+      >
+        {/* Content trip Merbabu */}
+        {destinasi.length > 0 ? (
+          <div
             style={{
-              width: "100%",
-              height: "180px",
-              borderRadius: "10px",
-              objectFit: "cover",
-            }}
-            onClick={() => openModal(item.foto)}
-          />
-          <button
-           onClick={() => navigate(`/FormDaftar/${item.id}`)}
-            style={{
-              backgroundColor: "#FA8806",
-              color: "white",
-              padding: "10px 20px",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              marginTop: "10px",
-              fontSize: "16px",
-              fontWeight: "bold",
+              display: "grid",
+              gridTemplateColumns:
+                destinasi.length > 5
+                  ? "repeat(2, 1fr)"
+                  : "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "20px",
+              maxWidth: "1200px",
+              justifyContent: "center",
+              alignItems: "start",
             }}
           >
-            Harga: IDR {item.harga}
-          </button>
-        </div>
-      ))}
-    </div>
-  ) : (
-    <p style={{ fontSize: "18px", color: "#ccc" }}>Destinasi tidak ditemukan.</p>
-  )}
-</div>
-
+            {destinasi.map((item) => (
+              <div
+                key={item.id}
+                style={{
+                  textAlign: "center",
+                  padding: "10px",
+                  border: "1px solid #ccc",
+                  borderRadius: "10px",
+                  backgroundColor: "#333",
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: "24px",
+                    fontFamily: "'Belanosima', sans-serif",
+                  }}
+                >
+                  {item.nama_gunung}
+                </h2>
+                <p style={{ fontSize: "18px", color: "#ccc" }}>{item.lokasi}</p>
+                <img
+                  src={`http://localhost:5000/images/Destinasi/${item.foto}`}
+                  alt={item.nama_gunung}
+                  style={{
+                    width: "100%",
+                    height: "180px",
+                    borderRadius: "10px",
+                    objectFit: "cover",
+                  }}
+                  onClick={() => openModal(item.foto)}
+                />
+                <div
+                  dangerouslySetInnerHTML={{ __html: item.keterangan }}
+                ></div>
+                <button
+                  // onClick={() => navigate(`/FormDaftar/${item.id}`)}
+                  onClick={() =>
+                    navigate(`/Paket/OpenTrip/Gunung/merbabu/${item.id}`)
+                  }
+                  style={{
+                    backgroundColor: "#FA8806",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    marginTop: "10px",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Harga: IDR {item.harga}
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p style={{ fontSize: "18px", color: "#ccc" }}>
+            Destinasi tidak ditemukan.
+          </p>
+        )}
+      </div>
 
       {/* Modal */}
       {isModalOpen && (
@@ -217,4 +234,4 @@ const OpenTrip = () => {
   );
 };
 
-export default OpenTrip;
+export default PrivateTrip;

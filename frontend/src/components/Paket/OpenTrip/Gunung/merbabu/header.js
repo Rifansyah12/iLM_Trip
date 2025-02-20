@@ -3,7 +3,7 @@ import Background1 from "../../../../../assets/Trip/bg2.png";
 import Background2 from "../../../../../assets/Gunung/Merbabu/merbabu1.jpg";
 import Background3 from "../../../../../assets/Gunung/Merbabu/merbabu2.jpg"; // Tambahkan gambar lain jika diperlukan
 
-function Header({destinasi}) {
+function Header({ destinasi }) {
   const [currentImage, setCurrentImage] = useState(Background1); // Gambar pertama sebagai default
 
   // Gambar latar belakang yang akan diputar
@@ -102,23 +102,7 @@ function Header({destinasi}) {
       <div style={overlayStyle}></div> {/* Overlay hitam transparan */}
       <div className="PilihPetualanganAndaCapaiPuncaknya" style={textStyle}>
         {destinasi.nama_gunung}
-        {/* <p
-          style={{
-            color: "#ffff",
-            fontSize: 25,
-            fontWeight: "50",
-            fontFamily: "Poppins",
-            width: "100%", // Sesuaikan lebar teks
-            margin: "0px", // Agar teks tetap di tengah secara horizontal
-            left: 50,
-            textAlign: "left",
-            fontStyle: "italic",
-          }}
-        >
-          "Nikmati pengalaman mendaki yang menakjubkan dengan pemandangan alam
-          yang memukau dan kenangan tak terlupakan. Bersiaplah untuk petualangan
-          penuh tantangan dan keindahan di puncak Merbabu."
-        </p> */}
+
         <p
           style={{
             color: "#FFFFFF",

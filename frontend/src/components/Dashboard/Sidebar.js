@@ -41,12 +41,6 @@ const Sidebar = () => {
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-6">
       <a href="index3.html" className="brand-link">
-        <img
-          src="dist/img/Logo_trip.png"
-          alt="AdminLTE Logo"
-          className="brand-image img-circle elevation-3"
-          style={{ opacity: ".8" }}
-        />
         <span className="brand-text font-weight-light fw-bold">IL'M TRIP</span>
       </a>
 
@@ -218,12 +212,12 @@ const Sidebar = () => {
 
             {/* Logout */}
             <li className="nav-item">
-            <li className="nav-item">
-        <button className="nav-link text-danger" onClick={handleLogout}>
-          <i className="fas fa-sign-out-alt nav-icon"></i>
-          <p>Logout</p>
-        </button>
-      </li>
+              <li className="nav-item">
+                <button className="nav-link text-danger" onClick={handleLogout}>
+                  <i className="fas fa-sign-out-alt nav-icon"></i>
+                  <p>Logout</p>
+                </button>
+              </li>
             </li>
           </ul>
         </nav>
