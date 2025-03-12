@@ -19,6 +19,14 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+             {
+          nama: "Ilyas Maulana",
+          username: "maukemana",
+          password: "ilm01",
+          foto: "admin2.png",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
